@@ -19,6 +19,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FoodWuzUp.Web.Test", "FoodW
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FoodWuzUp.Web", "FoodWuzUp.Web\FoodWuzUp.Web.csproj", "{CB9F3D90-5284-4D60-8CB9-3DAFEDD69955}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{B5E30F1A-873C-4F12-8B4F-9F7C4DB8F2CE}"
+	ProjectSection(SolutionItems) = preProject
+		App.config = App.config
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
