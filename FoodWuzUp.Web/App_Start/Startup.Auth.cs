@@ -46,9 +46,9 @@ namespace FoodWuzUp.Web
             //   consumerKey: "",
             //   consumerSecret: "");
 
-            //app.UseFacebookAuthentication(
-            //   appId: "",
-            //   appSecret: "");
+            app.UseFacebookAuthentication(
+               appId: "675135002567966",
+               appSecret: "d926d4f1094111a4cc49a9ddddfb005c");
 
             app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
             {
