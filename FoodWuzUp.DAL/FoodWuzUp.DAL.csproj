@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Base.cs" />
+    <Compile Include="BaseItemRating.cs" />
     <Compile Include="BaseXref.cs" />
     <Compile Include="Bracket.cs" />
     <Compile Include="Comment.cs" />
@@ -71,6 +72,7 @@
     <Compile Include="RestaurantComment.cs" />
     <Compile Include="RestaurantEmployee.cs" />
     <Compile Include="User.cs" />
+    <Compile Include="UserMenuItemRating.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

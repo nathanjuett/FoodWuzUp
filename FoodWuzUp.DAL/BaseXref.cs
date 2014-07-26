@@ -33,5 +33,5 @@ namespace FoodWuzUp.DAL
             db.RecordTypes.Add(new RecordType() { Name = typeof(Txref).Name, Description = typeof(Txref).Name, DisplayName = typeof(Txref).Name });
         }
     }
-
+     
 }
