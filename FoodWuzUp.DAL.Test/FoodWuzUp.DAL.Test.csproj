@@ -58,11 +58,19 @@
   </Choose>
   <ItemGroup>
     <Compile Include="ContextTests.cs" />
+    <Compile Include="EmployeeTests.cs" />
+    <Compile Include="EmployeeTypeTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="GroupTests.cs" />
+    <Compile Include="BaseTests.cs" />
+    <Compile Include="RatingsTests.cs" />
+    <Compile Include="RestaurantTests.cs" />
+    <Compile Include="UserTests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

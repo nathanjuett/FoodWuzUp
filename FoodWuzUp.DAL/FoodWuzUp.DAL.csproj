@@ -52,6 +52,9 @@
     <Compile Include="Comment.cs" />
     <Compile Include="Context.cs" />
     <Compile Include="ContextInitializer.cs" />
+    <Compile Include="Employee.cs" />
+    <Compile Include="EmployeeComment.cs" />
+    <Compile Include="EmployeeType.cs" />
     <Compile Include="Group.cs" />
     <Compile Include="GroupComment.cs" />
     <Compile Include="MenuItem.cs" />
@@ -66,6 +69,7 @@
     <Compile Include="RecordType.cs" />
     <Compile Include="Restaurant.cs" />
     <Compile Include="RestaurantComment.cs" />
+    <Compile Include="RestaurantEmployee.cs" />
     <Compile Include="User.cs" />
   </ItemGroup>
   <ItemGroup>

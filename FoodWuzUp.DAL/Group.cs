@@ -17,6 +17,7 @@ namespace FoodWuzUp.DAL
        public virtual ICollection<User> Members { get; set; }
        public virtual ICollection<Restaurant> Restaurants { get; set; }
        public virtual ICollection<GroupComment> Comments { get; set; }
+       public virtual ICollection<Employee> Employees { get; set; }
 
 
         public Group()

@@ -25,4 +25,5 @@ namespace FoodWuzUp.Core
         TParent Parent {get;set;}
 
     }
+   
 }

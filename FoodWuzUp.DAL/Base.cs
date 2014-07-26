@@ -40,5 +40,18 @@ namespace FoodWuzUp.DAL
         
         public TBase Parent { get; set; }
     }
+    public abstract class BaseRating<TBase, TComment> : IBaseComment<TBase>
+        where TComment : IBaseComment<TBase>
+        where TBase : IBase
+    {
 
+        [Key]
+        public int ID { get; set; }
+        public string Comment { get; set; }
+
+        [ForeignKey("Parent")]
+        public int ParentID { get; set; }
+
+        public TBase Parent { get; set; }
+    }
 }

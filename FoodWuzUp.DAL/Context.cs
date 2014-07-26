@@ -21,6 +21,8 @@ namespace FoodWuzUp.DAL
         public DbSet<Bracket> Brackets { get; set; }
         public DbSet<RatingsList> RatingsLists { get; set; }
 
+        public DbSet<EmployeeType> EmployeeTypes { get; set; }
+
         public Context()
         {
             Database.SetInitializer<Context>(new ContextInitializer());
