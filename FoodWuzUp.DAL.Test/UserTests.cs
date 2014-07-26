@@ -41,5 +41,25 @@ namespace FoodWuzUp.DAL.Test
             Assert.AreEqual("1Star", actual.UserMenuItemRatings.Take(1).Single().Rating.Name);
 
        }
+        [TestMethod]
+        public void UserTestAddRestaurantRating()
+        {
+            Context db = new Context();
+            User u = new User() { Name = "test" };
+            Group g = new Group() { Name = "BreakfastClub" };
+            Restaurant i = new Restaurant() { Name = "Sonic", Description = "Drive In", GroupID  = 1 };
+            db.Users.Add(u);
+            db.Groups.Add(g);
+            db.Restaurants.Add(i);
+            db.SaveChanges();
+            u.UserRestaurantRatings.Add(new UserRestaurantRating() { Child = i, RatingID = 1 });
+            db.SaveChanges();
+
+            db = new Context();
+            User actual = db.Users.Include("UserRestaurantRatings.Rating").Where(o => o.Name == "test").Single();
+
+            Assert.AreEqual("1Star", actual.UserRestaurantRatings.Take(1).Single().Rating.Name);
+
+        }
     }
 }

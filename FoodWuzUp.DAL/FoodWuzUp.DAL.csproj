@@ -73,6 +73,7 @@
     <Compile Include="RestaurantEmployee.cs" />
     <Compile Include="User.cs" />
     <Compile Include="UserMenuItemRating.cs" />
+    <Compile Include="UserRestaurantRating.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

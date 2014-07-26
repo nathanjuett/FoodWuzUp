@@ -24,7 +24,7 @@ namespace FoodWuzUp.DAL
             db.EmployeeTypes.Add(new EmployeeType() { Name = "Bartender", Description = "Bartender" });
             db.EmployeeTypes.Add(new EmployeeType() { Name = "Bar Back", Description = "Bar Back" });
             db.EmployeeTypes.Add(new EmployeeType() { Name = "Cocktail Waitress", Description = "Cocktail Waitress" });
-
+            db.EmployeeTypes.Add(new EmployeeType() { Name = "Cashier", Description = "Cashier" });
            
 
         }

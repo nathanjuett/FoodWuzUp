@@ -14,6 +14,7 @@ namespace FoodWuzUp.DAL
 
         
         public DbSet<Restaurant> Restaurants { get; set; }
+        public DbSet<RestaurantEmployee> RestaurantEmployees { get; set; }
         public DbSet<RecordType> RecordTypes { get; set; }
         public DbSet<MenuItem> MenuItems { get; set; }
         public DbSet<Comment> Comments { get; set; }

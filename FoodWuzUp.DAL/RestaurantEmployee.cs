@@ -10,9 +10,9 @@ namespace FoodWuzUp.DAL
    public class RestaurantEmployee : BaseXref<RestaurantEmployee,Restaurant,Employee>
     {
         public int EmployeeTypeID { get; set; }
-
+        public int? RatingID { get; set; }
         public virtual EmployeeType EmployeeType { get; set; }
-
+        public virtual Rating Rating { get; set; }
 
     }
 }

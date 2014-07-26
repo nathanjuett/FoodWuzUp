@@ -23,7 +23,7 @@ namespace FoodWuzUp.DAL.Test
         {
             Assert.AreEqual("Owner", efobject.Name);
             int count = db.EmployeeTypes.Count();
-            Assert.AreEqual(14, count);
+            Assert.AreEqual(15, count);
             Assert.AreEqual(unique, db.EmployeeTypes.Find(count).Name);
         }
     }
