@@ -1,5 +1,6 @@
 ﻿using FoodWuzUp.Core;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 namespace FoodWuzUp.DAL
 {
     public class User : Base<User>
@@ -8,6 +9,9 @@ namespace FoodWuzUp.DAL
         public virtual ICollection<UserMenuItemRating> UserMenuItemRatings { get; set; }
         public virtual ICollection<UserRestaurantRating> UserRestaurantRatings { get; set; }
 
+        [Required]
+        [MaxLength(128)]
+        public string UserID { get; set; }
 
         public User()
         {

@@ -11,6 +11,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Owin;
 using FoodWuzUp.Web.Models;
+using FoodWuzUp.DAL;
 
 namespace FoodWuzUp.Web.Controllers
 {
@@ -101,6 +102,8 @@ namespace FoodWuzUp.Web.Controllers
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+
+                    await AddUserToDal(user.Id, user.UserName);
 
                     return RedirectToAction("Index", "Home");
                 }
@@ -354,7 +357,7 @@ namespace FoodWuzUp.Web.Controllers
                 // If the user does not have an account, then prompt the user to create an account
                 ViewBag.ReturnUrl = returnUrl;
                 ViewBag.LoginProvider = loginInfo.Login.LoginProvider;
-                return View("ExternalLoginConfirmation", new ExternalLoginConfirmationViewModel { Email = loginInfo.Email });
+                return View("ExternalLoginConfirmation", new ExternalLoginConfirmationViewModel { Email = loginInfo.Email, UserName = loginInfo.ExternalIdentity.Name});
             }
         }
 
@@ -405,7 +408,7 @@ namespace FoodWuzUp.Web.Controllers
                 {
                     return View("ExternalLoginFailure");
                 }
-                var user = new ApplicationUser() { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser() { UserName = model.UserName, Email = model.Email };
                 IdentityResult result = await UserManager.CreateAsync(user);
                 if (result.Succeeded)
                 {
@@ -419,7 +422,9 @@ namespace FoodWuzUp.Web.Controllers
                         // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                         // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                         // SendEmail(user.Email, callbackUrl, "Confirm your account", "Please confirm your account by clicking this link");
-                        
+
+                        await AddUserToDal(user.Id, info.ExternalIdentity.Name);
+
                         return RedirectToLocal(returnUrl);
                     }
                 }
@@ -525,6 +530,13 @@ namespace FoodWuzUp.Web.Controllers
             {
                 return RedirectToAction("Index", "Home");
             }
+        }
+
+        private async Task AddUserToDal(string Id, string UserName)
+        {
+            Context context = new Context();
+            context.Users.Add(new User { UserID = Id, Name = UserName });
+            await context.SaveChangesAsync();
         }
 
         private class ChallengeResult : HttpUnauthorizedResult
