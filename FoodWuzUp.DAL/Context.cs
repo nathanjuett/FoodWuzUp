@@ -14,6 +14,7 @@ namespace FoodWuzUp.DAL
 
         
         public DbSet<Restaurant> Restaurants { get; set; }
+        public DbSet<Employee> Employees { get; set; }
         public DbSet<RestaurantEmployee> RestaurantEmployees { get; set; }
         public DbSet<RecordType> RecordTypes { get; set; }
         public DbSet<MenuItem> MenuItems { get; set; }
@@ -23,6 +24,8 @@ namespace FoodWuzUp.DAL
         public DbSet<RatingsList> RatingsLists { get; set; }
 
         public DbSet<EmployeeType> EmployeeTypes { get; set; }
+        public DbSet<UserEmployeeRating> UserEmployeeRatings { get; set; }
+
 
         public Context()
         {
@@ -39,5 +42,6 @@ namespace FoodWuzUp.DAL
             base.OnModelCreating(modelBuilder);
         }
 
+        
     }
 }

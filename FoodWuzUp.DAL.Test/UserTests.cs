@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace FoodWuzUp.DAL.Test
 {
     [TestClass]
-   public  class UserTests: BaseTest<User>
+    public class UserTests : BaseTest<User>
     {
         [TestMethod]
         public void UserCreateTest()
@@ -16,21 +16,23 @@ namespace FoodWuzUp.DAL.Test
             base.BaseCreateTest();
         }
         public override User Create(User efObject, Context db)
-       {
-           return efObject;
-       }
-       public override void AddedAsserts(Context db, User efobject, string unique)
-       {
-           base.AddedAsserts(db, efobject, unique);
-       }
+        {
+            efObject.UserID = "test";
+            return efObject;
+        }
+        public override void AddedAsserts(Context db, User efobject, string unique)
+        {
+            base.AddedAsserts(db, efobject, unique);
+            Assert.AreEqual("test", efobject.UserID);
+        }
         [TestMethod]
         public void UserTestAddMenuItemRating()
-       {
-           Context db = new Context();
-           User u = new User() { Name = "test" };
-           MenuItem mi = new MenuItem() { Name = "Extra Long Chili Cheese Coney", Description = "ELCCC" };
-           db.Users.Add(u);
-           db.MenuItems.Add(mi);
+        {
+            Context db = new Context();
+            User u = new User() { Name = "test", UserID = "test" };
+            MenuItem mi = new MenuItem() { Name = "Extra Long Chili Cheese Coney", Description = "ELCCC" };
+            db.Users.Add(u);
+            db.MenuItems.Add(mi);
             db.SaveChanges();
             u.UserMenuItemRatings.Add(new UserMenuItemRating() { Child = mi, RatingID = 1 });
             db.SaveChanges();
@@ -40,14 +42,14 @@ namespace FoodWuzUp.DAL.Test
 
             Assert.AreEqual("1Star", actual.UserMenuItemRatings.Take(1).Single().Rating.Name);
 
-       }
+        }
         [TestMethod]
         public void UserTestAddRestaurantRating()
         {
             Context db = new Context();
-            User u = new User() { Name = "test" };
+            User u = new User() { Name = "test", UserID = "test" };
             Group g = new Group() { Name = "BreakfastClub" };
-            Restaurant i = new Restaurant() { Name = "Sonic", Description = "Drive In", GroupID  = 1 };
+            Restaurant i = new Restaurant() { Name = "Sonic", Description = "Drive In", GroupID = 1 };
             db.Users.Add(u);
             db.Groups.Add(g);
             db.Restaurants.Add(i);
@@ -59,6 +61,24 @@ namespace FoodWuzUp.DAL.Test
             User actual = db.Users.Include("UserRestaurantRatings.Rating").Where(o => o.Name == "test").Single();
 
             Assert.AreEqual("1Star", actual.UserRestaurantRatings.Take(1).Single().Rating.Name);
+
+        }
+        [TestMethod]
+        public void UserTestAddEmployeeRating()
+        {
+            Context db = new Context();
+            User u = new User() { Name = "test", UserID = "test" };
+            Employee e = new Employee() { Name = "Extra Long Chili Cheese Coney", Description = "ELCCC" };
+            db.Users.Add(u);
+            db.Employees.Add(e);
+            db.SaveChanges();
+            u.UserEmployeeRatings.Add(new UserEmployeeRating() { Child = e, RatingID = 1 });
+            db.SaveChanges();
+
+            db = new Context();
+            User actual = db.Users.Include("UserEmployeeRatings.Rating").Where(o => o.Name == "test").Single();
+
+            Assert.AreEqual("1Star", actual.UserEmployeeRatings.Take(1).Single().Rating.Name);
 
         }
     }
