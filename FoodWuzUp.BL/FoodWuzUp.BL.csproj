@@ -52,6 +52,16 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\FoodWuzUp.Core\FoodWuzUp.Core.csproj">
+      <Project>{3ecac2ba-b4a9-48c2-9b61-e4de37e78424}</Project>
+      <Name>FoodWuzUp.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FoodWuzUp.DAL\FoodWuzUp.DAL.csproj">
+      <Project>{a5352536-2150-4f2a-961f-07245d9ede00}</Project>
+      <Name>FoodWuzUp.DAL</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

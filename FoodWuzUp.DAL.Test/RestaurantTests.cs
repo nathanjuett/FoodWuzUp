@@ -49,5 +49,19 @@ namespace FoodWuzUp.DAL.Test
             Assert.AreEqual(1, re1.RatingID = 1);
 
         }
+        [TestMethod]
+        public void RestaurantClone()
+        {
+            Restaurant obj = new Restaurant() { ID = 5, Name = "test", Description = "testdesc", Group = new Group() { ID = 1, Name = "Group1" } };
+            Restaurant newobj = (Restaurant)obj.Clone();
+            Assert.AreNotEqual(obj, newobj);
+            Assert.AreNotEqual(obj.ID, newobj.ID);
+            Assert.AreNotEqual(obj.Group, newobj.Group);
+            Assert.AreEqual(obj.Name, newobj.Name);
+            Assert.AreEqual(obj.Description, newobj.Description);
+            Assert.AreNotEqual(obj.Employees, newobj.Employees);
+
+
+        }
     }
 }
