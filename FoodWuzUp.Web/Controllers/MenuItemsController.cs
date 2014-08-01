@@ -10,6 +10,7 @@ using FoodWuzUp.DAL;
 
 namespace FoodWuzUp.Web.Controllers
 {
+    [Authorize]
     public class MenuItemsController : Controller
     {
         private Context db = new Context();
