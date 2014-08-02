@@ -1,0 +1,43 @@
+Contests
+
+master record 
+	id – inherit from base
+	date- end date?
+	Name – inherit from base
+	descritpion – inherit from base
+	??menu item – string/id
+
+contest detail table
+	id
+	contest id
+	rest  id
+	description
+	menu item id – def required
+		so when rest has similar item pick that by default
+		allow selection of other item with add item
+
+contest details ratings table implements ibase<comments>
+	user id key
+	detail id key
+	rating id
+	?comment
+	?date rated
+		pull from preexiting rating – only during population
+
+contest rating view
+	produce avg of contest details rating
+
+when create new contest
+	based on menu item
+	pre-populate detail page
+	and rating page
+	
+	so user with not enough ratings can edit ratings
+
+	bug user missing ratings
+
+	when a user changes a rating change rating and date in user
+		maybe checkbox – populate up or not
+
+
+Does nathan have rating date

@@ -51,6 +51,8 @@
     <Compile Include="BaseXref.cs" />
     <Compile Include="Bracket.cs" />
     <Compile Include="Comment.cs" />
+    <Compile Include="Contest.cs" />
+    <Compile Include="ContestDetailRatingComment.cs" />
     <Compile Include="Context.cs" />
     <Compile Include="ContextInitializer.cs" />
     <Compile Include="Employee.cs" />
