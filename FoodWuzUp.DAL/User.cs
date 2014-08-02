@@ -5,6 +5,8 @@ namespace FoodWuzUp.DAL
 {
     public class User : Base<User>
     {
+        [Display(Name="User")]
+        public new string Name { get { return base.Name; } set { base.Name = value; } }
         public virtual ICollection<Group> Groups { get; set; }
         public virtual ICollection<UserMenuItemRating> UserMenuItemRatings { get; set; }
         public virtual ICollection<UserRestaurantRating> UserRestaurantRatings { get; set; }

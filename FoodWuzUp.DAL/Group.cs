@@ -4,11 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using FoodWuzUp.Core;
+using System.ComponentModel.DataAnnotations;
 
 namespace FoodWuzUp.DAL
 {
     public class Group : Base<Group>, IBaseWithComments<Group, GroupComment>
     {
+        [Display(Name = "Group")]
+        public new string Name { get { return base.Name; } set { base.Name = value; } }
 
         public int? CreatorID { get; set; }
 
@@ -23,6 +26,9 @@ namespace FoodWuzUp.DAL
         public Group()
        {
            Comments = new List<GroupComment>();
+           Members = new List<User>();
+           Restaurants = new List<Restaurant>();
+           Employees = new List<Employee>();
        }
 
     }

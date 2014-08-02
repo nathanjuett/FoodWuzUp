@@ -29,7 +29,7 @@ namespace FoodWuzUp.Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Group group = db.Groups.Find(id);
+            Group group = db.Groups.Include(g => g.Creator).Single(o=> o.ID == id);
             if (group == null)
             {
                 return HttpNotFound();
@@ -40,8 +40,7 @@ namespace FoodWuzUp.Web.Controllers
         // GET: Groups/Create
         public ActionResult Create()
         {
-            ViewBag.CreatorID = new SelectList(db.Users, "ID", "UserID");
-            return View();
+             return View();
         }
 
         // POST: Groups/Create
@@ -53,13 +52,13 @@ namespace FoodWuzUp.Web.Controllers
         {
             if (ModelState.IsValid)
             {
+                group.CreatorID = db.Users.Single(o => o.Name == User.Identity.Name).ID;
                 db.Groups.Add(group);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.CreatorID = new SelectList(db.Users, "ID", "UserID", group.CreatorID);
-            return View(group);
+             return View(group);
         }
 
         // GET: Groups/Edit/5
@@ -69,12 +68,11 @@ namespace FoodWuzUp.Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Group group = db.Groups.Find(id);
+            Group group = db.Groups.Include(g => g.Creator).Single(o => o.ID == id);
             if (group == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.CreatorID = new SelectList(db.Users, "ID", "UserID", group.CreatorID);
             return View(group);
         }
 
@@ -91,7 +89,6 @@ namespace FoodWuzUp.Web.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.CreatorID = new SelectList(db.Users, "ID", "UserID", group.CreatorID);
             return View(group);
         }
 
@@ -102,7 +99,7 @@ namespace FoodWuzUp.Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Group group = db.Groups.Find(id);
+            Group group = db.Groups.Include(g => g.Creator).Single(o => o.ID == id);
             if (group == null)
             {
                 return HttpNotFound();
@@ -115,7 +112,7 @@ namespace FoodWuzUp.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Group group = db.Groups.Find(id);
+            Group group = db.Groups.Include(g => g.Creator).Single(o=> o.ID == id);
             db.Groups.Remove(group);
             db.SaveChanges();
             return RedirectToAction("Index");
