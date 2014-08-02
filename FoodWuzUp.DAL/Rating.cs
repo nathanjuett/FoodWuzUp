@@ -7,6 +7,8 @@ namespace FoodWuzUp.DAL
         public override void Init(Context db)
         {
             base.Init(db);
+            db.Ratings.Add(new Rating() { Name = "NotRated", Description = "Not Rated" });
+
              for (int i = 1; i < 6; i++)
                 if (i == 1)
                     db.Ratings.Add(new Rating() { Name = i.ToString() + "Star", Description = i.ToString() + " Star" });

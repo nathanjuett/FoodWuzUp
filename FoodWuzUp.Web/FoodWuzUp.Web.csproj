@@ -165,6 +165,7 @@
     <Compile Include="Controllers\GroupsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MenuItemsController.cs" />
+    <Compile Include="Controllers\RestaurantEmployeesController.cs" />
     <Compile Include="Controllers\RestaurantsController.cs" />
     <Compile Include="Controllers\UserEmployeeRatingsController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
@@ -257,6 +258,11 @@
     <Content Include="Views\UserEmployeeRatings\Details.cshtml" />
     <Content Include="Views\UserEmployeeRatings\Edit.cshtml" />
     <Content Include="Views\UserEmployeeRatings\Index.cshtml" />
+    <Content Include="Views\RestaurantEmployees\Create.cshtml" />
+    <Content Include="Views\RestaurantEmployees\Delete.cshtml" />
+    <Content Include="Views\RestaurantEmployees\Details.cshtml" />
+    <Content Include="Views\RestaurantEmployees\Edit.cshtml" />
+    <Content Include="Views\RestaurantEmployees\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Code\" />

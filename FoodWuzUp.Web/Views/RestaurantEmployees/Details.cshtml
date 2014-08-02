@@ -1,0 +1,52 @@
+﻿@model FoodWuzUp.DAL.RestaurantEmployee
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>RestaurantEmployee</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Child.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Child.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EmployeeType.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EmployeeType.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Parent.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Parent.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Rating.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Rating.Name)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ParentID, childid = Model.ChildID }) |
+    @Html.ActionLink("RestaurantEmployees", "Index", "RestaurantEmployees")
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -41,7 +41,7 @@ namespace FoodWuzUp.DAL.Test
             User actual = db.Users.Include("UserMenuItemRatings.Rating").Where(o => o.Name == "test").Single();
 
             Assert.AreEqual(DateTime.Today, actual.UserMenuItemRatings.Take(1).Single().DateRated);
-            Assert.AreEqual("1Star", actual.UserMenuItemRatings.Take(1).Single().Rating.Name);
+            Assert.AreEqual("NotRated", actual.UserMenuItemRatings.Take(1).Single().Rating.Name);
 
         }
         [TestMethod]
@@ -62,7 +62,7 @@ namespace FoodWuzUp.DAL.Test
             User actual = db.Users.Include("UserRestaurantRatings.Rating").Where(o => o.Name == "test").Single();
 
             Assert.AreEqual(DateTime.Today, actual.UserRestaurantRatings.Take(1).Single().DateRated);
-            Assert.AreEqual("1Star", actual.UserRestaurantRatings.Take(1).Single().Rating.Name);
+            Assert.AreEqual("NotRated", actual.UserRestaurantRatings.Take(1).Single().Rating.Name);
 
         }
         [TestMethod]
@@ -81,7 +81,7 @@ namespace FoodWuzUp.DAL.Test
             User actual = db.Users.Include("UserEmployeeRatings.Rating").Where(o => o.Name == "test").Single();
 
             Assert.AreEqual(DateTime.Today, actual.UserEmployeeRatings.Take(1).Single().DateRated);
-            Assert.AreEqual("1Star", actual.UserEmployeeRatings.Take(1).Single().Rating.Name);
+            Assert.AreEqual("NotRated", actual.UserEmployeeRatings.Take(1).Single().Rating.Name);
 
         }
     }

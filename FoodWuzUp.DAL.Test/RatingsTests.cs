@@ -21,9 +21,9 @@ namespace FoodWuzUp.DAL.Test
         }
         public override void AddedAsserts(Context db, Rating efobject, string unique)
         {
-            Assert.AreEqual("1Star", efobject.Name);
+            Assert.AreEqual("NotRated", efobject.Name);
             int count = db.Ratings.Count();
-            Assert.AreEqual(6, count);
+            Assert.AreEqual(7, count);
             Assert.AreEqual(unique, db.Ratings.Find(count).Name);
         }
     }
