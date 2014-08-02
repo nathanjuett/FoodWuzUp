@@ -34,12 +34,13 @@ namespace FoodWuzUp.DAL.Test
             db.Users.Add(u);
             db.MenuItems.Add(mi);
             db.SaveChanges();
-            u.UserMenuItemRatings.Add(new UserMenuItemRating() { Child = mi, RatingID = 1 });
+            u.UserMenuItemRatings.Add(new UserMenuItemRating() { Child = mi, RatingID = 1, DateRated = DateTime.Today });
             db.SaveChanges();
 
             db = new Context();
             User actual = db.Users.Include("UserMenuItemRatings.Rating").Where(o => o.Name == "test").Single();
 
+            Assert.AreEqual(DateTime.Today, actual.UserMenuItemRatings.Take(1).Single().DateRated);
             Assert.AreEqual("1Star", actual.UserMenuItemRatings.Take(1).Single().Rating.Name);
 
         }
@@ -54,12 +55,13 @@ namespace FoodWuzUp.DAL.Test
             db.Groups.Add(g);
             db.Restaurants.Add(i);
             db.SaveChanges();
-            u.UserRestaurantRatings.Add(new UserRestaurantRating() { Child = i, RatingID = 1 });
+            u.UserRestaurantRatings.Add(new UserRestaurantRating() { Child = i, RatingID = 1, DateRated = DateTime.Today });
             db.SaveChanges();
 
             db = new Context();
             User actual = db.Users.Include("UserRestaurantRatings.Rating").Where(o => o.Name == "test").Single();
 
+            Assert.AreEqual(DateTime.Today, actual.UserRestaurantRatings.Take(1).Single().DateRated);
             Assert.AreEqual("1Star", actual.UserRestaurantRatings.Take(1).Single().Rating.Name);
 
         }
@@ -72,12 +74,13 @@ namespace FoodWuzUp.DAL.Test
             db.Users.Add(u);
             db.Employees.Add(e);
             db.SaveChanges();
-            u.UserEmployeeRatings.Add(new UserEmployeeRating() { Child = e, RatingID = 1 });
+            u.UserEmployeeRatings.Add(new UserEmployeeRating() { Child = e, RatingID = 1, DateRated= DateTime.Today });
             db.SaveChanges();
 
             db = new Context();
             User actual = db.Users.Include("UserEmployeeRatings.Rating").Where(o => o.Name == "test").Single();
 
+            Assert.AreEqual(DateTime.Today, actual.UserEmployeeRatings.Take(1).Single().DateRated);
             Assert.AreEqual("1Star", actual.UserEmployeeRatings.Take(1).Single().Rating.Name);
 
         }

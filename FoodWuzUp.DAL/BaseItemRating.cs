@@ -12,6 +12,7 @@ namespace FoodWuzUp.DAL
         where TParent : IBase
         where TItem : IBase
     {
+        public DateTime DateRated { get; set; }
         public int RatingID { get; set; }
         public Rating Rating { get; set; }
     }
