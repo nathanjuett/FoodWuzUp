@@ -5,7 +5,7 @@ using System.Text;
 
 namespace FoodWuzUp.DAL
 {
-    class ContestDetailRatingComment : BaseComment<ContestDetailRating, ContestDetailRatingComment>
+    public class ContestDetailRatingComment : BaseComment<ContestDetailRating, ContestDetailRatingComment>
     {
     }
 }
