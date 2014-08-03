@@ -17,19 +17,19 @@ namespace FoodWuzUp.DAL.Test
         }
         public override User Create(User efObject, Context db)
         {
-            efObject.UserID = "test";
+            efObject.AuthID = "test";
             return efObject;
         }
         public override void AddedAsserts(Context db, User efobject, string unique)
         {
             base.AddedAsserts(db, efobject, unique);
-            Assert.AreEqual("test", efobject.UserID);
+            Assert.AreEqual("test", efobject.AuthID);
         }
         [TestMethod]
         public void UserTestAddMenuItemRating()
         {
             Context db = new Context();
-            User u = new User() { Name = "test", UserID = "test" };
+            User u = new User() { Name = "test", AuthID = "test" };
             MenuItem mi = new MenuItem() { Name = "Extra Long Chili Cheese Coney", Description = "ELCCC" };
             db.Users.Add(u);
             db.MenuItems.Add(mi);
@@ -48,7 +48,7 @@ namespace FoodWuzUp.DAL.Test
         public void UserTestAddRestaurantRating()
         {
             Context db = new Context();
-            User u = new User() { Name = "test", UserID = "test" };
+            User u = new User() { Name = "test", AuthID = "test" };
             Group g = new Group() { Name = "BreakfastClub" };
             Restaurant i = new Restaurant() { Name = "Sonic", Description = "Drive In", GroupID = 1 };
             db.Users.Add(u);
@@ -69,7 +69,7 @@ namespace FoodWuzUp.DAL.Test
         public void UserTestAddEmployeeRating()
         {
             Context db = new Context();
-            User u = new User() { Name = "test", UserID = "test" };
+            User u = new User() { Name = "test", AuthID = "test" };
             Employee e = new Employee() { Name = "Extra Long Chili Cheese Coney", Description = "ELCCC" };
             db.Users.Add(u);
             db.Employees.Add(e);

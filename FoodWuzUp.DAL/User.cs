@@ -14,7 +14,7 @@ namespace FoodWuzUp.DAL
 
         [Required]
         [MaxLength(128)]
-        public string UserID { get; set; }
+        public string AuthID { get; set; }
 
         public User()
         {

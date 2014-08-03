@@ -535,7 +535,7 @@ namespace FoodWuzUp.Web.Controllers
         private async Task AddUserToDal(string Id, string UserName)
         {
             Context context = new Context();
-            context.Users.Add(new User { UserID = Id, Name = UserName });
+            context.Users.Add(new User { AuthID = Id, Name = UserName });
             await context.SaveChangesAsync();
         }
 
