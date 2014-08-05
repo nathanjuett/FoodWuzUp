@@ -11,8 +11,8 @@ namespace FoodWuzUp.DAL
     {
         public DbSet<Group> Groups { get; set; }
         public DbSet<User> Users { get; set; }
-
-        
+        public DbSet<UserType> UserTypes { get; set; }
+                
         public DbSet<Restaurant> Restaurants { get; set; }
         public DbSet<Employee> Employees { get; set; }
         public DbSet<RestaurantEmployee> RestaurantEmployees { get; set; }

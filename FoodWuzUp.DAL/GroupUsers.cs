@@ -8,5 +8,7 @@ namespace FoodWuzUp.DAL
 {
     public class GroupUsers : BaseXref<GroupUsers, Group, User>
     {
+        public int UserTypeID { get; set; }
+        public UserType UserType { get; set; }
     }
 }

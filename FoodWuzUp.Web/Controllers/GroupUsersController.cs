@@ -17,7 +17,7 @@ namespace FoodWuzUp.Web.Controllers
         // GET: GroupUsers
         public ActionResult Index()
         {
-            var groupUsers = db.GroupUsers.Include(g => g.Child).Include(g => g.Parent);
+            var groupUsers = db.GroupUsers.Include(g=> g.UserType).Include(g => g.Child).Include(g => g.Parent);
             return View(groupUsers.ToList());
         }
 
@@ -28,7 +28,7 @@ namespace FoodWuzUp.Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            GroupUsers groupUsers = db.GroupUsers.Include(g => g.Child).Include(g => g.Parent)
+            GroupUsers groupUsers = db.GroupUsers.Include(g => g.UserType).Include(g => g.Child).Include(g => g.Parent)
                 .Single(o=> o.ParentID == parentid & o.ChildID == childid);
             if (groupUsers == null)
             {
@@ -40,6 +40,7 @@ namespace FoodWuzUp.Web.Controllers
         // GET: GroupUsers/Create
         public ActionResult Create()
         {
+            ViewBag.UserTypeID = new SelectList(db.UserTypes, "ID", "Name");
             ViewBag.ChildID = new SelectList(db.Users, "ID", "Name");
             ViewBag.ParentID = new SelectList(db.Groups, "ID", "Name");
             return View();
@@ -50,7 +51,7 @@ namespace FoodWuzUp.Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ParentID,ChildID")] GroupUsers groupUsers)
+        public ActionResult Create([Bind(Include = "ParentID,ChildID,UserTypeID")] GroupUsers groupUsers)
         {
             if (ModelState.IsValid)
             {
@@ -59,6 +60,7 @@ namespace FoodWuzUp.Web.Controllers
                 return RedirectToAction("Index");
             }
 
+            ViewBag.UserTypeID = new SelectList(db.UserTypes, "ID", "Name");
             ViewBag.ChildID = new SelectList(db.Users, "ID", "Name", groupUsers.ChildID);
             ViewBag.ParentID = new SelectList(db.Groups, "ID", "Name", groupUsers.ParentID);
             return View(groupUsers);
@@ -71,12 +73,13 @@ namespace FoodWuzUp.Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            GroupUsers groupUsers = db.GroupUsers.Include(g => g.Child).Include(g => g.Parent)
+            GroupUsers groupUsers = db.GroupUsers.Include(g => g.UserType).Include(g => g.Child).Include(g => g.Parent)
                 .Single(o => o.ParentID == parentid & o.ChildID == childid);
             if (groupUsers == null)
             {
                 return HttpNotFound();
             }
+            ViewBag.UserTypeID = new SelectList(db.UserTypes, "ID", "Name");
             ViewBag.ChildID = new SelectList(db.Users, "ID", "Name", groupUsers.ChildID);
             ViewBag.ParentID = new SelectList(db.Groups, "ID", "Name", groupUsers.ParentID);
             return View(groupUsers);
@@ -87,7 +90,7 @@ namespace FoodWuzUp.Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ParentID,ChildID")] GroupUsers groupUsers)
+        public ActionResult Edit([Bind(Include = "ParentID,ChildID,UserTypeID")] GroupUsers groupUsers)
         {
             if (ModelState.IsValid)
             {
@@ -95,6 +98,7 @@ namespace FoodWuzUp.Web.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            ViewBag.UserTypeID = new SelectList(db.UserTypes, "ID", "Name");
             ViewBag.ChildID = new SelectList(db.Users, "ID", "Name", groupUsers.ChildID);
             ViewBag.ParentID = new SelectList(db.Groups, "ID", "Name", groupUsers.ParentID);
             return View(groupUsers);
@@ -107,7 +111,7 @@ namespace FoodWuzUp.Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            GroupUsers groupUsers = db.GroupUsers.Include(g => g.Child).Include(g => g.Parent)
+            GroupUsers groupUsers = db.GroupUsers.Include(g => g.UserType).Include(g => g.Child).Include(g => g.Parent)
                 .Single(o => o.ParentID == parentid & o.ChildID == childid);
             if (groupUsers == null)
             {
