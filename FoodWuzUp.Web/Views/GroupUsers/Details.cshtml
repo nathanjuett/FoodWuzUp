@@ -1,0 +1,35 @@
+﻿@model FoodWuzUp.DAL.GroupUsers
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>GroupUsers</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Child.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Child.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Parent.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Parent.Name)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { parentid = Model.ParentID, childid = Model.ChildID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

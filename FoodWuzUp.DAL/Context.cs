@@ -22,7 +22,7 @@ namespace FoodWuzUp.DAL
         public DbSet<Rating> Ratings { get; set; }
         public DbSet<Bracket> Brackets { get; set; }
         public DbSet<RatingsList> RatingsLists { get; set; }
-
+        public DbSet<GroupUsers> GroupUsers { get; set; }
         public DbSet<EmployeeType> EmployeeTypes { get; set; }
         public DbSet<UserEmployeeRating> UserEmployeeRatings { get; set; }
 

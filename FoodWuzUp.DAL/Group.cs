@@ -17,7 +17,7 @@ namespace FoodWuzUp.DAL
 
 
         public virtual User Creator { get; set; }
-       public virtual ICollection<User> Members { get; set; }
+       public virtual ICollection<GroupUsers> Members { get; set; }
        public virtual ICollection<Restaurant> Restaurants { get; set; }
        public virtual ICollection<GroupComment> Comments { get; set; }
        public virtual ICollection<Employee> Employees { get; set; }
@@ -26,7 +26,7 @@ namespace FoodWuzUp.DAL
         public Group()
        {
            Comments = new List<GroupComment>();
-           Members = new List<User>();
+           Members = new List<GroupUsers>();
            Restaurants = new List<Restaurant>();
            Employees = new List<Employee>();
        }

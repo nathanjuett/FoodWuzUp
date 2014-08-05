@@ -163,6 +163,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\EmployeesController.cs" />
     <Compile Include="Controllers\GroupsController.cs" />
+    <Compile Include="Controllers\GroupUsersController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MenuItemsController.cs" />
     <Compile Include="Controllers\RestaurantEmployeesController.cs" />
@@ -263,6 +264,11 @@
     <Content Include="Views\RestaurantEmployees\Details.cshtml" />
     <Content Include="Views\RestaurantEmployees\Edit.cshtml" />
     <Content Include="Views\RestaurantEmployees\Index.cshtml" />
+    <Content Include="Views\GroupUsers\Create.cshtml" />
+    <Content Include="Views\GroupUsers\Delete.cshtml" />
+    <Content Include="Views\GroupUsers\Details.cshtml" />
+    <Content Include="Views\GroupUsers\Edit.cshtml" />
+    <Content Include="Views\GroupUsers\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Code\" />
