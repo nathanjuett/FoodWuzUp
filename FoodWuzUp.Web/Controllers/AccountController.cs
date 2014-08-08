@@ -105,7 +105,7 @@ namespace FoodWuzUp.Web.Controllers
 
                     await AddUserToDal(user.Id, user.UserName);
 
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("AuthenticatedIndex", "Home");
                 }
                 else
                 {
