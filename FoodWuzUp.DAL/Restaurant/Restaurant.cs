@@ -1,4 +1,5 @@
 ﻿using FoodWuzUp.Core;
+using System;
 using System.Collections.Generic;
 
 namespace FoodWuzUp.DAL
@@ -7,7 +8,7 @@ namespace FoodWuzUp.DAL
     {
 
         public int GroupID { get; set; }
-
+        public Guid UniqueID { get; set; }
         public virtual Group Group { get; set; }
         public virtual ICollection<MenuItem> MenuItems { get; set; }
         public virtual ICollection<RestaurantComment> Comments { get; set; }
@@ -17,6 +18,7 @@ namespace FoodWuzUp.DAL
             Comments = new List<RestaurantComment>();
             Employees = new List<RestaurantEmployee>();
             MenuItems = new List<MenuItem>();
+            UniqueID = Guid.NewGuid();
         }
     }
 }

@@ -9,11 +9,13 @@ namespace FoodWuzUp.DAL
 {
     public class Employee : Base<Employee>, IBaseWithComments<Employee, EmployeeComment>
     {
+        public Guid UniqueID { get; set; }
         public virtual ICollection<Restaurant> Restaurants { get; set; }
         public virtual ICollection<EmployeeComment> Comments { get; set; }
         public Employee()
         {
             Comments = new List<EmployeeComment>();
+            UniqueID = Guid.NewGuid();
         }
     }
 }

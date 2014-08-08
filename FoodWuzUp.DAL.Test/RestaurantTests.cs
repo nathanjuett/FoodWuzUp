@@ -56,6 +56,7 @@ namespace FoodWuzUp.DAL.Test
             Restaurant newobj = (Restaurant)obj.Clone();
             Assert.AreNotEqual(obj, newobj);
             Assert.AreNotEqual(obj.ID, newobj.ID);
+            Assert.AreNotEqual(obj.UniqueID, newobj.UniqueID);
             Assert.AreNotEqual(obj.Group, newobj.Group);
             Assert.AreEqual(obj.Name, newobj.Name);
             Assert.AreEqual(obj.Description, newobj.Description);

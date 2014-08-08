@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace FoodWuzUp.DAL
 {
-    public class GroupUsers : BaseXref<GroupUsers, Group, User>
+    public class GroupEmployee : BaseXref<GroupEmployee, Group, Employee>
     {
-        public int UserTypeID { get; set; }
-        public UserType UserType { get; set; }
+
     }
 }

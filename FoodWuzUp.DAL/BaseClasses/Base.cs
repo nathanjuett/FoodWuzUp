@@ -29,7 +29,7 @@ namespace FoodWuzUp.DAL
         public virtual object Clone()
         {
            T clone = new T();
-           foreach (var item in typeof(T).GetProperties().Where(o=> o.Name != "ID" ))
+           foreach (var item in typeof(T).GetProperties().Where(o=> o.Name != "ID" && o.Name != "UniqueID"))
            {
                if (item.PropertyType.IsGenericType)
                    continue;
@@ -41,32 +41,19 @@ namespace FoodWuzUp.DAL
         }
 
     }
-    public abstract class BaseComment<TBase, TComment> : IBaseComment<TBase>
-        where TComment : IBaseComment<TBase>
-        where TBase : IBase
-    {
+   
+    //public abstract class BaseRating<TBase, TComment> : IBaseComment<TBase>
+    //    where TComment : IBaseComment<TBase>
+    //    where TBase : IBase
+    //{
 
-        [Key]
-        public int ID { get; set; }
-        public string Comment { get; set; }
+    //    [Key]
+    //    public int ID { get; set; }
+    //    public string Comment { get; set; }
 
-        [ForeignKey("Parent")]
-        public int ParentID { get; set; }
+    //    [ForeignKey("Parent")]
+    //    public int ParentID { get; set; }
 
-        public TBase Parent { get; set; }
-    }
-    public abstract class BaseRating<TBase, TComment> : IBaseComment<TBase>
-        where TComment : IBaseComment<TBase>
-        where TBase : IBase
-    {
-
-        [Key]
-        public int ID { get; set; }
-        public string Comment { get; set; }
-
-        [ForeignKey("Parent")]
-        public int ParentID { get; set; }
-
-        public TBase Parent { get; set; }
-    }
+    //    public TBase Parent { get; set; }
+    //}
 }

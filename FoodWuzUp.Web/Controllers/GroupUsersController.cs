@@ -28,7 +28,7 @@ namespace FoodWuzUp.Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            GroupUsers groupUsers = db.GroupUsers.Include(g => g.UserType).Include(g => g.Child).Include(g => g.Parent)
+            GroupUser groupUsers = db.GroupUsers.Include(g => g.UserType).Include(g => g.Child).Include(g => g.Parent)
                 .Single(o=> o.ParentID == parentid & o.ChildID == childid);
             if (groupUsers == null)
             {
@@ -51,7 +51,7 @@ namespace FoodWuzUp.Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ParentID,ChildID,UserTypeID")] GroupUsers groupUsers)
+        public ActionResult Create([Bind(Include = "ParentID,ChildID,UserTypeID")] GroupUser groupUsers)
         {
             if (ModelState.IsValid)
             {
@@ -73,7 +73,7 @@ namespace FoodWuzUp.Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            GroupUsers groupUsers = db.GroupUsers.Include(g => g.UserType).Include(g => g.Child).Include(g => g.Parent)
+            GroupUser groupUsers = db.GroupUsers.Include(g => g.UserType).Include(g => g.Child).Include(g => g.Parent)
                 .Single(o => o.ParentID == parentid & o.ChildID == childid);
             if (groupUsers == null)
             {
@@ -90,7 +90,7 @@ namespace FoodWuzUp.Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ParentID,ChildID,UserTypeID")] GroupUsers groupUsers)
+        public ActionResult Edit([Bind(Include = "ParentID,ChildID,UserTypeID")] GroupUser groupUsers)
         {
             if (ModelState.IsValid)
             {
@@ -111,7 +111,7 @@ namespace FoodWuzUp.Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            GroupUsers groupUsers = db.GroupUsers.Include(g => g.UserType).Include(g => g.Child).Include(g => g.Parent)
+            GroupUser groupUsers = db.GroupUsers.Include(g => g.UserType).Include(g => g.Child).Include(g => g.Parent)
                 .Single(o => o.ParentID == parentid & o.ChildID == childid);
             if (groupUsers == null)
             {
@@ -125,7 +125,7 @@ namespace FoodWuzUp.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int? parentid, int? childid)
         {
-            GroupUsers groupUsers = db.GroupUsers.Find(parentid, childid);
+            GroupUser groupUsers = db.GroupUsers.Find(parentid, childid);
             db.GroupUsers.Remove(groupUsers);
             db.SaveChanges();
             return RedirectToAction("Index");
