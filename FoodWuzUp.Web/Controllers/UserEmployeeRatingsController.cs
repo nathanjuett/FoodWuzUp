@@ -41,7 +41,7 @@ namespace FoodWuzUp.Web.Controllers
         public ActionResult Create()
         {
             ViewBag.ChildID = new SelectList(db.Employees, "ID", "Name");
-            ViewBag.ParentID = new SelectList(db.Users, "ID", "UserID");
+            ViewBag.ParentID = new SelectList(db.Users, "ID", "Name");
             ViewBag.RatingID = new SelectList(db.Ratings, "ID", "Name");
             return View();
         }
