@@ -107,6 +107,9 @@
                             Name
                         </th>
                         <th>
+                            Group
+                        </th>
+                        <th>
                             Description
                         </th>
                     </tr>
@@ -115,6 +118,9 @@
                         <tr>
                             <td>
                                 @Html.DisplayFor(modelItem => item.Name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modeItem => item.Group.Name)
                             </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.Description)
