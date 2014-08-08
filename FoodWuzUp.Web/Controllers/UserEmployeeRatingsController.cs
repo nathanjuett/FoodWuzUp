@@ -55,6 +55,7 @@ namespace FoodWuzUp.Web.Controllers
         {
             if (ModelState.IsValid)
             {
+                userEmployeeRating.DateRated = DateTime.Now;
                 db.UserEmployeeRatings.Add(userEmployeeRating);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -93,6 +94,7 @@ namespace FoodWuzUp.Web.Controllers
         {
             if (ModelState.IsValid)
             {
+                userEmployeeRating.DateRated = DateTime.Now;
                 db.Entry(userEmployeeRating).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
