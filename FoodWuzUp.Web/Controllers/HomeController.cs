@@ -31,7 +31,21 @@ namespace FoodWuzUp.Web.Controllers
         private DAL.User GetAuthenticatedUser()
         {
             Context context = new Context();
-            var user = context.Users.Include("Groups").Include("Memberships.Parent").Include("Memberships.Child").Single(o => o.Name == User.Identity.Name);
+            var user = context.Users
+                .Include("Groups")
+                .Include("Memberships.Parent")
+                .Include("Memberships.Child")
+                .Include("Memberships.Parent.Creator")
+                .Single(o => o.Name == User.Identity.Name);
+            List<int> groupIDs = context.Groups
+                .Where(o => o.CreatorID == user.ID)
+                .Select(o => o.ID).ToList();
+            groupIDs.AddRange(
+                context.GroupUsers
+                .Where(o => o.ChildID == user.ID)
+                .Select(o => o.ParentID));
+            ViewBag.Restaurants = context.Restaurants
+                .Where(o => groupIDs.Contains(o.GroupID)).ToList();
             return user;
         }
 
