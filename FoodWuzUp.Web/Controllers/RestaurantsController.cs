@@ -29,7 +29,10 @@ namespace FoodWuzUp.Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Restaurant restaurant = db.Restaurants.Find(id);
+            Restaurant restaurant = db.Restaurants
+                .Include(r => r.Group)
+                .Where(r => r.ID == id)
+                .Single();
             if (restaurant == null)
             {
                 return HttpNotFound();
