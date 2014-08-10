@@ -2,9 +2,11 @@
 using FoodWuzUp.DAL;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+
 
 namespace FoodWuzUp.Web.Controllers
 {
@@ -32,7 +34,7 @@ namespace FoodWuzUp.Web.Controllers
         {
             Context context = new Context();
             var user = context.Users
-                .Include("Groups")
+                .Include(o=> o.Groups)
                 .Include("Memberships.Parent")
                 .Include("Memberships.Child")
                 .Include("Memberships.Parent.Creator")
@@ -52,14 +54,12 @@ namespace FoodWuzUp.Web.Controllers
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
-
             return View();
         }
 
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";
-
             return View();
         }
     }
