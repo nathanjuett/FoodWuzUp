@@ -4,6 +4,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using FoodWuzUp.Web.Models;
+using System.Linq;
 
 namespace FoodWuzUp.Web
 {
@@ -15,8 +16,18 @@ namespace FoodWuzUp.Web
             : base(store)
         {
         }
+        public override Task<ApplicationUser> FindAsync(string userName, string password)
+        {
+            Task<ApplicationUser> ret = base.FindAsync(userName, password);
+            return ret;
+        }
 
-        public static ApplicationUserManager Create(IdentityFactoryOptions<ApplicationUserManager> options, IOwinContext context) 
+        public override Task<System.Collections.Generic.IList<UserLoginInfo>> GetLoginsAsync(string userId)
+        {
+            return base.GetLoginsAsync(userId);
+        }
+
+        public static ApplicationUserManager Create(IdentityFactoryOptions<ApplicationUserManager> options, IOwinContext context)
         {
             var manager = new ApplicationUserManager(new UserStore<ApplicationUser>(context.Get<ApplicationDbContext>()));
             // Configure validation logic for usernames
@@ -28,11 +39,11 @@ namespace FoodWuzUp.Web
             // Configure validation logic for passwords
             manager.PasswordValidator = new PasswordValidator
             {
-                RequiredLength = 6,
-                RequireNonLetterOrDigit = true,
-                RequireDigit = true,
-                RequireLowercase = true,
-                RequireUppercase = true,
+                RequiredLength = 4,
+                //RequireNonLetterOrDigit = true,
+                //RequireDigit = true,
+                //RequireLowercase = true,
+                //RequireUppercase = true,
             };
             // Register two factor authentication providers. This application uses Phone and Emails as a step of receiving a code for verifying the user
             // You can write your own provider and plug in here.
