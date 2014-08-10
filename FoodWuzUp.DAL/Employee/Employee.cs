@@ -14,6 +14,7 @@ namespace FoodWuzUp.DAL
         public virtual ICollection<EmployeeComment> Comments { get; set; }
         public Employee()
         {
+            Restaurants = new List<Restaurant>();
             Comments = new List<EmployeeComment>();
             UniqueID = Guid.NewGuid();
         }
