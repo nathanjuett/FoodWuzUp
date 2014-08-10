@@ -66,6 +66,14 @@ namespace FoodWuzUp.Web.Controllers
                 }
                 else
                 {
+                    ApplicationDbContext db = new ApplicationDbContext();
+                    //This is ugly.
+                    user = db.Users.Where(o => o.Email == model.Email).SingleOrDefault();
+                    if (user != null)
+                    {
+                        await SignInAsync(user, model.RememberMe);
+                        return RedirectToLocal(returnUrl);
+                    }
                     ModelState.AddModelError("", "Invalid username or password.");
                 }
             }
