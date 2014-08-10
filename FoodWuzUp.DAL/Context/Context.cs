@@ -31,15 +31,15 @@ namespace FoodWuzUp.DAL
         public Context()
         {
             Database.SetInitializer<Context>(new ContextInitializer());
-
-
             this.Configuration.LazyLoadingEnabled = false;
-
         }
-
+        public Context(ContextInitializer init)
+        {
+            Database.SetInitializer<Context>(init);
+            this.Configuration.LazyLoadingEnabled = false;
+        }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-
             base.OnModelCreating(modelBuilder);
         }
 
