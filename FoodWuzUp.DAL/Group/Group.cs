@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using FoodWuzUp.Core;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace FoodWuzUp.DAL
 {
@@ -16,6 +17,9 @@ namespace FoodWuzUp.DAL
         public int? CreatorID { get; set; }
 
         public virtual User Creator { get; set; }
+        [NotMapped]
+        [Display(Name = "Creator")]
+        public string CreatorName { get { return Creator.Name ;} }
         public virtual ICollection<GroupUser> Members { get; set; }
         public virtual ICollection<Restaurant> Restaurants { get; set; }
         public virtual ICollection<GroupComment> Comments { get; set; }

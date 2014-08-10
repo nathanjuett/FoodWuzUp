@@ -42,13 +42,13 @@
 <table class="table">
     <tr>
         <th>
-            Group Name
+            @Html.DisplayNameFor(model => model.Name)
         </th>
         <th>
-            Creator
+            @Html.DisplayNameFor(model => model.CreatorName)
         </th>
         <th>
-            Description
+            @Html.DisplayNameFor(model => model.Description)
         </th>
         <th></th>
     </tr>
@@ -60,7 +60,7 @@
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Creator.Name)
+                @Html.DisplayFor(modelItem => item.CreatorName)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Description)
