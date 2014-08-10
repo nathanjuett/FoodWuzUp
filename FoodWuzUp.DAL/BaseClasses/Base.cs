@@ -15,6 +15,7 @@ namespace FoodWuzUp.DAL
         [Key]
         public int ID { get; set; }
         [MaxLength(100)]
+        [Required]
         public string Name { get; set; }
         [MaxLength(500)]
         public string Description { get; set; }
