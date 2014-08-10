@@ -18,8 +18,18 @@ namespace FoodWuzUp.Web.Controllers
         // GET: Restaurants
         public ActionResult Index()
         {
-            var restaurants = db.Restaurants.Include(r => r.Group);
-            return View(restaurants.ToList());
+            List<int> groupIDs = db.Groups
+                .Where(o => o.Creator.Name == User.Identity.Name)
+                .Select(o => o.ID).ToList();
+            groupIDs.AddRange(
+                db.GroupUsers
+                .Where(o => o.Child.Name == User.Identity.Name)
+                .Select(o => o.ParentID));
+            var restaurants = db.Restaurants
+                .Include(o => o.Group)
+                .Where(o => groupIDs.Contains(o.GroupID))
+                .OrderBy(o => o.Name).ToList();
+            return View(restaurants);
         }
 
         // GET: Restaurants/Details/5
