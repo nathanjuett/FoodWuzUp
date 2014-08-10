@@ -56,6 +56,7 @@
     <Compile Include="ContestDetailRatingComment.cs" />
     <Compile Include="Context\Context.cs" />
     <Compile Include="Context\ContextInitializer.cs" />
+    <Compile Include="Context\DemoContextInitializer.cs" />
     <Compile Include="Employee\Employee.cs" />
     <Compile Include="Employee\EmployeeComment.cs" />
     <Compile Include="Employee\EmployeeType.cs" />
