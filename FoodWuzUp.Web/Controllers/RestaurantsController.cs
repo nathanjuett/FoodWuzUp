@@ -53,16 +53,8 @@ namespace FoodWuzUp.Web.Controllers
         // GET: Restaurants/Create
         public ActionResult Create()
         {
-            List<Group> groupIds = GetGroupList();
-            ViewBag.GroupID = new SelectList(groupIds, "ID", "Name", "Select Group");
+            ViewBag.GroupID = new SelectList(GetGroupList(), "ID", "Name");
             return View();
-        }
-
-        private List<Group> GetGroupList()
-        {
-            List<Group> groupIds = db.Groups.Where(o => o.Creator.Name == User.Identity.Name).ToList();
-            groupIds.Insert(0, null);
-            return groupIds;
         }
 
         // POST: Restaurants/Create
@@ -78,8 +70,7 @@ namespace FoodWuzUp.Web.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            List<Group> groupIds = GetGroupList();
-            ViewBag.GroupID = new SelectList(groupIds, "ID", "Name", restaurant.GroupID);
+            ViewBag.GroupID = new SelectList(GetGroupList(), "ID", "Name", restaurant.GroupID);
             return View(restaurant);
         }
 
@@ -123,7 +114,9 @@ namespace FoodWuzUp.Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Restaurant restaurant = db.Restaurants.Find(id);
+            Restaurant restaurant = db.Restaurants
+                .Include(o => o.Group)
+                .Single(o => o.ID == id);
             if (restaurant == null)
             {
                 return HttpNotFound();
@@ -149,6 +142,13 @@ namespace FoodWuzUp.Web.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        private List<Group> GetGroupList()
+        {
+            List<Group> groupIds = db.Groups.Where(o => o.Creator.Name == User.Identity.Name).ToList();
+            groupIds.Insert(0, null);
+            return groupIds;
         }
     }
 }
