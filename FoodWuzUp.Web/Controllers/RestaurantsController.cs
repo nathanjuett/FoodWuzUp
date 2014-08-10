@@ -53,8 +53,16 @@ namespace FoodWuzUp.Web.Controllers
         // GET: Restaurants/Create
         public ActionResult Create()
         {
-            ViewBag.GroupID = new SelectList(db.Groups, "ID", "Name");
+            List<Group> groupIds = GetGroupList();
+            ViewBag.GroupID = new SelectList(groupIds, "ID", "Name", "Select Group");
             return View();
+        }
+
+        private List<Group> GetGroupList()
+        {
+            List<Group> groupIds = db.Groups.Where(o => o.Creator.Name == User.Identity.Name).ToList();
+            groupIds.Insert(0, null);
+            return groupIds;
         }
 
         // POST: Restaurants/Create
@@ -70,8 +78,8 @@ namespace FoodWuzUp.Web.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-
-            ViewBag.GroupID = new SelectList(db.Groups, "ID", "Name", restaurant.GroupID);
+            List<Group> groupIds = GetGroupList();
+            ViewBag.GroupID = new SelectList(groupIds, "ID", "Name", restaurant.GroupID);
             return View(restaurant);
         }
 
