@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApplicationAuthType.cs" />
     <Compile Include="BaseClasses\Base.cs" />
     <Compile Include="BaseClasses\BaseComment.cs" />
     <Compile Include="BaseClasses\BaseItemRating.cs" />

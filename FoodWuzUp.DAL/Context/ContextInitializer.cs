@@ -15,6 +15,11 @@ namespace FoodWuzUp.DAL
         {
             base.Seed(context);
 
+            ApplicationAuthType google = new ApplicationAuthType() { Name = "Google", ThirdPartyKey = "767908454013-n8obtkbr51sjm57jgeh9i3dtbep0c7sb.apps.googleusercontent.com", ThirdPartySecret = "l-11RV3J9E_5QB-vXB7wLS5m" };
+            context.ApplicationAuthTypes.Add(google);
+            ApplicationAuthType facebook = new ApplicationAuthType() { Name = "Facebook", ThirdPartyKey = "675135002567966", ThirdPartySecret = "d926d4f1094111a4cc49a9ddddfb005c" };
+            context.ApplicationAuthTypes.Add(facebook);
+
             context.RecordTypes.Add(new RecordType() { Name = "RecordType", Description = "BaseTypes", DisplayName = "Base Types" });
             context.SaveChanges();
 

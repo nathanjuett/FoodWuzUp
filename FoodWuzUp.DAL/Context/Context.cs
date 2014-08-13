@@ -27,7 +27,7 @@ namespace FoodWuzUp.DAL
         public DbSet<EmployeeType> EmployeeTypes { get; set; }
         public DbSet<UserEmployeeRating> UserEmployeeRatings { get; set; }
 
-
+        public DbSet<ApplicationAuthType> ApplicationAuthTypes { get; set; }
         public Context()
         {
             Database.SetInitializer<Context>(new ContextInitializer());

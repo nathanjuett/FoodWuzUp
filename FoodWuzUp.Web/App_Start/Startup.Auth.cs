@@ -7,6 +7,7 @@ using Microsoft.Owin.Security.DataProtection;
 using Microsoft.Owin.Security.Google;
 using Owin;
 using System;
+using System.Linq;
 using FoodWuzUp.Web.Models;
 
 namespace FoodWuzUp.Web
@@ -34,7 +35,7 @@ namespace FoodWuzUp.Web
                         regenerateIdentity: (manager, user) => user.GenerateUserIdentityAsync(manager))
                 }
             });
-            
+
             app.UseExternalSignInCookie(DefaultAuthenticationTypes.ExternalCookie);
 
             // Uncomment the following lines to enable logging in with third party login providers
@@ -45,15 +46,17 @@ namespace FoodWuzUp.Web
             //app.UseTwitterAuthentication(
             //   consumerKey: "",
             //   consumerSecret: "");
-
+            FoodWuzUp.DAL.Context db = new FoodWuzUp.DAL.Context();
+            FoodWuzUp.DAL.ApplicationAuthType facebook = db.ApplicationAuthTypes.Single(o => o.Name == "Facebook");
             app.UseFacebookAuthentication(
-               appId: "675135002567966",
-               appSecret: "d926d4f1094111a4cc49a9ddddfb005c");
+               appId: facebook.ThirdPartyKey,
+               appSecret: facebook.ThirdPartySecret);
 
+            FoodWuzUp.DAL.ApplicationAuthType google = db.ApplicationAuthTypes.Single(o => o.Name == "Google");
             app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
             {
-                ClientId = "767908454013-n8obtkbr51sjm57jgeh9i3dtbep0c7sb.apps.googleusercontent.com",
-                ClientSecret = "l-11RV3J9E_5QB-vXB7wLS5m"
+                ClientId = google.ThirdPartyKey,
+                ClientSecret = google.ThirdPartySecret
             });
         }
     }
