@@ -10,7 +10,7 @@ using FoodWuzUp.DAL;
 
 namespace FoodWuzUp.Web.Controllers
 {
-    public class RestaurantEmployeesController : Controller
+    public class RestaurantEmployeesController : BaseController
     {
         private Context db = new Context();
 

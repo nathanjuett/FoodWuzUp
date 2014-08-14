@@ -11,7 +11,7 @@ using FoodWuzUp.DAL;
 namespace FoodWuzUp.Web.Controllers
 {
     [Authorize]
-    public class GroupsController : Controller
+    public class GroupsController : BaseController
     {
         private Context db = new Context();
 
@@ -19,9 +19,9 @@ namespace FoodWuzUp.Web.Controllers
         public ActionResult Index()
         {
             var myGroups = db.Groups
-                .Where(o => o.Creator.Name == User.Identity.Name)
+                .Where(o => o.Creator.AuthID  == AuthID)
                 .OrderBy(o => o.Name);
-            List<int> groupIDs = db.GroupUsers.Where(o => o.Child.Name == User.Identity.Name).Select(o => o.ParentID).ToList();
+            List<int> groupIDs = db.GroupUsers.Where(o => o.Child.AuthID == AuthID).Select(o => o.ParentID).ToList();
             ViewBag.MyMemberships = db.Groups
                 .Include(o => o.Creator)
                 .Where(o => groupIDs.Contains(o.ID))
@@ -59,7 +59,7 @@ namespace FoodWuzUp.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                group.CreatorID = db.Users.Single(o => o.Name == User.Identity.Name).ID;
+                group.CreatorID = db.Users.Single(o => o.AuthID == AuthID).ID;
                 db.Groups.Add(group);
                 db.SaveChanges();
                 return RedirectToAction("Index");

@@ -11,7 +11,7 @@ using FoodWuzUp.DAL;
 namespace FoodWuzUp.Web.Controllers
 {
     [Authorize]
-    public class MenuItemsController : Controller
+    public class MenuItemsController : BaseController
     {
         private Context db = new Context();
 

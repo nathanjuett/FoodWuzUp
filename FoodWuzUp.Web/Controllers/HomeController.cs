@@ -13,7 +13,7 @@ namespace FoodWuzUp.Web.Controllers
 
     [RequireHttps]
     [Authorize]
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
         [AllowAnonymous]
         public ActionResult Index()
@@ -34,11 +34,11 @@ namespace FoodWuzUp.Web.Controllers
         {
             Context context = new Context();
             var user = context.Users
-                .Include(o=> o.Groups)
+                .Include(o => o.Groups)
                 .Include("Memberships.Parent")
                 .Include("Memberships.Child")
                 .Include("Memberships.Parent.Creator")
-                .Single(o => o.Name == User.Identity.Name);
+                .Single(o => o.AuthID == AuthID);
             List<int> groupIDs = context.Groups
                 .Where(o => o.CreatorID == user.ID)
                 .Select(o => o.ID).ToList();

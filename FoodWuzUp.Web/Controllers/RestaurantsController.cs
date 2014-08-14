@@ -11,7 +11,7 @@ using FoodWuzUp.DAL;
 namespace FoodWuzUp.Web.Controllers
 {
     [Authorize]
-    public class RestaurantsController : Controller
+    public class RestaurantsController : BaseController
     {
         private Context db = new Context();
 
@@ -19,11 +19,11 @@ namespace FoodWuzUp.Web.Controllers
         public ActionResult Index()
         {
             List<int> groupIDs = db.Groups
-                .Where(o => o.Creator.Name == User.Identity.Name)
+                .Where(o => o.Creator.AuthID == AuthID)
                 .Select(o => o.ID).ToList();
             groupIDs.AddRange(
                 db.GroupUsers
-                .Where(o => o.Child.Name == User.Identity.Name)
+                .Where(o => o.Child.AuthID == AuthID)
                 .Select(o => o.ParentID));
             var restaurants = db.Restaurants
                 .Include(o => o.Group)
@@ -146,7 +146,7 @@ namespace FoodWuzUp.Web.Controllers
 
         private List<Group> GetGroupList()
         {
-            List<Group> groupIds = db.Groups.Where(o => o.Creator.Name == User.Identity.Name).ToList();
+            List<Group> groupIds = db.Groups.Where(o => o.Creator.AuthID == AuthID).ToList();
             groupIds.Insert(0, null);
             return groupIds;
         }
