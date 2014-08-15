@@ -136,7 +136,7 @@
 </div>
 
 <div id="createRestaurantModal" class="modal fade" data-url='@Url.Action("CreateModal", "Restaurants")'>
-    <div id="RestaurantCreateModalContainer"></div>
+    <div id="restaurantCreateModalContainer"></div>
 </div>
 
 
@@ -155,7 +155,7 @@
         $('#restaurantCreate').click(function () {
             var url = $('#createRestaurantModal').data('url');
             $.get(url, function (data) {
-                $('#RestaurantCreateModalContainer').html(data);
+                $('#restaurantCreateModalContainer').html(data);
                 $('#createRestaurantModal').modal('show');
             });
         });
