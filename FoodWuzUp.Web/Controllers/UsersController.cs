@@ -14,6 +14,7 @@ namespace FoodWuzUp.Web.Controllers
     public class UsersController : BaseController
     {
         private Context db = new Context();
+        
 
         // GET: Users
         public ActionResult Index()
