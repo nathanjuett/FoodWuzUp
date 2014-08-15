@@ -52,7 +52,7 @@ namespace FoodWuzUp.Web.Controllers
 
         public ActionResult CreateModal()
         {
-            return PartialView();
+            return View();
         }
 
         // POST: Groups/Create
@@ -83,7 +83,7 @@ namespace FoodWuzUp.Web.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return PartialView(group);
+            return View(group);
         }
 
         // GET: Groups/Edit/5

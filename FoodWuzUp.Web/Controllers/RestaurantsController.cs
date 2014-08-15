@@ -59,7 +59,7 @@ namespace FoodWuzUp.Web.Controllers
         public ActionResult CreateModal()
         {
             ViewBag.GroupID = new SelectList(GetGroupList(), "ID", "Name");
-            return PartialView();
+            return View();
         }
 
         // POST: Restaurants/Create
@@ -89,7 +89,7 @@ namespace FoodWuzUp.Web.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.GroupID = new SelectList(GetGroupList(), "ID", "Name", restaurant.GroupID);
-            return PartialView(restaurant);
+            return View(restaurant);
         }
 
         // GET: Restaurants/Edit/5
