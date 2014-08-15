@@ -278,6 +278,8 @@
     <Content Include="Views\GroupUsers\Edit.cshtml" />
     <Content Include="Views\GroupUsers\Index.cshtml" />
     <Content Include="Views\Home\AuthenticatedIndex.cshtml" />
+    <Content Include="Views\Groups\CreateModal.cshtml" />
+    <Content Include="Views\Restaurants\CreateModal.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Code\" />

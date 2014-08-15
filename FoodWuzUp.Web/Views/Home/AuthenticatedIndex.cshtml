@@ -5,131 +5,164 @@
     List<FoodWuzUp.DAL.Restaurant> restaurants = ViewBag.Restaurants;
 }
 
-        <h2>AuthenticatedIndex</h2>
+<h2>AuthenticatedIndex</h2>
 
-        <div>
-            <h4>User</h4>
-            <hr />
-            <dl class="dl-horizontal">
-                <dt>
-                    @Html.DisplayNameFor(model => model.Name)
-                </dt>
+<div>
+    <h4>User</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
 
-                <dd>
-                    @Html.DisplayFor(model => model.Name)
-                </dd>
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
 
-                <dt>
-                    @Html.DisplayNameFor(model => model.AuthID)
-                </dt>
+        <dt>
+            @Html.DisplayNameFor(model => model.AuthID)
+        </dt>
 
-                <dd>
-                    @Html.DisplayFor(model => model.AuthID)
-                </dd>
+        <dd>
+            @Html.DisplayFor(model => model.AuthID)
+        </dd>
 
-                <dt>
-                    @Html.DisplayNameFor(model => model.Description)
-                </dt>
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
 
-                <dd>
-                    @Html.DisplayFor(model => model.Description)
-                </dd>
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
 
-            </dl>
-        </div>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+<div class="row">
+    <div class="col-sm-6 col-md-6 col-lg-6">
+        <h3>My Groups</h3>
+        <table class="table">
+            <tr>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Description
+                </th>
+            </tr>
+
+            @foreach (var item in Model.Groups)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+                </tr>
+            }
+        </table>
         <p>
-            @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
-            @Html.ActionLink("Back to List", "Index")
+            <input type="button" value="Create" class="btn btn-default" id="groupCreate" />
         </p>
 
-        <div class="row">
-            <div class="col-sm-6 col-md-6 col-lg-6">
-                <h3>My Groups</h3>
-                <table class="table">
-                    <tr>
-                        <th>
-                            Name
-                        </th>
-                        <th>
-                            Description
-                        </th>
-                    </tr>
-
-                    @foreach (var item in Model.Groups)
+        <h3>My Memberships</h3>
+        <table class="table">
+            <tr>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Creator
+                </th>
+                <th>
+                    Description
+                </th>
+            </tr>
+            @foreach (var item in Model.Memberships)
             {
-                        <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Name)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Description)
-                            </td>
-                        </tr>
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Parent.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Parent.Creator.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Parent.Description)
+                    </td>
+                </tr>
             }
-                </table>
-                <p>
-                    @Html.ActionLink("Create New", "Create", "Groups")
-                </p>
-                <h3>My Memberships</h3>
-                <table class="table">
-                    <tr>
-                        <th>
-                            Name
-                        </th>
-                        <th>
-                            Creator
-                        </th>
-                        <th>
-                            Description
-                        </th>
-                    </tr>
-                    @foreach (var item in Model.Memberships)
-                    {
-                        <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Parent.Name)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Parent.Creator.Name)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Parent.Description)
-                            </td>
-                        </tr>
-                    }
-                </table>
-            </div>
-            <div class="col-sm-6 col-md-6 col-lg-6">
-                <h3>My Resturants</h3>
-                <table class="table">
-                    <tr>
-                        <th>
-                            Name
-                        </th>
-                        <th>
-                            Group
-                        </th>
-                        <th>
-                            Description
-                        </th>
-                    </tr>
-                    @foreach (var item in restaurants)
-                    {
-                        <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Name)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modeItem => item.Group.Name)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Description)
-                            </td>
-                        </tr>
-                    }
-                </table>
-                <p>
-                    @Html.ActionLink("Create New", "Create", "Restaurants")
-                </p>
-            </div>
-        </div>
+        </table>
+    </div>
+    <div class="col-sm-6 col-md-6 col-lg-6">
+        <h3>My Resturants</h3>
+        <table class="table">
+            <tr>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Group
+                </th>
+                <th>
+                    Description
+                </th>
+            </tr>
+            @foreach (var item in restaurants)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modeItem => item.Group.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+                </tr>
+            }
+        </table>
+        <p>
+            @Html.ActionLink("Create New", "Create", "Restaurants")|
+            <input type="button" value="Create" class="btn btn-default" id="restaurantCreate" />
+        </p>
+    </div>
+</div>
+
+<div id="createGroupModal" class="modal fade" data-url='@Url.Action("CreateModal", "Groups")'>
+    <div id="groupCreateModalContainer"></div>
+</div>
+
+<div id="createRestaurantModal" class="modal fade" data-url='@Url.Action("CreateModal", "Restaurants")'>
+    <div id="RestaurantCreateModalContainer"></div>
+</div>
+
+
+@Scripts.Render("~/bundles/jquery")
+<script>
+    $(document).ready(function () {
+        $('#groupCreate').click(function () {
+            var url = $('#createGroupModal').data('url');
+            $.get(url, function (data) {
+                $('#groupCreateModalContainer').html(data);
+                $('#createGroupModal').modal('show');
+            });
+        });
+    });
+    $(document).ready(function () {
+        $('#restaurantCreate').click(function () {
+            var url = $('#createRestaurantModal').data('url');
+            $.get(url, function (data) {
+                $('#RestaurantCreateModalContainer').html(data);
+                $('#createRestaurantModal').modal('show');
+            });
+        });
+    });
+</script>

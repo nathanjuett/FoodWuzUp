@@ -56,6 +56,11 @@ namespace FoodWuzUp.Web.Controllers
             ViewBag.GroupID = new SelectList(GetGroupList(), "ID", "Name");
             return View();
         }
+        public ActionResult CreateModal()
+        {
+            ViewBag.GroupID = new SelectList(GetGroupList(), "ID", "Name");
+            return PartialView();
+        }
 
         // POST: Restaurants/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
@@ -72,6 +77,19 @@ namespace FoodWuzUp.Web.Controllers
             }
             ViewBag.GroupID = new SelectList(GetGroupList(), "ID", "Name", restaurant.GroupID);
             return View(restaurant);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateModal([Bind(Include = "ID,GroupID,Name,Description")] Restaurant restaurant)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Restaurants.Add(restaurant);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            ViewBag.GroupID = new SelectList(GetGroupList(), "ID", "Name", restaurant.GroupID);
+            return PartialView(restaurant);
         }
 
         // GET: Restaurants/Edit/5

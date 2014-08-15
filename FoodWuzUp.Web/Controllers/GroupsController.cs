@@ -50,6 +50,11 @@ namespace FoodWuzUp.Web.Controllers
              return View();
         }
 
+        public ActionResult CreateModal()
+        {
+            return PartialView();
+        }
+
         // POST: Groups/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -66,6 +71,19 @@ namespace FoodWuzUp.Web.Controllers
             }
 
              return View(group);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateModal([Bind(Include = "ID,CreateorID,Name,Description")] Group group)
+        {
+            if (ModelState.IsValid)
+            {
+                group.CreatorID = db.Users.Single(o => o.AuthID == AuthID).ID;
+                db.Groups.Add(group);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return PartialView(group);
         }
 
         // GET: Groups/Edit/5
