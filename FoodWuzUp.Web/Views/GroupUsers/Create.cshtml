@@ -25,9 +25,11 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.ChildID, "ChildID", htmlAttributes: new { @class = "control-label col-md-2" })
+             @Html.LabelFor(model => model.ChildID, "ChildID", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("ChildID", null, htmlAttributes: new { @class = "form-control" })
+                <input class="form-control" id="tags">
+
+@*                @Html.DropDownList("ChildID", null, htmlAttributes: new { @class = "form-control" })*@
                 @Html.ValidationMessageFor(model => model.ChildID, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -50,8 +52,60 @@
 
 <div>
     @Html.ActionLink("Back to List", "Index")
-</div>
-
+</div> 
+ 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
+@Scripts.Render("~/bundles/jquery")
+
+<script  type="text/javascript">
+    $(function () {
+
+        var availableTags = [
+         "ActionScript",
+         "AppleScript",
+          "Asp",
+          "Scala",
+          "Scheme"
+        ];
+
+        $("#tags").autocomplete({
+            source: function (request, response) {
+                $.get("@Url.Action("UserLookup")",{
+                    query: $("#tags")[0].value
+                }).done(function (data) {
+                    var ret;
+                    for (var i in data) {
+                        new 
+                        {
+                            label: data.text, 
+                            value: data.value 
+                        };
+                        ret.push(data[i]);
+                    }
+                    return ret;
+                });
+                @*$.ajax({
+                    url: "@Url.Action("UserLookup")",
+                    type: "GET",
+                    dataType: "json",
+                    contentType: "application/json; charset=utf-8",
+                    data:  "tesst",
+                    //dataFilter: function (data) { return data; },
+                    success: function (data) {
+                        response($.map(data.d, function (item) {
+                            return {
+                                label: name,
+                                value: value
+                            }
+                        }))
+                    },
+                    error: function (result) {
+                        alert("Error");
+                    }
+                });*@
+            }
+        });
+    });
+</script>
