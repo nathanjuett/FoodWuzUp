@@ -86,7 +86,7 @@ namespace FoodWuzUp.Web.Controllers
             {
                 db.Restaurants.Add(restaurant);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("AuthenticatedIndex", "Home");
             }
             ViewBag.GroupID = new SelectList(GetGroupList(), "ID", "Name", restaurant.GroupID);
             return View(restaurant);

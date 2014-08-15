@@ -81,7 +81,7 @@ namespace FoodWuzUp.Web.Controllers
                 group.CreatorID = db.Users.Single(o => o.AuthID == AuthID).ID;
                 db.Groups.Add(group);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("AuthenticatedIndex", "Home");
             }
             return View(group);
         }
