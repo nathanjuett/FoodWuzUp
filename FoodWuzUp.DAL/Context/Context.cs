@@ -12,14 +12,8 @@ namespace FoodWuzUp.DAL
         public DbSet<Group> Groups { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<UserType> UserTypes { get; set; }
-<<<<<<< HEAD
-
         public DbSet<Event> Events { get; set; }
-
         public DbSet<EventType> EventTypes { get; set; }
-
-=======
->>>>>>> bedc523af276f15e2e8a69eb3b95ab53d0139265
         public DbSet<Restaurant> Restaurants { get; set; }
         public DbSet<Employee> Employees { get; set; }
         public DbSet<RestaurantEmployee> RestaurantEmployees { get; set; }
@@ -49,8 +43,8 @@ namespace FoodWuzUp.DAL
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-         }
+        }
 
-        
+
     }
 }
