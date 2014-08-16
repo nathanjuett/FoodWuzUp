@@ -61,6 +61,8 @@
     <Compile Include="Employee\Employee.cs" />
     <Compile Include="Employee\EmployeeComment.cs" />
     <Compile Include="Employee\EmployeeType.cs" />
+    <Compile Include="Event\Event.cs" />
+    <Compile Include="Event\EventType.cs" />
     <Compile Include="Group\Group.cs" />
     <Compile Include="Group\GroupComment.cs" />
     <Compile Include="Group\GroupEmployee.cs" />

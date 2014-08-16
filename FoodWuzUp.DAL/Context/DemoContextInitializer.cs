@@ -17,19 +17,22 @@ namespace FoodWuzUp.DAL
             User User4 = db.Users.Add(new User() { AuthID = Guid.NewGuid().ToString(), Name = "Cory", Description = "SayWhat" });
             User User5 = db.Users.Add(new User() { AuthID = Guid.NewGuid().ToString(), Name = "Paula", Description = "The Balla" });
             User User6 = db.Users.Add(new User() { AuthID = Guid.NewGuid().ToString(), Name = "TheHopefull", Description = "Has All Restaurants" });
+            db.SaveChanges();
 
             Group group1 = db.Groups.Add(new Group() { Name = "Downtown", Creator = User1, Description = "Breakfast club got nothing on us." });
             Group group2 = db.Groups.Add(new Group() { Name = "ClearLake", Creator = User3, Description = "Time for Lunch" });
             Group group3 = db.Groups.Add(new Group() { Name = "Work", Creator = User1, Description = "We go early" });
             Group group4 = db.Groups.Add(new Group() { Name = "Private", Creator = User2, Description = "I don't have any users" });
             Group group5 = db.Groups.Add(new Group() { Name = "Public", Creator = User4, Description = "I include everyone." });
+            db.SaveChanges();
 
             GroupUser groupuser1 = db.GroupUsers.Add(new GroupUser() { Parent = group1, Child = User1, UserType = db.UserTypes.Single(o=> o.Name == "Administrator") });
-            GroupUser groupuser2 = db.GroupUsers.Add(new GroupUser() { Parent = group1, Child = User1, UserType = db.UserTypes.Single(o => o.Name == "User") });
-            GroupUser groupuser3 = db.GroupUsers.Add(new GroupUser() { Parent = group1, Child = User1, UserType = db.UserTypes.Single(o => o.Name == "Contributor") });
-            GroupUser groupuser4 = db.GroupUsers.Add(new GroupUser() { Parent = group1, Child = User1, UserType = db.UserTypes.Single(o => o.Name == "Owner") });
-            GroupUser groupuser5 = db.GroupUsers.Add(new GroupUser() { Parent = group1, Child = User1, UserType = db.UserTypes.Single(o => o.Name == "Owner") });
-            GroupUser groupuser6 = db.GroupUsers.Add(new GroupUser() { Parent = group1, Child = User1, UserType = db.UserTypes.Single(o => o.Name == "Owner") });
+            GroupUser groupuser2 = db.GroupUsers.Add(new GroupUser() { Parent = group2, Child = User1, UserType = db.UserTypes.Single(o => o.Name == "Administrator") });
+            GroupUser groupuser3 = db.GroupUsers.Add(new GroupUser() { Parent = group3, Child = User1, UserType = db.UserTypes.Single(o => o.Name == "Contributor") });
+            GroupUser groupuser4 = db.GroupUsers.Add(new GroupUser() { Parent = group4, Child = User1, UserType = db.UserTypes.Single(o => o.Name == "Guest") });
+            GroupUser groupuser5 = db.GroupUsers.Add(new GroupUser() { Parent = group5, Child = User1, UserType = db.UserTypes.Single(o => o.Name == "Guest") });
+            GroupUser groupuser6 = db.GroupUsers.Add(new GroupUser() { Parent = group1, Child = User2, UserType = db.UserTypes.Single(o => o.Name == "Guest") });
+            db.SaveChanges();
 
             Restaurant restaurant0 = db.Restaurants.Add(new Restaurant() { Group = group1, Name = "CharBar", UniqueID = Guid.NewGuid() });
             Restaurant restaurant1 = db.Restaurants.Add(new Restaurant() { Group = group1, Name = "Shay's", UniqueID = Guid.NewGuid() });
@@ -43,6 +46,7 @@ namespace FoodWuzUp.DAL
             group2.Restaurants.Add(restaurant0);
             group3.Restaurants.Add(restaurant1);
             group5.Restaurants.Add(restaurant2);
+            db.SaveChanges();
 
 
             Employee employee0 = db.Employees.Add(new Employee() { UniqueID = Guid.NewGuid(), Name = "Charlean", Description = "GirlWonder" });

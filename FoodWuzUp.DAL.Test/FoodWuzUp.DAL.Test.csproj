@@ -65,6 +65,7 @@
     <Compile Include="BaseTests.cs" />
     <Compile Include="RatingsTests.cs" />
     <Compile Include="RestaurantTests.cs" />
+    <Compile Include="EventTests.cs" />
     <Compile Include="UserTests.cs" />
   </ItemGroup>
   <ItemGroup>
