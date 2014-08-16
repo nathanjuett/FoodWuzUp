@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.30501.0
+VisualStudioVersion = 12.0.30723.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FoodWuzUp.DAL", "FoodWuzUp.DAL\FoodWuzUp.DAL.csproj", "{A5352536-2150-4F2A-961F-07245D9EDE00}"
 EndProject
@@ -27,6 +27,11 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Notes", "Notes", "{899C5246-E6DF-4936-903D-3FF9A7728746}"
 	ProjectSection(SolutionItems) = preProject
 		ContestNotes.txt = ContestNotes.txt
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SQL", "SQL", "{0CF021AF-EB4A-4BA2-8EE6-FBBCAF8524D3}"
+	ProjectSection(SolutionItems) = preProject
+		SQL\RestaurantType.sql = SQL\RestaurantType.sql
 	EndProjectSection
 EndProject
 Global
