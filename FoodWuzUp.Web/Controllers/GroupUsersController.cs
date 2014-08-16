@@ -45,9 +45,7 @@ namespace FoodWuzUp.Web.Controllers
         // GET: GroupUsers/Create
         public ActionResult Create()
         {
-            ViewBag.UserTypeID = new SelectList(db.UserTypes, "ID", "Name");
-            ViewBag.ChildID = new SelectList(db.Users, "ID", "Name");
-            ViewBag.ParentID = new SelectList(db.Groups, "ID", "Name");
+            GenerateViewBagItems();
             return View();
         }
 
@@ -65,9 +63,7 @@ namespace FoodWuzUp.Web.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.UserTypeID = new SelectList(db.UserTypes, "ID", "Name");
-            ViewBag.ChildID = new SelectList(db.Users, "ID", "Name", groupUsers.ChildID);
-            ViewBag.ParentID = new SelectList(db.Groups, "ID", "Name", groupUsers.ParentID);
+            GenerateViewBagItems(groupUsers);
             return View(groupUsers);
         }
 
@@ -84,9 +80,7 @@ namespace FoodWuzUp.Web.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.UserTypeID = new SelectList(db.UserTypes, "ID", "Name", groupUsers.UserTypeID);
-            ViewBag.ChildID = new SelectList(db.Users, "ID", "Name", groupUsers.ChildID);
-            ViewBag.ParentID = new SelectList(db.Groups, "ID", "Name", groupUsers.ParentID);
+            GenerateViewBagItems(groupUsers);
             return View(groupUsers);
         }
 
@@ -103,9 +97,7 @@ namespace FoodWuzUp.Web.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.UserTypeID = new SelectList(db.UserTypes, "ID", "Name", groupUsers.UserTypeID);
-            ViewBag.ChildID = new SelectList(db.Users, "ID", "Name", groupUsers.ChildID);
-            ViewBag.ParentID = new SelectList(db.Groups, "ID", "Name", groupUsers.ParentID);
+            GenerateViewBagItems(groupUsers);
             return View(groupUsers);
         }
 
@@ -134,6 +126,21 @@ namespace FoodWuzUp.Web.Controllers
             db.GroupUsers.Remove(groupUsers);
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        private void GenerateViewBagItems(GroupUser groupUsers = null)
+        {
+            if (groupUsers == null)
+                groupUsers = new GroupUser();
+            var userTypes = db.UserTypes.ToList();
+            userTypes.Insert(0, null);
+            ViewBag.UserTypeID = new SelectList(userTypes, "ID", "Name", groupUsers.UserTypeID);
+            var users = db.Users.ToList();
+            users.Insert(0, null);
+            ViewBag.ChildID = new SelectList(users, "ID", "Name", groupUsers.ChildID);
+            var groups = db.Groups.ToList();
+            groups.Insert(0, null);
+            ViewBag.ParentID = new SelectList(groups, "ID", "Name", groupUsers.ParentID);
         }
 
         protected override void Dispose(bool disposing)
