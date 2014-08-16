@@ -8,9 +8,9 @@ namespace FoodWuzUp.DAL
 {
     public class Restaurant : Base<Restaurant>, IBaseWithComments<Restaurant, RestaurantComment>
     {
-
         public int GroupID { get; set; }
         public Guid UniqueID { get; set; }
+        [Required]
         public virtual Group Group { get; set; }
         [MaxLength(32)]
         public string Phone { get; set; }
@@ -20,6 +20,7 @@ namespace FoodWuzUp.DAL
         public string Address { get; set; }
         [ForeignKey("RestaurantType")]
         public int? RestaurantTypeID { get; set; }
+        [Display(Name = "Resturant Type")]
         public RestaurantType RestaurantType { get; set; }
         public virtual ICollection<MenuItem> MenuItems { get; set; }
         public virtual ICollection<RestaurantComment> Comments { get; set; }
