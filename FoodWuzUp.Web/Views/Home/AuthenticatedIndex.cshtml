@@ -106,7 +106,7 @@
             {
                 <tr>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Name)
+                        @Html.ActionLink(item.Name, "Details", "Restaurants", new { id = item.ID }, null)
                     </td>
                     <td>
                         @Html.DisplayFor(modeItem => item.Group.Name)
