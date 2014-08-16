@@ -44,3 +44,22 @@ GO
 ALTER TABLE dbo.Restaurants ADD
 	Address nvarchar(512) NULL
 GO
+
+
+insert into RestaurantTypes 
+select 'Italian',''
+union
+select 'Thai',''
+union
+select 'American',''
+union
+select 'Mexican',''
+union
+select 'Vietnamese',''
+union
+select 'BBQ',''
+union
+select 'Chinese',''
+union
+select 'Steak House',''
+
