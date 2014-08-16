@@ -13,7 +13,7 @@ namespace FoodWuzUp.DAL
         {
             base.Init(db);
             db.UserTypes.Add(new UserType() { Name = "Guest", Description = "Guest Users can view and add rattings." });
-            db.UserTypes.Add(new UserType() { Name = "Contributor", Description = "Contributors have the access that guests have and can add Restaurants, Employees, and Menu Items " });
+            db.UserTypes.Add(new UserType() { Name = "Contributor", Description = "Contributors have the access that guests have and can add Restaurants, Employees, and Menu Items." });
             db.UserTypes.Add(new UserType() { Name = "Administrator", Description = "Administrators have all the rights of Contributors and can add users to the Group" });
         }
     }
