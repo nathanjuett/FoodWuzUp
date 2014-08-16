@@ -27,43 +27,69 @@
             @Html.DisplayNameFor(model => model.Phone)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Url)
-        </th>
-        <th>
             @Html.DisplayNameFor(model => model.Address)
         </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Description)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Group.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.RestaurantType.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Phone)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Url)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Address)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @if (item.Url != null)
+                {
+                    <a href="http://@Html.DisplayFor(modelItem => item.Url)">
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </a>
+                }
+                else
+                {
+                    @Html.DisplayFor(modelItem => item.Name)
+                }
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Group.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RestaurantType.Name)
+            </td>
+            <td>
+                @if (item.Phone != null)
+                {
+                    <a href="tel:@Html.DisplayFor(modelItem => item.Phone)"
+                       data-toggle="tooltip" class="tip"
+                       data-original-title="@Html.DisplayFor(modelItem => item.Phone)">
+                        <span class="glyphicon glyphicon-earphone"></span>
+                    </a>
+                }
+            </td>
+            <td>
+                @if (item.Address != null)
+                {
+                    <a href="http://maps.google.com/?q=@Html.DisplayFor(modelItem => item.Address)"
+                       data-toggle="tooltip" class="tip"
+                       data-original-title="@Html.DisplayFor(modelItem => item.Address)">
+                        <span class="glyphicon glyphicon-globe"></span>
+                    </a>
+                }
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+            </td>
+        </tr>
+    }
 
 </table>
+@Scripts.Render("~/bundles/jquery")
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(".tip").tooltip({
+            placement: 'top'
+        });
+    });
+</script>

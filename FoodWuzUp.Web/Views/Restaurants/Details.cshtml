@@ -32,7 +32,12 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Phone)
+            @if (@Html.DisplayFor(model => model.Phone) != null)
+            {
+                <a href="tel:@Html.DisplayFor(model => model.Phone)">
+                    @Html.DisplayFor(model => model.Phone)
+                </a>
+            }
         </dd>
 
         <dt>
@@ -40,7 +45,12 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Url)
+            @if (@Html.DisplayFor(model => model.Url) != null)
+            {
+                <a href="http://@Html.DisplayFor(model => model.Url)">
+                    @Html.DisplayFor(model => model.Url)
+                </a>
+            }
         </dd>
 
         <dt>
@@ -48,7 +58,12 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Address)
+            @if (@Html.DisplayFor(model => model.Address) != null)
+            {
+                <a href="http://maps.google.com/?q=@Html.DisplayFor(model => model.Address)">
+                    @Html.DisplayFor(model => model.Address)
+                </a>
+            }
         </dd>
 
         <dt>
