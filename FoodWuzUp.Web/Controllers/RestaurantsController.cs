@@ -55,7 +55,7 @@ namespace FoodWuzUp.Web.Controllers
         public ActionResult Create()
         {
             ViewBag.GroupID = new SelectList(GetGroupList(), "ID", "Name");
-            ViewBag.RestaurantTypeID = new SelectList(db.RestaurantTypes, "ID", "Name");
+            setRestaurantTypeIDViewBag();
             return View();
         }
 
