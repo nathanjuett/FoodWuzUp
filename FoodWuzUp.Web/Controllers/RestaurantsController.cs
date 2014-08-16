@@ -191,7 +191,7 @@ namespace FoodWuzUp.Web.Controllers
             ViewBag.RestaurantTypeID = new SelectList(restaurantTypeList, "ID", "Name", restaurant.RestaurantTypeID);
         }
 
-        private static void fixAddress(Restaurant restaurant)
+        private void fixAddress(Restaurant restaurant)
         {
             System.Text.RegularExpressions.Regex r = new System.Text.RegularExpressions.Regex(Environment.NewLine);
             restaurant.Address = r.Replace(restaurant.Address, ", ");
