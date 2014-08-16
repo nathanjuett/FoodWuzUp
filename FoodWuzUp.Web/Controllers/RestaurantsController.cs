@@ -54,10 +54,12 @@ namespace FoodWuzUp.Web.Controllers
         public ActionResult Create()
         {
             ViewBag.GroupID = new SelectList(GetGroupList(), "ID", "Name");
+            ViewBag.RestaurantTypeID = new SelectList(db.RestaurantTypes, "ID", "Name");
             return View();
         }
         public ActionResult CreateModal()
         {
+            ViewBag.RestaurantTypeID = new SelectList(db.RestaurantTypes, "ID", "Name");
             ViewBag.GroupID = new SelectList(GetGroupList(), "ID", "Name");
             return View();
         }
@@ -75,6 +77,7 @@ namespace FoodWuzUp.Web.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            ViewBag.RestaurantTypeID = new SelectList(db.RestaurantTypes, "ID", "Name");
             ViewBag.GroupID = new SelectList(GetGroupList(), "ID", "Name", restaurant.GroupID);
             return View(restaurant);
         }
@@ -88,6 +91,7 @@ namespace FoodWuzUp.Web.Controllers
                 db.SaveChanges();
                 return RedirectToAction("AuthenticatedIndex", "Home");
             }
+            ViewBag.RestaurantTypeID = new SelectList(db.RestaurantTypes, "ID", "Name");
             ViewBag.GroupID = new SelectList(GetGroupList(), "ID", "Name", restaurant.GroupID);
             return View(restaurant);
         }
