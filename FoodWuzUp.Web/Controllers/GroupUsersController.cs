@@ -84,7 +84,7 @@ namespace FoodWuzUp.Web.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.UserTypeID = new SelectList(db.UserTypes, "ID", "Name");
+            ViewBag.UserTypeID = new SelectList(db.UserTypes, "ID", "Name", groupUsers.UserTypeID);
             ViewBag.ChildID = new SelectList(db.Users, "ID", "Name", groupUsers.ChildID);
             ViewBag.ParentID = new SelectList(db.Groups, "ID", "Name", groupUsers.ParentID);
             return View(groupUsers);
@@ -103,7 +103,7 @@ namespace FoodWuzUp.Web.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.UserTypeID = new SelectList(db.UserTypes, "ID", "Name");
+            ViewBag.UserTypeID = new SelectList(db.UserTypes, "ID", "Name", groupUsers.UserTypeID);
             ViewBag.ChildID = new SelectList(db.Users, "ID", "Name", groupUsers.ChildID);
             ViewBag.ParentID = new SelectList(db.Groups, "ID", "Name", groupUsers.ParentID);
             return View(groupUsers);
