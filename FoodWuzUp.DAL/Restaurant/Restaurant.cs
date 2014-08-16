@@ -8,9 +8,9 @@ namespace FoodWuzUp.DAL
 {
     public class Restaurant : Base<Restaurant>, IBaseWithComments<Restaurant, RestaurantComment>
     {
+        [Required]
         public int GroupID { get; set; }
         public Guid UniqueID { get; set; }
-        [Required]
         public virtual Group Group { get; set; }
         [MaxLength(32)]
         public string Phone { get; set; }

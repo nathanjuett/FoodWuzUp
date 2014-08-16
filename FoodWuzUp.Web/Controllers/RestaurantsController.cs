@@ -41,6 +41,7 @@ namespace FoodWuzUp.Web.Controllers
             }
             Restaurant restaurant = db.Restaurants
                 .Include(r => r.Group)
+                .Include(r => r.RestaurantType)
                 .Where(r => r.ID == id)
                 .Single();
             if (restaurant == null)
@@ -57,9 +58,10 @@ namespace FoodWuzUp.Web.Controllers
             ViewBag.RestaurantTypeID = new SelectList(db.RestaurantTypes, "ID", "Name");
             return View();
         }
+
         public ActionResult CreateModal()
         {
-            ViewBag.RestaurantTypeID = new SelectList(db.RestaurantTypes, "ID", "Name");
+            setRestaurantTypeIDViewBag();
             ViewBag.GroupID = new SelectList(GetGroupList(), "ID", "Name");
             return View();
         }
@@ -69,7 +71,7 @@ namespace FoodWuzUp.Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,GroupID,Name,Description")] Restaurant restaurant)
+        public ActionResult Create([Bind(Include = "ID,GroupID,Name,Description,Phone,Url,Address,RestaurantTypeID")] Restaurant restaurant)
         {
             if (ModelState.IsValid)
             {
@@ -77,13 +79,14 @@ namespace FoodWuzUp.Web.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.RestaurantTypeID = new SelectList(db.RestaurantTypes, "ID", "Name");
+            setRestaurantTypeIDViewBag(restaurant);
             ViewBag.GroupID = new SelectList(GetGroupList(), "ID", "Name", restaurant.GroupID);
             return View(restaurant);
         }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CreateModal([Bind(Include = "ID,GroupID,Name,Description")] Restaurant restaurant)
+        public ActionResult CreateModal([Bind(Include = "ID,GroupID,Name,Description,Phone,Url,Address,RestaurantTypeID")] Restaurant restaurant)
         {
             if (ModelState.IsValid)
             {
@@ -91,7 +94,7 @@ namespace FoodWuzUp.Web.Controllers
                 db.SaveChanges();
                 return RedirectToAction("AuthenticatedIndex", "Home");
             }
-            ViewBag.RestaurantTypeID = new SelectList(db.RestaurantTypes, "ID", "Name");
+            setRestaurantTypeIDViewBag(restaurant);
             ViewBag.GroupID = new SelectList(GetGroupList(), "ID", "Name", restaurant.GroupID);
             return View(restaurant);
         }
@@ -108,6 +111,7 @@ namespace FoodWuzUp.Web.Controllers
             {
                 return HttpNotFound();
             }
+            setRestaurantTypeIDViewBag(restaurant);
             ViewBag.GroupID = new SelectList(db.Groups, "ID", "Name", restaurant.GroupID);
             return View(restaurant);
         }
@@ -117,7 +121,7 @@ namespace FoodWuzUp.Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,GroupID,Name,Description")] Restaurant restaurant)
+        public ActionResult Edit([Bind(Include = "ID,GroupID,Name,Description,Phone,Url,Address,RestaurantTypeID")] Restaurant restaurant)
         {
             if (ModelState.IsValid)
             {
@@ -125,6 +129,7 @@ namespace FoodWuzUp.Web.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            setRestaurantTypeIDViewBag(restaurant);
             ViewBag.GroupID = new SelectList(db.Groups, "ID", "Name", restaurant.GroupID);
             return View(restaurant);
         }
@@ -138,6 +143,7 @@ namespace FoodWuzUp.Web.Controllers
             }
             Restaurant restaurant = db.Restaurants
                 .Include(o => o.Group)
+                .Include(o => o.RestaurantType)
                 .Single(o => o.ID == id);
             if (restaurant == null)
             {
@@ -171,6 +177,15 @@ namespace FoodWuzUp.Web.Controllers
             List<Group> groupIds = db.Groups.Where(o => o.Creator.AuthID == AuthID).ToList();
             groupIds.Insert(0, null);
             return groupIds;
+        }
+
+        private void setRestaurantTypeIDViewBag(Restaurant restaurant = null)
+        {
+            if (restaurant == null)
+                restaurant = new Restaurant();
+            var restaurantTypeList = db.RestaurantTypes.ToList();
+            restaurantTypeList.Insert(0, null);
+            ViewBag.RestaurantTypeID = new SelectList(restaurantTypeList, "ID", "Name", restaurant.RestaurantTypeID);
         }
     }
 }
