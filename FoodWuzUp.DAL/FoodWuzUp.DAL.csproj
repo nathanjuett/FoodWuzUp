@@ -79,6 +79,7 @@
     <Compile Include="Restaurant\Restaurant.cs" />
     <Compile Include="Restaurant\RestaurantComment.cs" />
     <Compile Include="Restaurant\RestaurantEmployee.cs" />
+    <Compile Include="Restaurant\RestaurantType.cs" />
     <Compile Include="User\User.cs" />
     <Compile Include="User\UserEmployeeRating.cs" />
     <Compile Include="User\UserMenuItemRating.cs" />
