@@ -351,6 +351,7 @@
     <Content Include="Views\Events\Index.cshtml" />
     <Content Include="Views\Restaurants\Create.cshtml" />
     <Content Include="Views\Restaurants\CreatePartial.cshtml" />
+    <Content Include="Views\Groups\CreatePartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Code\" />
