@@ -27,6 +27,7 @@ namespace FoodWuzUp.Web.Controllers
                 .Select(o => o.ParentID));
             var restaurants = db.Restaurants
                 .Include(o => o.Group)
+                .Include(o => o.RestaurantType)
                 .Where(o => groupIDs.Contains(o.GroupID))
                 .OrderBy(o => o.Name).ToList();
             return View(restaurants);
