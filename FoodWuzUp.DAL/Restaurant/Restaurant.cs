@@ -8,7 +8,7 @@ namespace FoodWuzUp.DAL
 {
     public class Restaurant : Base<Restaurant>, IBaseWithComments<Restaurant, RestaurantComment>
     {
-        [Required]
+        [Required(ErrorMessage = "The Group field is required")]
         public int GroupID { get; set; }
         public Guid UniqueID { get; set; }
         public virtual Group Group { get; set; }
