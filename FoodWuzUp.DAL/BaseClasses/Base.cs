@@ -29,20 +29,21 @@ namespace FoodWuzUp.DAL
 
         public virtual object Clone()
         {
-           T clone = new T();
-           foreach (var item in typeof(T).GetProperties().Where(o=> o.Name != "ID" && o.Name != "UniqueID"))
-           {
-               if (item.PropertyType.IsGenericType)
-                   continue;
-               if (item.PropertyType.BaseType.IsGenericType)
-                   continue;
-               item.SetValue(clone, item.GetValue(this));
-           }
-           return clone;
+            T clone = new T();
+            foreach (var item in typeof(T).GetProperties().Where(o => o.Name != "ID" && o.Name != "UniqueID"))
+            {
+                if (item.PropertyType.IsGenericType)
+                    continue;
+                if (item.PropertyType.BaseType.IsGenericType)
+                    continue;
+                if (item.CanWrite)
+                    item.SetValue(clone, item.GetValue(this));
+            }
+            return clone;
         }
 
     }
-   
+
     //public abstract class BaseRating<TBase, TComment> : IBaseComment<TBase>
     //    where TComment : IBaseComment<TBase>
     //    where TBase : IBase
