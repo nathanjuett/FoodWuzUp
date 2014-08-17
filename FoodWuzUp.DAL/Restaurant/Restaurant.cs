@@ -32,5 +32,14 @@ namespace FoodWuzUp.DAL
             MenuItems = new List<MenuItem>();
             UniqueID = Guid.NewGuid();
         }
+
+        [NotMapped]
+        public string AddressUrl
+        {
+            get
+            {
+                return Address.Replace('\n', ' ').Replace('\r', ' ');
+            }
+        }
     }
 }

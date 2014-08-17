@@ -69,9 +69,10 @@
             <td>
                 @if (item.Address != null)
                 {
-                    <a href="http://maps.google.com/?q=@Html.DisplayFor(modelItem => item.Address)"
+                    <a href="http://maps.google.com/?q=@Html.DisplayFor(modelItem => item.AddressUrl)"
+                       target="_blank"
                        data-toggle="tooltip" class="tip"
-                       data-original-title="@Html.DisplayFor(modelItem => item.Address)">
+                       data-original-title="@Html.DisplayFor(modelItem => item.AddressUrl)">
                         <span class="glyphicon glyphicon-globe"></span>
                     </a>
                 }

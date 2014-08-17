@@ -77,7 +77,6 @@ namespace FoodWuzUp.Web.Controllers
                 restaurant.Url = GetUrl(restaurant.Url);
             if (ModelState.IsValid)
             {
-                fixAddress(restaurant);
                 db.Restaurants.Add(restaurant);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -95,7 +94,6 @@ namespace FoodWuzUp.Web.Controllers
                 restaurant.Url = GetUrl(restaurant.Url);
             if (ModelState.IsValid)
             {
-                fixAddress(restaurant);
                 db.Restaurants.Add(restaurant);
                 db.SaveChanges();
                 return RedirectToAction("AuthenticatedIndex", "Home");
@@ -133,7 +131,6 @@ namespace FoodWuzUp.Web.Controllers
                 restaurant.Url = GetUrl(restaurant.Url);
             if (ModelState.IsValid)
             {
-                fixAddress(restaurant);
                 db.Entry(restaurant).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -200,12 +197,6 @@ namespace FoodWuzUp.Web.Controllers
         private string GetUrl(string url)
         {
             return new UriBuilder(url).Uri.ToString();
-        }
-
-        private void fixAddress(Restaurant restaurant)
-        {
-            System.Text.RegularExpressions.Regex r = new System.Text.RegularExpressions.Regex(Environment.NewLine);
-            restaurant.Address = r.Replace(restaurant.Address, ", ");
         }
     }
 }

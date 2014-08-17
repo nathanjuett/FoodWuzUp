@@ -60,8 +60,9 @@
         <dd>
             @if (@Html.DisplayFor(model => model.Address) != null)
             {
-                <a href="http://maps.google.com/?q=@Html.DisplayFor(model => model.Address)">
-                    @Html.DisplayFor(model => model.Address)
+                <a href="http://maps.google.com/?q=@Html.DisplayFor(model => model.AddressUrl)"
+                   target="_blank">
+                    @Html.DisplayFor(model => model.AddressUrl)
                 </a>
             }
         </dd>
