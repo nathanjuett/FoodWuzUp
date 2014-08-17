@@ -47,7 +47,7 @@
         <dd>
             @if (@Html.DisplayFor(model => model.Url) != null)
             {
-                <a href="http://@Html.DisplayFor(model => model.Url)">
+                <a href=@Html.DisplayFor(model => model.Url) target="_blank">
                     @Html.DisplayFor(model => model.Url)
                 </a>
             }

@@ -73,6 +73,8 @@ namespace FoodWuzUp.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ID,GroupID,Name,Description,Phone,Url,Address,RestaurantTypeID")] Restaurant restaurant)
         {
+            if (!String.IsNullOrEmpty(restaurant.Url))
+                restaurant.Url = GetUrl(restaurant.Url);
             if (ModelState.IsValid)
             {
                 fixAddress(restaurant);
@@ -89,6 +91,8 @@ namespace FoodWuzUp.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult CreateModal([Bind(Include = "ID,GroupID,Name,Description,Phone,Url,Address,RestaurantTypeID")] Restaurant restaurant)
         {
+            if (!String.IsNullOrEmpty(restaurant.Url))
+                restaurant.Url = GetUrl(restaurant.Url);
             if (ModelState.IsValid)
             {
                 fixAddress(restaurant);
@@ -125,6 +129,8 @@ namespace FoodWuzUp.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ID,GroupID,Name,Description,Phone,Url,Address,RestaurantTypeID")] Restaurant restaurant)
         {
+            if (!String.IsNullOrEmpty(restaurant.Url))
+                restaurant.Url = GetUrl(restaurant.Url);
             if (ModelState.IsValid)
             {
                 fixAddress(restaurant);
@@ -189,6 +195,11 @@ namespace FoodWuzUp.Web.Controllers
             var restaurantTypeList = db.RestaurantTypes.ToList();
             restaurantTypeList.Insert(0, null);
             ViewBag.RestaurantTypeID = new SelectList(restaurantTypeList, "ID", "Name", restaurant.RestaurantTypeID);
+        }
+
+        private string GetUrl(string url)
+        {
+            return new UriBuilder(url).Uri.ToString();
         }
 
         private void fixAddress(Restaurant restaurant)
