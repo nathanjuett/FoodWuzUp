@@ -38,7 +38,10 @@ namespace FoodWuzUp.DAL
         {
             get
             {
-                return Address.Replace('\n', ' ').Replace('\r', ' ');
+                if (!String.IsNullOrEmpty(Address))
+                    return Address.Replace('\n', ' ').Replace('\r', ' ');
+                else
+                    return Address;
             }
         }
     }
