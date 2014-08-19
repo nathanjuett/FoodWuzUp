@@ -352,6 +352,7 @@
     <Content Include="Views\Restaurants\Create.cshtml" />
     <Content Include="Views\Restaurants\CreatePartial.cshtml" />
     <Content Include="Views\Groups\CreatePartial.cshtml" />
+    <Content Include="Views\Restaurants\DetailsPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Code\" />
