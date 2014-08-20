@@ -189,10 +189,14 @@ namespace FoodWuzUp.Web.Controllers
             }
             else
                 ViewBag.GroupID = new SelectList(GetGroupList(), "ID", "Name", restaurant.GroupID);
+            ViewBag.RestaurantTypeID = new SelectList(GetRestaurantTypeList(), "ID", "Name", restaurant.RestaurantTypeID);
+        }
 
+        private List<RestaurantType> GetRestaurantTypeList()
+        {
             var restaurantTypeList = db.RestaurantTypes.ToList();
             restaurantTypeList.Insert(0, null);
-            ViewBag.RestaurantTypeID = new SelectList(restaurantTypeList, "ID", "Name", restaurant.RestaurantTypeID);
+            return restaurantTypeList;
         }
 
         private string GetUrl(string url)
