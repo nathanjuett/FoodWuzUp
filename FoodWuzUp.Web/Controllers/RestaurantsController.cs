@@ -47,13 +47,13 @@ namespace FoodWuzUp.Web.Controllers
         // GET: Restaurants/Create
         public ActionResult Create()
         {
-            SetViewBagItems();
+            SetViewBagItems(new Restaurant());
             return View();
         }
 
         public ActionResult CreateModal()
         {
-            SetViewBagItems();
+            SetViewBagItems(new Restaurant());
             return View();
         }
 
@@ -172,16 +172,18 @@ namespace FoodWuzUp.Web.Controllers
             return groupIds;
         }
 
-        private void SetViewBagItems(Restaurant restaurant = null)
+        private void SetViewBagItems(Restaurant restaurant)
         {
-            if (restaurant == null)
-            {
-                restaurant = new Restaurant();
+            if (IsRestaurantNew(restaurant))
                 ViewBag.GroupID = new SelectList(GetGroupList(), "ID", "Name");
-            }
             else
                 ViewBag.GroupID = new SelectList(GetGroupList(), "ID", "Name", restaurant.GroupID);
             ViewBag.RestaurantTypeID = new SelectList(GetRestaurantTypeList(), "ID", "Name", restaurant.RestaurantTypeID);
+        }   
+
+        private static bool IsRestaurantNew(Restaurant restaurant)
+        {
+            return restaurant.ID == 0;
         }
 
         private List<RestaurantType> GetRestaurantTypeList()
