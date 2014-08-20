@@ -16,13 +16,14 @@ namespace FoodWuzUp.Web.Controllers
         private Context db = new Context();
         public ActionResult UserLookup(string query)
         {
-           SelectList ret = new SelectList(db.Users.Where(o => o.Name.StartsWith(query)),"ID","Name");
-           return Json(ret, JsonRequestBehavior.AllowGet);
+            //SelectList ret = new SelectList(db.Users.Where(o => o.Name.StartsWith(query)),"ID","Name");
+            var ret = db.Users.Where(o => o.Name.StartsWith(query)).Select(o => new { label = o.Name, value = o.ID });
+            return Json(ret, JsonRequestBehavior.AllowGet);
         }
         // GET: GroupUsers
         public ActionResult Index()
         {
-            var groupUsers = db.GroupUsers.Include(g=> g.UserType).Include(g => g.Child).Include(g => g.Parent);
+            var groupUsers = db.GroupUsers.Include(g => g.UserType).Include(g => g.Child).Include(g => g.Parent);
             return View(groupUsers.ToList());
         }
 
@@ -34,7 +35,7 @@ namespace FoodWuzUp.Web.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             GroupUser groupUsers = db.GroupUsers.Include(g => g.UserType).Include(g => g.Child).Include(g => g.Parent)
-                .Single(o=> o.ParentID == parentid & o.ChildID == childid);
+                .Single(o => o.ParentID == parentid & o.ChildID == childid);
             if (groupUsers == null)
             {
                 return HttpNotFound();
