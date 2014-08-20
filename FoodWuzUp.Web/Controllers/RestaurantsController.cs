@@ -36,38 +36,12 @@ namespace FoodWuzUp.Web.Controllers
         // GET: Restaurants/Details/5
         public ActionResult Details(int? id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Restaurant restaurant = db.Restaurants
-                .Include(r => r.Group)
-                .Include(r => r.RestaurantType)
-                .Where(r => r.ID == id)
-                .Single();
-            if (restaurant == null)
-            {
-                return HttpNotFound();
-            }
-            return View(restaurant);
+            return DetailsGet(id);
         }
 
         public ActionResult DetailsToolTip(int? id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Restaurant restaurant = db.Restaurants
-                .Include(r => r.Group)
-                .Include(r => r.RestaurantType)
-                .Where(r => r.ID == id)
-                .Single();
-            if (restaurant == null)
-            {
-                return HttpNotFound();
-            }
-            return View(restaurant);
+            return DetailsGet(id);
         }
 
         // GET: Restaurants/Create
@@ -220,6 +194,24 @@ namespace FoodWuzUp.Web.Controllers
         private string GetUrl(string url)
         {
             return new UriBuilder(url).Uri.ToString();
+        }
+        
+        private ActionResult DetailsGet(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Restaurant restaurant = db.Restaurants
+                .Include(r => r.Group)
+                .Include(r => r.RestaurantType)
+                .Where(r => r.ID == id)
+                .Single();
+            if (restaurant == null)
+            {
+                return HttpNotFound();
+            }
+            return View(restaurant);
         }
     }
 }
