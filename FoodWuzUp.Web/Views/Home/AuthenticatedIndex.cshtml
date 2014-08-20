@@ -104,7 +104,7 @@
             </tr>
             @foreach (var item in restaurants)
             {
-                <tr>
+                <tr class="restaurantToolTip" title="" data-id=@item.ID>
                     <td>
                         @Html.ActionLink(item.Name, "Details", "Restaurants", new { id = item.ID }, null)
                     </td>
@@ -151,5 +151,19 @@
                 $('#createRestaurantModal').modal('show');
             });
         });
+    });
+    $(".restaurantToolTip").tooltip({
+        position: {
+            my: "left center",
+            at: "right center"
+        },
+        content: function (callback) {
+            $.ajax({
+                url: '@Url.Action("DetailsToolTip", "Restaurants", new { id = 1 })',
+                success: function (data) {
+                    callback(data);
+                }
+            });
+        }
     });
 </script>

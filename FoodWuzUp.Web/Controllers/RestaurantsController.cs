@@ -52,6 +52,24 @@ namespace FoodWuzUp.Web.Controllers
             return View(restaurant);
         }
 
+        public ActionResult DetailsToolTip(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Restaurant restaurant = db.Restaurants
+                .Include(r => r.Group)
+                .Include(r => r.RestaurantType)
+                .Where(r => r.ID == id)
+                .Single();
+            if (restaurant == null)
+            {
+                return HttpNotFound();
+            }
+            return View(restaurant);
+        }
+
         // GET: Restaurants/Create
         public ActionResult Create()
         {

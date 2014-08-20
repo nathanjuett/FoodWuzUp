@@ -1,0 +1,21 @@
+﻿@{
+    Layout = null;
+}
+
+@Styles.Render("~/Content/css")
+@Scripts.Render("~/bundles/modernizr")
+<style>
+    body {
+        padding-top: 0px; /* to override */
+        padding-right: 2px;
+        padding-left: 2px; /* for balance */
+    }
+
+    html {
+        overflow-y: scroll;
+    }
+</style>
+
+<div style="font-size: 0.5em;">
+    @{ Html.RenderPartial("DetailsPartial"); }
+</div>
