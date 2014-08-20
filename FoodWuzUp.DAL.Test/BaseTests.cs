@@ -32,13 +32,13 @@ namespace FoodWuzUp.DAL.Test
             db.SaveChanges();
 
             db = new Context();
-            T actual = AddIncludes(db);
+            T actual = AddIncludes(db, efobject.ID);
             AddedAsserts(db, actual, unique);
         }
 
-        public virtual T AddIncludes(Context db)
+        public virtual T AddIncludes(Context db, int ID)
         {
-            T actual = db.Set<T>().Find(1);
+            T actual = db.Set<T>().Find(ID);
             return actual;
         }
 
@@ -46,8 +46,7 @@ namespace FoodWuzUp.DAL.Test
         {
             Assert.AreNotEqual(0, efobject.ID);
             Assert.AreEqual(unique, efobject.Name);
-            Assert.AreEqual(efobject.ID, efobject.ID);
-        }
+         }
         public virtual T Create(T efobject, Context db)
         {
             throw new NotImplementedException("Please Implement This Method.");
@@ -66,9 +65,9 @@ namespace FoodWuzUp.DAL.Test
             efobject.Comments.Add(new TComment() { Comment = Guid.NewGuid().ToString() });
             return efobject;
         }
-        public override TBase AddIncludes(Context db)
+        public override TBase AddIncludes(Context db, int ID)
         {
-            return db.Set<TBase>().Include("Comments").Where(o => o.ID == 1).Single();
+            return db.Set<TBase>().Include("Comments").Where(o => o.ID == ID).Single();
         }
         public override void AddedAsserts(Context db, TBase efobject, string unique)
         {

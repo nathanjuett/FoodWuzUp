@@ -21,7 +21,7 @@ namespace FoodWuzUp.DAL.Test
         }
         public override void AddedAsserts(Context db, EmployeeType efobject, string unique)
         {
-            Assert.AreEqual("Owner", efobject.Name);
+            Assert.AreEqual(unique, efobject.Name);
             int count = db.EmployeeTypes.Count();
             Assert.AreEqual(15, count);
             Assert.AreEqual(unique, db.EmployeeTypes.Find(count).Name);

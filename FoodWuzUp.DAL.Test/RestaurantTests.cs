@@ -44,7 +44,7 @@ namespace FoodWuzUp.DAL.Test
             re.Rating = db.Ratings.Find(1);
             db.SaveChanges();
 
-            Assert.AreEqual(1, db.RestaurantEmployees.Count());
+            Assert.AreEqual(6, db.RestaurantEmployees.Count());
             RestaurantEmployee re1 = db.RestaurantEmployees.Take(1).Single();
             Assert.AreEqual(1, re1.RatingID = 1);
 

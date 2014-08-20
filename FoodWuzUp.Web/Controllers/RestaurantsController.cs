@@ -73,15 +73,13 @@ namespace FoodWuzUp.Web.Controllers
         // GET: Restaurants/Create
         public ActionResult Create()
         {
-            ViewBag.GroupID = new SelectList(GetGroupList(), "ID", "Name");
-            setRestaurantTypeIDViewBag();
+            SetViewBagItems();
             return View();
         }
 
         public ActionResult CreateModal()
         {
-            setRestaurantTypeIDViewBag();
-            ViewBag.GroupID = new SelectList(GetGroupList(), "ID", "Name");
+            SetViewBagItems();
             return View();
         }
 
@@ -100,8 +98,7 @@ namespace FoodWuzUp.Web.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            setRestaurantTypeIDViewBag(restaurant);
-            ViewBag.GroupID = new SelectList(GetGroupList(), "ID", "Name", restaurant.GroupID);
+            SetViewBagItems(restaurant);
             return View(restaurant);
         }
 
@@ -117,8 +114,7 @@ namespace FoodWuzUp.Web.Controllers
                 db.SaveChanges();
                 return RedirectToAction("AuthenticatedIndex", "Home");
             }
-            setRestaurantTypeIDViewBag(restaurant);
-            ViewBag.GroupID = new SelectList(GetGroupList(), "ID", "Name", restaurant.GroupID);
+            SetViewBagItems(restaurant);
             return View(restaurant);
         }
 
@@ -134,8 +130,7 @@ namespace FoodWuzUp.Web.Controllers
             {
                 return HttpNotFound();
             }
-            setRestaurantTypeIDViewBag(restaurant);
-            ViewBag.GroupID = new SelectList(db.Groups, "ID", "Name", restaurant.GroupID);
+            SetViewBagItems(restaurant);
             return View(restaurant);
         }
 
@@ -154,8 +149,7 @@ namespace FoodWuzUp.Web.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            setRestaurantTypeIDViewBag(restaurant);
-            ViewBag.GroupID = new SelectList(db.Groups, "ID", "Name", restaurant.GroupID);
+            SetViewBagItems(restaurant);
             return View(restaurant);
         }
 
@@ -204,13 +198,23 @@ namespace FoodWuzUp.Web.Controllers
             return groupIds;
         }
 
-        private void setRestaurantTypeIDViewBag(Restaurant restaurant = null)
+        private void SetViewBagItems(Restaurant restaurant = null)
         {
             if (restaurant == null)
+            {
                 restaurant = new Restaurant();
+                ViewBag.GroupID = new SelectList(GetGroupList(), "ID", "Name");
+            }
+            else
+                ViewBag.GroupID = new SelectList(GetGroupList(), "ID", "Name", restaurant.GroupID);
+            ViewBag.RestaurantTypeID = new SelectList(GetRestaurantTypeList(), "ID", "Name", restaurant.RestaurantTypeID);
+        }
+
+        private List<RestaurantType> GetRestaurantTypeList()
+        {
             var restaurantTypeList = db.RestaurantTypes.ToList();
             restaurantTypeList.Insert(0, null);
-            ViewBag.RestaurantTypeID = new SelectList(restaurantTypeList, "ID", "Name", restaurant.RestaurantTypeID);
+            return restaurantTypeList;
         }
 
         private string GetUrl(string url)

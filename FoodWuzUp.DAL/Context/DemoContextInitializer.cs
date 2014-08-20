@@ -11,6 +11,21 @@ namespace FoodWuzUp.DAL
         protected override void Seed(Context db)
         {
             base.Seed(db);
+
+            //ApplicationAuthType google = new ApplicationAuthType() { Name = "Google", ThirdPartyKey = "767908454013-n8obtkbr51sjm57jgeh9i3dtbep0c7sb.apps.googleusercontent.com", ThirdPartySecret = "l-11RV3J9E_5QB-vXB7wLS5m" };
+            
+            ApplicationAuthType google = db.ApplicationAuthTypes.Single(o=> o.Name == "Google");
+            google.ThirdPartyKey = "794421591270-204pj3cnd72bf5rp9b44ib7l9vedr8fh.apps.googleusercontent.com";
+            google.ThirdPartySecret = "sVOPsL_afGiex4nkf0O76F5p";
+
+            ApplicationAuthType facebook = db.ApplicationAuthTypes.Single(o => o.Name == "Facebook");
+            facebook.ThirdPartyKey = "298659913639585";
+            facebook.ThirdPartySecret = "24481b3b74c8478a26c8144778237db1";
+
+            db.SaveChanges();
+           // ApplicationAuthType facebook = new ApplicationAuthType() { Name = "Facebook", ThirdPartyKey = "675135002567966", ThirdPartySecret = "d926d4f1094111a4cc49a9ddddfb005c" };
+ 
+
             User User1 = db.Users.Add(new User() { AuthID = Guid.NewGuid().ToString(), Name = "Nathan", Description = "NateDogg" });
             User User2 = db.Users.Add(new User() { AuthID = Guid.NewGuid().ToString(), Name = "Joe", Description = "JoeFacedKilla" });
             User User3 = db.Users.Add(new User() { AuthID = Guid.NewGuid().ToString(), Name = "Pam", Description = "NittaPleaze" });
