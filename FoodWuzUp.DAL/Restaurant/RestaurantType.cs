@@ -20,6 +20,7 @@ namespace FoodWuzUp.DAL
             db.RestaurantTypes.Add(new RestaurantType() { Name = "BBQ" });
             db.RestaurantTypes.Add(new RestaurantType() { Name = "Chinese" });
             db.RestaurantTypes.Add(new RestaurantType() { Name = "Steak House" });
+            db.RestaurantTypes.Add(new RestaurantType() { Name = "Bar" });
         }
     }
 }
