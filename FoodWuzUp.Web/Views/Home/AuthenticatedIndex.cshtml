@@ -158,8 +158,10 @@
             at: "right center"
         },
         content: function (callback) {
+            var rid = $(this).data('id');
             $.ajax({
-                url: '@Url.Action("DetailsToolTip", "Restaurants", new { id = 1 })',
+                url: '@Url.Action("DetailsToolTip", "Restaurants")',
+                data: { id: rid },
                 success: function (data) {
                     callback(data);
                 }
