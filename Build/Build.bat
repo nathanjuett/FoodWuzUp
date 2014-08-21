@@ -1,0 +1,1 @@
+C:\Windows\Microsoft.NET\Framework\v4.0.30319\MSbuild.exe L:\Code\Git\FoodWuzUp\FoodWuzUp.sln /p:Configuration=Release /p:Platform="Any CPU"
