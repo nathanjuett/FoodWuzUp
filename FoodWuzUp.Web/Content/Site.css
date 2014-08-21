@@ -20,6 +20,5 @@ textarea {
 
 /* this is working towards solving the disappearing scroll bar as of 8/20/14 it still disappears */
 html {
-    overflow-y: scroll;
-    height: 101%;
+    -ms-overflow-style: scrollbar;
 }
