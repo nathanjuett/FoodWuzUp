@@ -63,3 +63,11 @@ select 'Chinese',''
 union
 select 'Steak House',''
 
+GO
+
+--3ac875dc7554923ac9f4e6ed3c4fbf12fd3600b3
+insert into RestuarantTypes
+select 'Bar',''
+
+GO
+
