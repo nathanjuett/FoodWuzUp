@@ -18,7 +18,7 @@ textarea {
     max-width: 280px;
 }
 
-/* this is working towards solving the disappearing scroll bar as of 8/20/14 it still disappears */
+/* prevent IE's scrollbar from disappearing */
 html {
     -ms-overflow-style: scrollbar;
 }
