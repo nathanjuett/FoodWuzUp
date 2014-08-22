@@ -64,32 +64,14 @@ namespace FoodWuzUp.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ID,GroupID,Name,Description,Phone,Url,Address,RestaurantTypeID")] Restaurant restaurant)
         {
-            if (!String.IsNullOrEmpty(restaurant.Url))
-                restaurant.Url = GetUrl(restaurant.Url);
-            if (ModelState.IsValid)
-            {
-                db.Restaurants.Add(restaurant);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            SetViewBagItems(restaurant);
-            return View(restaurant);
+            return InnerCreate(restaurant, false);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult CreateModal([Bind(Include = "ID,GroupID,Name,Description,Phone,Url,Address,RestaurantTypeID")] Restaurant restaurant)
         {
-            if (!String.IsNullOrEmpty(restaurant.Url))
-                restaurant.Url = GetUrl(restaurant.Url);
-            if (ModelState.IsValid)
-            {
-                db.Restaurants.Add(restaurant);
-                db.SaveChanges();
-                return RedirectToAction("AuthenticatedIndex", "Home");
-            }
-            SetViewBagItems(restaurant);
-            return View(restaurant);
+            return InnerCreate(restaurant, true);
         }
 
         // GET: Restaurants/Edit/5
@@ -179,7 +161,7 @@ namespace FoodWuzUp.Web.Controllers
             else
                 ViewBag.GroupID = new SelectList(GetGroupList(), "ID", "Name", restaurant.GroupID);
             ViewBag.RestaurantTypeID = new SelectList(GetRestaurantTypeList(), "ID", "Name", restaurant.RestaurantTypeID);
-        }   
+        }
 
         private static bool IsRestaurantNew(Restaurant restaurant)
         {
@@ -197,7 +179,7 @@ namespace FoodWuzUp.Web.Controllers
         {
             return new UriBuilder(url).Uri.ToString();
         }
-        
+
         private ActionResult DetailsGet(int? id)
         {
             if (id == null)
@@ -213,6 +195,23 @@ namespace FoodWuzUp.Web.Controllers
             {
                 return HttpNotFound();
             }
+            return View(restaurant);
+        }
+
+        private ActionResult InnerCreate(Restaurant restaurant, bool isModal)
+        {
+            if (!String.IsNullOrEmpty(restaurant.Url))
+                restaurant.Url = GetUrl(restaurant.Url);
+            if (ModelState.IsValid)
+            {
+                db.Restaurants.Add(restaurant);
+                db.SaveChanges();
+                if (isModal)
+                    return RedirectToAction("AuthenticatedIndex", "Home");
+                else
+                    return RedirectToAction("Index");
+            }
+            SetViewBagItems(restaurant);
             return View(restaurant);
         }
     }
