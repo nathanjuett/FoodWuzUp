@@ -149,7 +149,10 @@ namespace FoodWuzUp.Web.Controllers
 
         private List<Group> GetGroupList()
         {
-            List<Group> groupIds = db.Groups.Where(o => o.Creator.AuthID == AuthID).ToList();
+            List<Group> groupIds = db.Groups
+                .Where(o => o.Creator.AuthID == AuthID)
+                .OrderBy(o => o.Name)
+                .ToList();
             groupIds.Insert(0, null);
             return groupIds;
         }
@@ -170,7 +173,9 @@ namespace FoodWuzUp.Web.Controllers
 
         private List<RestaurantType> GetRestaurantTypeList()
         {
-            var restaurantTypeList = db.RestaurantTypes.ToList();
+            var restaurantTypeList = db.RestaurantTypes
+                .OrderBy(o => o.Name)
+                .ToList();
             restaurantTypeList.Insert(0, null);
             return restaurantTypeList;
         }
