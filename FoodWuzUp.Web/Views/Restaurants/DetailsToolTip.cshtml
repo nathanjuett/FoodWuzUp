@@ -1,10 +1,62 @@
 ﻿@{
     Layout = null;
 }
-
+@model FoodWuzUp.DAL.Restaurant
 @Styles.Render("~/Content/css")
 @Scripts.Render("~/bundles/modernizr")
 
 <div style="font-size: 0.5em;">
-    @{ Html.RenderPartial("DetailsPartial"); }
+    <center><h4>@Html.DisplayFor(model => model.Name)</h4></center>
+    <hr style="margin-top: 2px; margin-bottom: 12px;"/>
+    <dl class="dl-horizontal">
+
+        <dt style="width: 45%">
+            @Html.DisplayNameFor(model => model.Phone)
+        </dt>
+
+        <dd style="margin-left: 50%">
+            @if (@Html.DisplayFor(model => model.Phone) != null)
+            {
+                <a href="tel:@Html.DisplayFor(model => model.Phone)">
+                    @Html.DisplayFor(model => model.Phone)
+                </a>
+            }
+        </dd>
+
+        <dt style="width: 45%">
+            @Html.DisplayNameFor(model => model.Url)
+        </dt>
+
+        <dd style="margin-left: 50%">
+            @if (@Html.DisplayFor(model => model.Url) != null)
+            {
+                <a href=@Html.DisplayFor(model => model.Url) target="_blank">
+                    @Html.DisplayFor(model => model.Url)
+                </a>
+            }
+        </dd>
+
+        <dt style="width: 45%">
+            @Html.DisplayNameFor(model => model.Address)
+        </dt>
+
+        <dd style="margin-left: 50%">
+            @if (@Html.DisplayFor(model => model.Address) != null)
+            {
+                <a href="http://maps.google.com/?q=@Html.DisplayFor(model => model.AddressUrl)"
+                   target="_blank">
+                    @Html.DisplayFor(model => model.AddressUrl)
+                </a>
+            }
+        </dd>
+
+        <dt style="width: 45%">
+            @Html.DisplayNameFor(model => model.RestaurantType)
+        </dt>
+
+        <dd style="margin-left: 50%">
+            @Html.DisplayFor(model => model.RestaurantType.Name)
+        </dd>
+
+    </dl>
 </div>
