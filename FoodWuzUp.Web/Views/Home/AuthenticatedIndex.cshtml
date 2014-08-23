@@ -5,6 +5,12 @@
     List<FoodWuzUp.DAL.Restaurant> restaurants = ViewBag.Restaurants;
 }
 
+<style>
+    .ui-tooltip-content {
+        width: 250px;
+    }
+</style>
+
 <h2>AuthenticatedIndex</h2>
 
 <div>
@@ -154,8 +160,8 @@
     });
     $(".restaurantToolTip").tooltip({
         position: {
-            my: "left center",
-            at: "right center"
+            my: "right center",
+            at: "left top",
         },
         content: function (callback) {
             var rid = $(this).data('id');
