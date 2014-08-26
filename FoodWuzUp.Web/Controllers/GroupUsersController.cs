@@ -14,10 +14,12 @@ namespace FoodWuzUp.Web.Controllers
     public class GroupUsersController : BaseController
     {
         private Context db = new Context();
-        public ActionResult UserLookup(string query)
+        public ActionResult UserLookup(string term)
         {
             //SelectList ret = new SelectList(db.Users.Where(o => o.Name.StartsWith(query)),"ID","Name");
-            var ret = db.Users.Where(o => o.Name.StartsWith(query)).Select(o => new { label = o.Name, value = o.ID });
+
+            //var ret = db.Users.Where(o => o.Name.StartsWith(query)).Select(o => new { label = o.Name + " - " + o.Description, value = o.Name }).ToArray();
+            var ret = db.Users.Where(o => o.Name.StartsWith(term)).Select(o => o.Name + "," + o.ID.ToString()).ToArray();
             return Json(ret, JsonRequestBehavior.AllowGet);
         }
         // GET: GroupUsers
@@ -55,17 +57,18 @@ namespace FoodWuzUp.Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ParentID,ChildID,UserTypeID")] GroupUser groupUsers)
+        public ActionResult Create([Bind(Include = "ParentID,ChildID,UserTypeID,UserName")] GroupUser groupUsers)
         {
-            if (ModelState.IsValid)
-            {
-                db.GroupUsers.Add(groupUsers);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+            groupUsers.ChildID = Convert.ToInt32(groupUsers.UserName.Split(',')[1]);
+            //if (ModelState.IsValid)
+            //    {
+            db.GroupUsers.Add(groupUsers);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+            //}
 
-            GenerateViewBagItems(groupUsers);
-            return View(groupUsers);
+            //GenerateViewBagItems(groupUsers);
+            //return View(groupUsers);
         }
 
         // GET: GroupUsers/Edit/5
