@@ -170,6 +170,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MenuItemsController.cs" />
     <Compile Include="Controllers\RestaurantEmployeesController.cs" />
+    <Compile Include="Controllers\RestaurantMenuItemsController.cs" />
     <Compile Include="Controllers\RestaurantsController.cs" />
     <Compile Include="Controllers\UserEmployeeRatingsController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
@@ -354,6 +355,11 @@
     <Content Include="Views\Groups\CreatePartial.cshtml" />
     <Content Include="Views\Restaurants\DetailsPartial.cshtml" />
     <Content Include="Views\Restaurants\DetailsToolTip.cshtml" />
+    <Content Include="Views\RestaurantMenuItems\Create.cshtml" />
+    <Content Include="Views\RestaurantMenuItems\Delete.cshtml" />
+    <Content Include="Views\RestaurantMenuItems\Details.cshtml" />
+    <Content Include="Views\RestaurantMenuItems\Edit.cshtml" />
+    <Content Include="Views\RestaurantMenuItems\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Code\" />

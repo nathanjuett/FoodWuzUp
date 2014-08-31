@@ -22,14 +22,14 @@ namespace FoodWuzUp.DAL
         public int? RestaurantTypeID { get; set; }
         [Display(Name = "Resturant Type")]
         public RestaurantType RestaurantType { get; set; }
-        public virtual ICollection<MenuItem> MenuItems { get; set; }
+        public virtual ICollection<RestaurantMenuItem> MenuItems { get; set; }
         public virtual ICollection<RestaurantComment> Comments { get; set; }
         public virtual ICollection<RestaurantEmployee> Employees { get; set; }
         public Restaurant()
         {
             Comments = new List<RestaurantComment>();
             Employees = new List<RestaurantEmployee>();
-            MenuItems = new List<MenuItem>();
+            MenuItems = new List<RestaurantMenuItem>();
             UniqueID = Guid.NewGuid();
         }
 

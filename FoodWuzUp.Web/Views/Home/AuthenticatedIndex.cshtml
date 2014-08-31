@@ -53,8 +53,8 @@
             {
                 <tr>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Name)
-                    </td>
+                        @Html.ActionLink(item.Name, "Details", "Groups", new { id = item.ID }, null)
+                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Description)
                     </td>
@@ -82,7 +82,7 @@
             {
                 <tr>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Parent.Name)
+                        @Html.ActionLink(item.Parent.Name, "Details", "Groups", new { id = item.ParentID }, null)
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Parent.Creator.Name)

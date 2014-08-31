@@ -15,3 +15,69 @@
     @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
     @Html.ActionLink("Back to List", "Index")
 </p>
+
+<div class="row">
+    <div class="col-sm-6">
+        <h3>Menu Items</h3>
+        <table class="table">
+            <tr>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Description
+                </th>
+            </tr>
+
+            @foreach (var item in Model.MenuItems)
+            {
+                <tr>
+                    <td>
+                        @Html.ActionLink(item.Child.Name, "Details", "MenuItems", new { id = item.Child.ID }, null)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Child.Description)
+                    </td>
+                </tr>
+            }
+        </table>
+        <p>
+            <input type="button" value="Create" class="btn btn-default" id="userGroupCreate" />
+        </p>
+    </div>
+
+    <div class="col-sm-6">
+        <h3>Employees</h3>
+        <table class="table">
+            <tr>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Group
+                </th>
+                <th>
+                    Description
+                </th>
+            </tr>
+            @foreach (var item in Model.Employees)
+            {
+                <tr class="restaurantToolTip" title="" data-id=@item.ChildID>
+                    <td>
+                        @Html.ActionLink(item.Child.Name, "Details", "Employees", new { id = item.ChildID }, null)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modeItem => item.Child.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Child.Description)
+                    </td>
+                </tr>
+            }
+        </table>
+        <p>
+            <input type="button" value="Create" class="btn btn-default" id="restaurantCreate" />
+        </p>
+    </div>
+</div>
+

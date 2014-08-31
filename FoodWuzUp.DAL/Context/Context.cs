@@ -45,6 +45,8 @@ namespace FoodWuzUp.DAL
             base.OnModelCreating(modelBuilder);
         }
 
+        public System.Data.Entity.DbSet<FoodWuzUp.DAL.RestaurantMenuItem> RestaurantMenuItems { get; set; }
+
 
     }
 }

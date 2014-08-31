@@ -41,3 +41,69 @@
     @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
     @Html.ActionLink("Back to List", "Index")
 </p>
+
+<div class="row">
+    <div class="col-sm-6">
+        <h3>Users</h3>
+        <table class="table">
+            <tr>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Description
+                </th>
+            </tr>
+
+            @foreach (var item in Model.Members)
+            {
+                <tr>
+                    <td>
+                        @Html.ActionLink(item.Child.Name, "Details", "Users", new { id = item.ChildID }, null)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Child.Description)
+                    </td>
+                </tr>
+            }
+        </table>
+        <p>
+            <input type="button" value="Create" class="btn btn-default" id="userGroupCreate" />
+        </p>
+</div>
+        
+    <div class="col-sm-6">
+        <h3>My Resturants</h3>
+        <table class="table">
+            <tr>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Group
+                </th>
+                <th>
+                    Description
+                </th>
+            </tr>
+            @foreach (var item in Model.Restaurants)
+            {
+                <tr class="restaurantToolTip" title="" data-id=@item.ID>
+                    <td>
+                        @Html.ActionLink(item.Name, "Details", "Restaurants", new { id = item.ID }, null)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modeItem => item.Group.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+                </tr>
+            }
+        </table>
+        <p>
+            <input type="button" value="Create" class="btn btn-default" id="restaurantCreate" />
+        </p>
+    </div>
+</div>
+   
