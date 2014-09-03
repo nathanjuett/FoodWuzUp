@@ -31,6 +31,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Notes", "Notes", "{899C5246
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SQL", "SQL", "{0CF021AF-EB4A-4BA2-8EE6-FBBCAF8524D3}"
 	ProjectSection(SolutionItems) = preProject
+		SQL\LabtoProd.scmp = SQL\LabtoProd.scmp
 		SQL\RestaurantType.sql = SQL\RestaurantType.sql
 	EndProjectSection
 EndProject
