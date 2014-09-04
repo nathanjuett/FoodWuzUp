@@ -192,8 +192,8 @@ namespace FoodWuzUp.Web.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Restaurant restaurant = db.Restaurants
-                .Include("Employees.Child")
-                .Include("MenuItems.Child")
+                .Include(o => o.Employees.Select(e => e.Child))
+                .Include(o => o.MenuItems.Select(e => e.Child))
                 .Include(r => r.Group)
                 .Include(r => r.RestaurantType)
                 .Where(r => r.ID == id)

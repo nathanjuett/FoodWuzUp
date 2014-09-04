@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Data.Entity;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -38,7 +39,9 @@ namespace FoodWuzUp.DAL.Test
             db.SaveChanges();
 
             db = new Context();
-            User actual = db.Users.Include("UserMenuItemRatings.Rating").Where(o => o.Name == "test").Single();
+            User actual = db.Users
+                .Include(o => o.UserMenuItemRatings.Select(e => e.Rating))
+                .Where(o => o.Name == "test").Single();
 
             Assert.AreEqual(DateTime.Today, actual.UserMenuItemRatings.Take(1).Single().DateRated);
             Assert.AreEqual("NotRated", actual.UserMenuItemRatings.Take(1).Single().Rating.Name);
@@ -59,7 +62,9 @@ namespace FoodWuzUp.DAL.Test
             db.SaveChanges();
 
             db = new Context();
-            User actual = db.Users.Include("UserRestaurantRatings.Rating").Where(o => o.Name == "test").Single();
+            User actual = db.Users
+                .Include(o => o.UserRestaurantRatings.Select(e => e.Rating))
+                .Where(o => o.Name == "test").Single();
 
             Assert.AreEqual(DateTime.Today, actual.UserRestaurantRatings.Take(1).Single().DateRated);
             Assert.AreEqual("NotRated", actual.UserRestaurantRatings.Take(1).Single().Rating.Name);
@@ -78,7 +83,9 @@ namespace FoodWuzUp.DAL.Test
             db.SaveChanges();
 
             db = new Context();
-            User actual = db.Users.Include("UserEmployeeRatings.Rating").Where(o => o.Name == "test").Single();
+            User actual = db.Users
+                .Include(o => o.UserEmployeeRatings.Select(ue=> ue.Rating))
+                .Where(o => o.Name == "test").Single();
 
             Assert.AreEqual(DateTime.Today, actual.UserEmployeeRatings.Take(1).Single().DateRated);
             Assert.AreEqual("NotRated", actual.UserEmployeeRatings.Take(1).Single().Rating.Name);

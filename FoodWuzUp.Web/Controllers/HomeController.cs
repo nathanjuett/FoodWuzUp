@@ -35,9 +35,9 @@ namespace FoodWuzUp.Web.Controllers
             Context context = new Context();
             var user = context.Users
                 .Include(o => o.Groups)
-                .Include("Memberships.Parent")
-                .Include("Memberships.Child")
-                .Include("Memberships.Parent.Creator")
+                .Include(o => o.Memberships.Select(e => e.Parent))
+                .Include(o => o.Memberships.Select(e => e.Child))
+                .Include(o => o.Memberships.Select(e => e.Parent).Select(c => c.Creator))
                 .Single(o => o.AuthID == AuthID);
             List<int> groupIDs = context.Groups
                 .Where(o => o.CreatorID == user.ID)

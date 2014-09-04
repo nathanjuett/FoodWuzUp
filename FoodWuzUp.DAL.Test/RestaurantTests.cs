@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Data.Entity;
 using System.Threading.Tasks;
 
 namespace FoodWuzUp.DAL.Test
@@ -39,7 +40,7 @@ namespace FoodWuzUp.DAL.Test
             r.Employees.Add(new RestaurantEmployee() { Child = new Employee() { Name = "Bob" }, EmployeeTypeID = 1 });
             db.SaveChanges();
             db = new Context();
-            RestaurantEmployee re = db.Restaurants.Include("Employees").Where(o => o.Name == "test").Select(o => o.Employees.Where(e => e.Child.Name == "Bob").FirstOrDefault()).Single();
+            RestaurantEmployee re = db.Restaurants.Include(o => o.Employees).Where(o => o.Name == "test").Select(o => o.Employees.Where(e => e.Child.Name == "Bob").FirstOrDefault()).Single();
 
             re.Rating = db.Ratings.Find(1);
             db.SaveChanges();
