@@ -14,7 +14,5 @@ namespace FoodWuzUp.DAL
         public int UserTypeID { get; set; }
         public UserType UserType { get; set; }
 
-        [NotMapped]
-        public string UserName { get; set; }
     }
 }

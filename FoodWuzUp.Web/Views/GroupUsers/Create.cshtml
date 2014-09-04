@@ -27,11 +27,8 @@
         <div class="form-group">
             @Html.LabelFor(model => model.ChildID, "User", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @*<input id="tags" size="50" class="form-control">*@
-                @Html.TextBoxFor(model => model.UserName, "User", htmlAttributes: new { @class = "form-control", @id = "tags", @size = "50" })
-                @Html.HiddenFor(model => model.ChildID, htmlAttributes: new { @id = "childid" })
-                @*@Html.DropDownList("ChildID", null, htmlAttributes: new { @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.ChildID, "", new { @class = "text-danger" })*@
+                @Html.TextBoxFor(model => model.Child.Name, "User", htmlAttributes: new { @class = "form-control", @id = "groupuser", @size = "50" })
+                @Html.Hidden("ChildID", null)
             </div>
         </div>
 
@@ -60,64 +57,6 @@
     @Scripts.Render("~/bundles/jqueryval")
 }
 @Scripts.Render("~/bundles/jquery")
-
-<script type="text/javascript">
-    $(function () {
-
-        $("#tags").autocomplete({
-            source: ('@Url.Action("UserLookup")' + $("#tags")[0].value),
-            minLength: 2,
-            response: function (event, ui) {
-                return ui.content;
-            },
-            select: function (event, ui) {
-                var values = ui.item.label.split(',')
-                $("#tags")[0].value = values[0];
-                //$("#userid")[0].value = values[1];
-            }
-        });
-        @*$("#tags").autocomplete({
-            source: function (request, response) {
-                $.get("@Url.Action("UserLookup")", {
-                    query: request.term
-                });
-            },
-            response: function (event, ui) {
-                return ui.content;
-            },
-            minLength: 2
-        });*@
-    });
-
-    @*function get (request, response) {
-        $.get("@Url.Action("UserLookup")",{
-            query: $("#tags")[0].value
-        }).done(function (data) {
-            return data;
-        });
-    };*@
-
-
-
+ <script>
+     ChildAutocomplete('@Url.Action("UserLookup")', 'groupuser');
 </script>
-@*<script>
-            $('#tags').autocomplete('@Url.Action("UserLookup")', {
-               dataType: 'json',
-               parse: function (data) {
-                   var rows = new Array();
-                   for (var i = 0; i < data.length; i++) {
-                       rows[i] = { data: data[i], value: data[i].Name, result: data[i].Name };
-                   }
-                   return rows;
-               },
-               formatItem: function (row) {
-                   return row.Name;
-               },
-               delay: 40,
-               autofill: true,
-               selectFirst: false,
-               highlight: false,
-               multiple: true,
-               multipleSeparator: ";"
-           });
-    </script>*@
