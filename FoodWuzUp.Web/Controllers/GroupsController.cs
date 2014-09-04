@@ -37,7 +37,7 @@ namespace FoodWuzUp.Web.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Group group = db.Groups
-                .Include(g=> g.Members)
+                .Include(g=> g.Members.Select(e => e.Child))
                 .Include(g=> g.Restaurants)
                 .Include(g => g.Creator)
                 .Single(o=> o.ID == id);

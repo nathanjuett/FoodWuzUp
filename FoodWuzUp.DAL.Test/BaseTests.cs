@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Data.Entity;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using FoodWuzUp.Core;
 
@@ -67,7 +68,7 @@ namespace FoodWuzUp.DAL.Test
         }
         public override TBase AddIncludes(Context db, int ID)
         {
-            return db.Set<TBase>().Include("Comments").Where(o => o.ID == ID).Single();
+            return db.Set<TBase>().Include(o => o.Comments).Where(o => o.ID == ID).Single();
         }
         public override void AddedAsserts(Context db, TBase efobject, string unique)
         {
