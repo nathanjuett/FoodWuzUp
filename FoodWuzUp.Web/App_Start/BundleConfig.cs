@@ -29,7 +29,7 @@ namespace FoodWuzUp.Web
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
-                      "~/Content/themes/base/jquery-ui.css",
+                      "~/Content/themes/ui-lightness/jquery-ui.css",
                       "~/Content/site.css"));
 
             // Set EnableOptimizations to false for debugging. For more information,
