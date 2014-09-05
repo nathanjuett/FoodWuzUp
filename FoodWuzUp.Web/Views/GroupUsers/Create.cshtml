@@ -57,6 +57,6 @@
     @Scripts.Render("~/bundles/jqueryval")
 }
 @Scripts.Render("~/bundles/jquery")
- <script>
-     ChildAutocomplete('@Url.Action("UserLookup")', 'groupuser');
+<script>
+    PropertyAutocomplete('@Url.Action("Lookup","Users")', 'groupuser', 'ChildID');
 </script>

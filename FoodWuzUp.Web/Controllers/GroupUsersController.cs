@@ -14,14 +14,7 @@ namespace FoodWuzUp.Web.Controllers
     public class GroupUsersController : BaseController
     {
         private Context db = new Context();
-        public ActionResult UserLookup(string term)
-        {
-            //SelectList ret = new SelectList(db.Users.Where(o => o.Name.StartsWith(query)),"ID","Name");
-
-            var ret = db.Users.Where(o => o.Name.StartsWith(term)).Select(o => new { label = o.Name + " - " + o.Description, value = o.Name, id = o.ID }).ToArray();
-            //var ret = db.Users.Where(o => o.Name.StartsWith(term)).Select(o => o.Name + "," + o.ID.ToString()).ToArray();
-            return Json(ret, JsonRequestBehavior.AllowGet);
-        }
+ 
         // GET: GroupUsers
         public ActionResult Index()
         {

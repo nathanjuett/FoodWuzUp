@@ -11,10 +11,8 @@ using FoodWuzUp.DAL;
 namespace FoodWuzUp.Web.Controllers
 {
     [Authorize]
-    public class EmployeesController : BaseController
+    public class EmployeesController : BaseController<Employee>
     {
-        private Context db = new Context();
-
         // GET: Employees
         public ActionResult Index()
         {

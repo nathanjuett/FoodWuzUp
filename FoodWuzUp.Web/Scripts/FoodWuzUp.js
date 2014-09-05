@@ -1,7 +1,4 @@
 ﻿
-function ChildAutocomplete(url, htmlcontrolid) {
-    PropertyAutocomplete(url, htmlcontrolid, 'ChildID');
-};
 function PropertyAutocomplete(url, htmlcontrolid, htmlhiddenfieldid) {
     $("#" + htmlcontrolid).autocomplete({
         source: (url + $("#" + htmlcontrolid)[0].value),
