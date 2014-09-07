@@ -25,7 +25,7 @@ namespace FoodWuzUp.Web.Controllers
         {
             var ret = db.Set<T>()
                 .Where(o => o.Name.StartsWith(term))
-                .Select(o => new { label = o.Name + " - " + o.Description, value = o.Name, id = o.ID })
+                .Select(o => new { label = o.Name + (String.IsNullOrEmpty(o.Description) ? o.Description : " - " + o.Description), value = o.Name, id = o.ID })
                 .Take(10)
                 .ToArray();
 
