@@ -107,6 +107,9 @@
                 <th>
                     Description
                 </th>
+                <th>
+                    Rating
+                </th>
             </tr>
             @foreach (var item in restaurants)
             {
@@ -119,6 +122,9 @@
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.RatingString)
                     </td>
                 </tr>
             }
