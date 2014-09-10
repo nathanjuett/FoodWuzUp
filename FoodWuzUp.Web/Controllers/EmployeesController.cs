@@ -16,7 +16,7 @@ namespace FoodWuzUp.Web.Controllers
         // GET: Employees
         public ActionResult Index()
         {
-            return View(db.Employees.ToList());
+            return View(db.Employees.Include(o => o.Ratings.Select(r => r.Rating)).ToList());
         }
 
         // GET: Employees/Details/5
@@ -26,7 +26,7 @@ namespace FoodWuzUp.Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Employee employee = db.Employees.Find(id);
+            Employee employee = db.Employees.Include(o => o.Ratings.Select(r => r.Rating)).Single(o => o.ID == id);
             if (employee == null)
             {
                 return HttpNotFound();

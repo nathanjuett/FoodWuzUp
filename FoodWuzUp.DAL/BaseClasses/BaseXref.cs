@@ -28,9 +28,9 @@ namespace FoodWuzUp.DAL
 
         public virtual void Init(Context db)
         {
-            if (typeof(Txref) == typeof(RecordType))
-                return;
-            db.RecordTypes.Add(new RecordType() { Name = typeof(Txref).Name, Description = typeof(Txref).Name, DisplayName = typeof(Txref).Name });
+            //if (typeof(Txref) == typeof(RecordType))
+            //    return;
+            //db.RecordTypes.Add(new RecordType() { Name = typeof(Txref).Name, Description = typeof(Txref).Name, DisplayName = typeof(Txref).Name });
         }
     }
      

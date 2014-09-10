@@ -65,5 +65,35 @@ namespace FoodWuzUp.DAL.Test
 
 
         }
+
+        [TestMethod]
+        public void RestaurantRatingTest()
+        {
+            Context db = new Context();
+            Restaurant actual = db.Restaurants.Include(o => o.Ratings).Single(o => o.Name == "CharBar");
+            Assert.AreEqual(1, actual.Rating);
+        }
+        [TestMethod]
+        public void RestaurantRatingStringTest()
+        {
+            Context db = new Context();
+            Restaurant actual = db.Restaurants.Include(o => o.Ratings).Single(o => o.Name == "CharBar");
+            Assert.AreEqual("1.00 Star(s)", actual.RatingString);
+        }
+        [TestMethod]
+        public void RestaurantMultipleRatingStringTest()
+        {
+            Context db = new Context();
+            Restaurant actual = db.Restaurants.Include(o => o.Ratings).Single(o => o.Name == "Shay's");
+            Assert.AreEqual("2.50 Star(s)", actual.RatingString);
+        }
+        [TestMethod]
+        public void RestaurantNoRatingStringTest()
+        {
+            Context db = new Context();
+            Restaurant actual = db.Restaurants.Include(o => o.Ratings).Single(o => o.Name == "Sambuca");
+            Assert.AreEqual("Not Yet Rated", actual.RatingString);
+        }
+
     }
 }

@@ -26,6 +26,7 @@ namespace FoodWuzUp.Web.Controllers
             var restaurants = db.Restaurants
                 .Include(o => o.Group)
                 .Include(o => o.RestaurantType)
+                .Include(o => o.Ratings)
                 .Where(o => groupIDs.Contains(o.GroupID))
                 .OrderBy(o => o.Name).ToList();
             return View(restaurants);
@@ -190,10 +191,11 @@ namespace FoodWuzUp.Web.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Restaurant restaurant = db.Restaurants
-                .Include(o => o.Employees.Select(e => e.Child))
+                .Include(o => o.Employees.Select(e => e.Child.Ratings.Select(r=> r.Rating)))
                 .Include(o => o.MenuItems.Select(e => e.Child))
                 .Include(r => r.Group)
                 .Include(r => r.RestaurantType)
+                .Include(o=> o.Ratings)
                 .Where(r => r.ID == id)
                 .Single();
             if (restaurant == null)

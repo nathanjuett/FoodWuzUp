@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
 
 namespace FoodWuzUp.DAL
 {
@@ -25,8 +26,10 @@ namespace FoodWuzUp.DAL
         public virtual ICollection<RestaurantMenuItem> MenuItems { get; set; }
         public virtual ICollection<RestaurantComment> Comments { get; set; }
         public virtual ICollection<RestaurantEmployee> Employees { get; set; }
+        public virtual ICollection<UserRestaurantRating> Ratings { get; set; }
         public Restaurant()
         {
+            Ratings = new List<UserRestaurantRating>();
             Comments = new List<RestaurantComment>();
             Employees = new List<RestaurantEmployee>();
             MenuItems = new List<RestaurantMenuItem>();
@@ -42,6 +45,32 @@ namespace FoodWuzUp.DAL
                     return Address.Replace('\n', ' ').Replace('\r', ' ');
                 else
                     return Address;
+            }
+        }
+        [NotMapped]
+        public float Rating
+        {
+            get
+            {
+                int cnt = Ratings.Where(o => o.RatingID > 0).Count();
+                if (cnt == 0)
+                    return cnt;
+                int sum = 0;
+                foreach (var item in Ratings.Where(o => o.RatingID > 0))
+                {
+                    sum += item.RatingID - 1;
+                }
+                    return (float)sum / (float)cnt;
+            }
+        }
+        [NotMapped]
+        public string RatingString
+        {
+            get
+            {
+                if (Rating == 0)
+                    return "Not Yet Rated";
+                return Rating.ToString("f") + " Star(s)";
             }
         }
     }

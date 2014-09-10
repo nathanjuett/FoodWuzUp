@@ -47,6 +47,7 @@ namespace FoodWuzUp.Web.Controllers
                 .Where(o => o.ChildID == user.ID)
                 .Select(o => o.ParentID));
             ViewBag.Restaurants = context.Restaurants
+                .Include(o=> o.Ratings)
                 .Where(o => groupIDs.Contains(o.GroupID)).ToList();
             return user;
         }

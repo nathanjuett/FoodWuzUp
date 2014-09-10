@@ -2,6 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using FoodWuzUp.DAL;
 using System.Linq;
+using System.Data.Entity;
 
 namespace FoodWuzUp.DAL.Test
 {
@@ -14,6 +15,13 @@ namespace FoodWuzUp.DAL.Test
         {
             base.BaseCreateTest();
         }
-        
+        [TestMethod]
+        public void CreatorTest()
+        {
+            Context db = new Context();
+            Group actual = db.Groups.Include(o=> o.Creator).Single(o => o.Name == "Downtown");
+            Assert.AreEqual("Nathan", actual.CreatorName);
+
+        }
     }
 }

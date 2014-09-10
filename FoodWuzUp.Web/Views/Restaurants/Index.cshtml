@@ -29,6 +29,9 @@
         <th>
             @Html.DisplayNameFor(model => model.Address)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Rating)
+        </th>
         <th></th>
     </tr>
 
@@ -76,6 +79,9 @@
                         <span class="glyphicon glyphicon-globe"></span>
                     </a>
                 }
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RatingString)
             </td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |

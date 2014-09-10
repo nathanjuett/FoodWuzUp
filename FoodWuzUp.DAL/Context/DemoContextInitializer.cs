@@ -61,9 +61,14 @@ namespace FoodWuzUp.DAL
             group2.Restaurants.Add(restaurant0);
             group3.Restaurants.Add(restaurant1);
             group5.Restaurants.Add(restaurant2);
+            restaurant0.Ratings.Add(new UserRestaurantRating() { RatingID = 2, Parent = User1, DateRated = DateTime.Parse("1/1/1980") });
+            restaurant1.Ratings.Add(new UserRestaurantRating() { RatingID = 2, Parent = User1, DateRated = DateTime.Parse("1/1/1980") });
+            restaurant1.Ratings.Add(new UserRestaurantRating() { RatingID = 5, Parent = User2, DateRated = DateTime.Parse("1/1/1980") });
+            
+            
+            
             db.SaveChanges();
-
-
+            
             Employee employee0 = db.Employees.Add(new Employee() { UniqueID = Guid.NewGuid(), Name = "Charlean", Description = "GirlWonder" });
             Employee employee1 = db.Employees.Add(new Employee() { UniqueID = Guid.NewGuid(), Name = "The Duke", Description = "Do You Have To Ask" });
             Employee employee2 = db.Employees.Add(new Employee() { UniqueID = Guid.NewGuid(), Name = "Holly", Description = "Dont take no SHIT" });
@@ -75,7 +80,9 @@ namespace FoodWuzUp.DAL
             restaurant1.Employees.Add(new RestaurantEmployee() { Child = employee2, EmployeeTypeID = 2, RatingID = 1 });
             restaurant2.Employees.Add(new RestaurantEmployee() { Child = employee3, EmployeeTypeID = 7, RatingID = 1 });
             restaurant2.Employees.Add(new RestaurantEmployee() { Child = employee4, EmployeeTypeID = 4, RatingID = 1 });
-
+            employee0.Ratings.Add(new UserEmployeeRating() { RatingID = 2, Parent = User1, DateRated = DateTime.Parse("1/1/1980") });
+            employee1.Ratings.Add(new UserEmployeeRating() { RatingID = 2, Parent = User1, DateRated = DateTime.Parse("1/1/1980") });
+            employee1.Ratings.Add(new UserEmployeeRating() { RatingID = 5, Parent = User2, DateRated = DateTime.Parse("1/1/1980") });
             db.SaveChanges();
 
 
