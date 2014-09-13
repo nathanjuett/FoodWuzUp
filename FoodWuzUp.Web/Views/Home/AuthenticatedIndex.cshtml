@@ -118,7 +118,12 @@
     $(function () {
         var gdialog = $('#createGroupModal').dialog({
             autoOpen: false,
-            modal: true
+            modal: true,
+            buttons: {
+                Cancel: function () {
+                    $(this).dialog('close');
+                }
+            }
         });
         $('#groupCreate').click(function () {
             var url = $('#createGroupModal').data('url');
@@ -127,7 +132,12 @@
 
         var rdialog = $('#createRestaurantModal').dialog({
             autoOpen: false,
-            modal: true
+            modal: true,
+            buttons: {
+                Cancel: function () {
+                    $(this).dialog('close');
+                }
+            }
         });
         $('#restaurantCreate').click(function () {
             var url = $('#createRestaurantModal').data('url');
