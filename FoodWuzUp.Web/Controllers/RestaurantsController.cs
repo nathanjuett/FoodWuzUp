@@ -50,10 +50,10 @@ namespace FoodWuzUp.Web.Controllers
             return View();
         }
 
-        public ActionResult CreateModal()
+        public PartialViewResult CreateModal()
         {
             SetViewBagItems(new Restaurant());
-            return View();
+            return PartialView();
         }
 
         // POST: Restaurants/Create

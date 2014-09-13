@@ -22,3 +22,7 @@ textarea {
 html {
     -ms-overflow-style: scrollbar;
 }
+
+ .ui-tooltip-content {
+        width: 250px;
+    }
