@@ -47,20 +47,28 @@ namespace FoodWuzUp.DAL
                     return Address;
             }
         }
+ 
         [NotMapped]
         public float Rating
         {
             get
             {
-                int cnt = Ratings.Where(o => o.RatingID > 0).Count();
-                if (cnt == 0)
-                    return cnt;
+                if (RatingCount == 0)
+                    return RatingCount;
                 int sum = 0;
                 foreach (var item in Ratings.Where(o => o.RatingID > 0))
                 {
                     sum += item.RatingID - 1;
                 }
-                    return (float)sum / (float)cnt;
+                return (float)sum / (float)RatingCount;
+            }
+        }
+       [NotMapped]
+        public int RatingCount
+        {
+            get
+            {
+                return Ratings.Where(o => o.RatingID > 0).Count();
             }
         }
         [NotMapped]
@@ -70,7 +78,7 @@ namespace FoodWuzUp.DAL
             {
                 if (Rating == 0)
                     return "Not Yet Rated";
-                return Rating.ToString("f") + " Star(s)";
+                return Rating.ToString("f") + " Star(s) by " + RatingCount + " Users";
             }
         }
     }
