@@ -52,9 +52,9 @@ namespace FoodWuzUp.Web.Controllers
              return View();
         }
 
-        public ActionResult CreateModal()
+        public PartialViewResult CreateModal()
         {
-            return View();
+            return PartialView();
         }
 
         // POST: Groups/Create
