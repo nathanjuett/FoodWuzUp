@@ -7,211 +7,202 @@
 
 <h2>@Model.Name</h2>
 
-    <div>
-        <h4>Your Info : </h4>
-        <hr />
-        <dl class="dl-horizontal">
-            <dt>
-                @Html.DisplayNameFor(model => model.Name)
-            </dt>
+<div>
+    <h4>Your Info : </h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.Name)
-            </dd>
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
 
-            <dt>
-                @Html.DisplayNameFor(model => model.Description)
-            </dt>
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.Description)
-            </dd>
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
 
-        </dl>
-    </div>
+    </dl>
+</div>
 
-    <div class="row">
-        <div class="col-sm-6">
-            <h3>My Groups</h3>
-            <table class="table">
+<div class="row">
+    <div class="col-sm-6">
+        <h3>My Groups</h3>
+        <table class="table">
+            <tr>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Description
+                </th>
+            </tr>
+
+            @foreach (var item in Model.Groups)
+            {
                 <tr>
-                    <th>
-                        Name
-                    </th>
-                    <th>
-                        Description
-                    </th>
+                    <td>
+                        @Html.ActionLink(item.Name, "Details", "Groups", new { id = item.ID }, null)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
                 </tr>
-
-                @foreach (var item in Model.Groups)
-                {
-                    <tr>
-                        <td>
-                            @Html.ActionLink(item.Name, "Details", "Groups", new { id = item.ID }, null)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Description)
-                        </td>
-                    </tr>
-                }
-            </table>
-            <p>
-                <input type="button" value="Create" class="btn btn-default" id="groupCreate" />
-            </p>
-
-            <h3>My Memberships</h3>
-            <table class="table">
-                <tr>
-                    <th>
-                        Name
-                    </th>
-                    <th>
-                        Creator
-                    </th>
-                    <th>
-                        Description
-                    </th>
-                </tr>
-                @foreach (var item in Model.Memberships)
-                {
-                    <tr>
-                        <td>
-                            @Html.ActionLink(item.Parent.Name, "Details", "Groups", new { id = item.ParentID }, null)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Parent.Creator.Name)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Parent.Description)
-                        </td>
-                    </tr>
-                }
-            </table>
-        </div>
-        <div class="col-sm-6">
-            <h3>My Resturants</h3>
-            <table class="table">
-                <tr>
-                    <th>
-                        Name
-                    </th>
-                    <th>
-                        Group
-                    </th>
-                    <th>
-                        Description
-                    </th>
-                    <th>
-                        Rating
-                    </th>
-                </tr>
-                @foreach (var item in restaurants)
-                {
-                    <tr class="restaurantToolTip" title="" id="@item.ID" data-id=@item.ID>
-                        <td>
-                            @Html.ActionLink(item.Name, "Details", "Restaurants", new { id = item.ID }, null)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modeItem => item.Group.Name)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Description)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.RatingString)
-                        </td>
-                    </tr>
-                }
-            </table>
-            <p>
-                <input type="button" value="Create" class="btn btn-default" id="restaurantCreate" />
-            </p>
-        </div>
-    </div>
-
-    <div id="createGroupModal" title="Group Create" data-url='@Url.Action("CreateModal", "Groups")'></div>
-
-    <div id="createRestaurantModal" title="Restaurant Create" data-url='@Url.Action("CreateModal", "Restaurants")'>
-        <div id="restaurantCreateModalContainer"></div>
-    </div>
-    <script type="text/javascript">
-        $(function () {
-            $('#createGroupModal').dialog({
-                autoOpen: false,
-                modal: true
-            });
-            $('#groupCreate').click(function () {
-                var url = $('#createGroupModal').data('url');
-                $('#createGroupModal').dialog('open').load(url);
-            });
-
-            var rdialog = $('#createRestaurantModal').dialog({
-                autoOpen: false,
-                modal: true
-            });
-            $('#restaurantCreate').click(function () {
-                var url = $('#createRestaurantModal').data('url');
-                rdialog.dialog('open').load(url);
-            });
-
-
-
-
-        });
-
-        $('.restaurantToolTip').tooltip({
-            content: function (callback) {
-                var rid = $(this).data('id');
-                $.ajax({
-                    url: '@Url.Action("DetailsToolTip", "Restaurants")',
-                    data: { id: rid },
-                    success: function (data) {
-                        callback(data);
-                    }
-                });
-            },
-            show: null,
-            position: {
-                my: "right center",
-                at: "left top",
-            },
-            open: function (ev, ui) {
-                if (typeof (ev.originalEvent) === 'undefined') {
-                    return false;
-                }
-                var $id = $(ui.tooltip).attr('id');
-                $('div.ui-tooltip').not('#' + $id).remove();
-            },
-            close: function (ev, ui) {
-                ui.tooltip.hover(function () {
-                    $(this).stop(true).fadeTo(400, 1);
-                },
-                function () {
-                    $(this).fadeOut('400', function () {
-                        $(this).remove();
-                    });
-                });
             }
-        }).on('mouseleave', function (e, ui) {
-            var that = this;
-          
-            // close the tooltip later (maybe ...)
-            mouseLeaveTimer = setTimeout(function () {
-                $(that).tooltip('close');
-            }, 100);
+        </table>
+        <p>
+            <input type="button" value="Create" class="btn btn-default" id="groupCreate" />
+        </p>
 
-            //prevent tooltip widget to close the tooltip now
-            e.stopImmediatePropagation();
+        <h3>My Memberships</h3>
+        <table class="table">
+            <tr>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Creator
+                </th>
+                <th>
+                    Description
+                </th>
+            </tr>
+            @foreach (var item in Model.Memberships)
+            {
+                <tr>
+                    <td>
+                        @Html.ActionLink(item.Parent.Name, "Details", "Groups", new { id = item.ParentID }, null)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Parent.Creator.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Parent.Description)
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+    <div class="col-sm-6">
+        <h3>My Resturants</h3>
+        <table class="table">
+            <tr>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Group
+                </th>
+                <th>
+                    Description
+                </th>
+                <th>
+                    Rating
+                </th>
+            </tr>
+            @foreach (var item in restaurants)
+            {
+                <tr class="restaurantToolTip" title="" id="@item.ID" data-id=@item.ID>
+                    <td>
+                        @Html.ActionLink(item.Name, "Details", "Restaurants", new { id = item.ID }, null)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modeItem => item.Group.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.RatingString)
+                    </td>
+                </tr>
+            }
+        </table>
+        <p>
+            <input type="button" value="Create" class="btn btn-default" id="restaurantCreate" />
+        </p>
+    </div>
+</div>
+
+<div id="createGroupModal" title="Group Create" data-url='@Url.Action("CreateModal", "Groups")'></div>
+
+<div id="createRestaurantModal" title="Restaurant Create" data-url='@Url.Action("CreateModal", "Restaurants")'>
+    <div id="restaurantCreateModalContainer"></div>
+</div>
+<script type="text/javascript">
+    $(function () {
+        $('#createGroupModal').dialog({
+            autoOpen: false,
+            modal: true
         });
-        //$(function() {
-        $(document).on('mouseenter', '.ui-tooltip', function (e) {
-            // cancel tooltip closing on hover
-            clearTimeout(mouseLeaveTimer);
+        $('#groupCreate').click(function () {
+            var url = $('#createGroupModal').data('url');
+            $('#createGroupModal').dialog('open').load(url);
         });
 
-        $(document).on('mouseleave', '.ui-tooltip', function () {
-            // make sure tooltip is closed when the mouse is gone
-            $('.restaurantToolTip').tooltip('close');
+        var rdialog = $('#createRestaurantModal').dialog({
+            autoOpen: false,
+            modal: true
         });
-        //});
-    </script>
+        $('#restaurantCreate').click(function () {
+            var url = $('#createRestaurantModal').data('url');
+            rdialog.dialog('open').load(url);
+        });
+    });
+
+    $('.restaurantToolTip').tooltip({
+        content: function (callback) {
+            var rid = $(this).data('id');
+            $.ajax({
+                url: '@Url.Action("DetailsToolTip", "Restaurants")',
+                data: { id: rid },
+                success: function (data) {
+                    callback(data);
+                }
+            });
+        },
+        show: null,
+        position: {
+            my: "right center",
+            at: "left top",
+        },
+        open: function (ev, ui) {
+            if (typeof (ev.originalEvent) === 'undefined') {
+                return false;
+            }
+            var $id = $(ui.tooltip).attr('id');
+            $('div.ui-tooltip').not('#' + $id).remove();
+        },
+        close: function (ev, ui) {
+            ui.tooltip.hover(function () {
+                $(this).stop(true).fadeTo(400, 1);
+            },
+            function () {
+                $(this).fadeOut('400', function () {
+                    $(this).remove();
+                });
+            });
+        }
+    }).on('mouseleave', function (e, ui) {
+        var that = this;
+        // close the tooltip later (maybe ...)
+        mouseLeaveTimer = setTimeout(function () {
+            $(that).tooltip('close');
+        }, 100);
+        //prevent tooltip widget to close the tooltip now
+        e.stopImmediatePropagation();
+    });
+    $(document).on('mouseenter', '.ui-tooltip', function (e) {
+        // cancel tooltip closing on hover
+        clearTimeout(mouseLeaveTimer);
+    });
+    $(document).on('mouseleave', '.ui-tooltip', function () {
+        // make sure tooltip is closed when the mouse is gone
+        $('.restaurantToolTip').tooltip('close');
+    });
+</script>
