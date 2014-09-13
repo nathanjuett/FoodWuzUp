@@ -5,29 +5,10 @@
     List<FoodWuzUp.DAL.Restaurant> restaurants = ViewBag.Restaurants;
 }
 
-<h2>@Model.Name</h2>
-
 <div>
-    <h4>Your Info : </h4>
+    <h2>@Model.Name</h2>
+    @Html.DisplayFor(model => model.Description)
     <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Description)
-        </dd>
-
-    </dl>
 </div>
 
 <div class="row">
@@ -132,17 +113,16 @@
 <div id="createGroupModal" title="Group Create" data-url='@Url.Action("CreateModal", "Groups")'></div>
 
 <div id="createRestaurantModal" title="Restaurant Create" data-url='@Url.Action("CreateModal", "Restaurants")'>
-    <div id="restaurantCreateModalContainer"></div>
 </div>
 <script type="text/javascript">
     $(function () {
-        $('#createGroupModal').dialog({
+        var gdialog = $('#createGroupModal').dialog({
             autoOpen: false,
             modal: true
         });
         $('#groupCreate').click(function () {
             var url = $('#createGroupModal').data('url');
-            $('#createGroupModal').dialog('open').load(url);
+            gdialog.dialog('open').load(url);
         });
 
         var rdialog = $('#createRestaurantModal').dialog({
