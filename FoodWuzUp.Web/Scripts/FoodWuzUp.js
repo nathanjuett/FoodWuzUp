@@ -8,3 +8,20 @@ function PropertyAutocomplete(url, htmlcontrolid, htmlhiddenfieldid) {
         }
     });
 };
+
+function CreateModal(ModalDivName, CreateButton) {
+    var gdialog = $('#' + ModalDivName).dialog({
+        autoOpen: false,
+        modal: true,
+        buttons: {
+            Cancel: function () {
+                $(this).dialog('close');
+            }
+        }
+    });
+    $('#' + CreateButton).click(function () {
+        var url = $('#' + ModalDivName).data('url');
+        gdialog.dialog('open').load(url);
+    });
+};
+

@@ -116,33 +116,8 @@
 
 <script type="text/javascript">
     $(function () {
-        var gdialog = $('#createGroupModal').dialog({
-            autoOpen: false,
-            modal: true,
-            buttons: {
-                Cancel: function () {
-                    $(this).dialog('close');
-                }
-            }
-        });
-        $('#groupCreate').click(function () {
-            var url = $('#createGroupModal').data('url');
-            gdialog.dialog('open').load(url);
-        });
-
-        var rdialog = $('#createRestaurantModal').dialog({
-            autoOpen: false,
-            modal: true,
-            buttons: {
-                Cancel: function () {
-                    $(this).dialog('close');
-                }
-            }
-        });
-        $('#restaurantCreate').click(function () {
-            var url = $('#createRestaurantModal').data('url');
-            rdialog.dialog('open').load(url);
-        });
+        CreateModal('createGroupModal', 'groupCreate');
+        CreateModal('createRestaurantModal', 'restaurantCreate');
     });
     var mouseLeaveTimer = 0;
     $('.restaurantToolTip').tooltip({
