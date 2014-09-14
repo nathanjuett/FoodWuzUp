@@ -144,7 +144,7 @@
             rdialog.dialog('open').load(url);
         });
     });
-
+    var mouseLeaveTimer = 0;
     $('.restaurantToolTip').tooltip({
         content: function (callback) {
             var rid = $(this).data('id');
