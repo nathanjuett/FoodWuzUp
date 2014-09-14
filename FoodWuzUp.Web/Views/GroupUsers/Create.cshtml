@@ -53,10 +53,6 @@
     @Html.ActionLink("Back to List", "Index")
 </div>
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
-@Scripts.Render("~/bundles/jquery")
 <script>
     PropertyAutocomplete('@Url.Action("Lookup","Users")', 'groupuser', 'ChildID');
 </script>
