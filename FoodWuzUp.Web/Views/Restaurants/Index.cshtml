@@ -6,9 +6,6 @@
 
 <h2>Index</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
 <table class="table">
     <tr>
         <th>
@@ -92,11 +89,15 @@
     }
 
 </table>
-@Scripts.Render("~/bundles/jquery")
+
+<p>
+    <input type="button" value="Create" class="btn btn-default" id="restaurantCreate" />
+</p>
+
+<div id="createRestaurantModal" title="Restaurant Create" data-url='@Url.Action("CreateModal", "Restaurants")'></div>
+
 <script type="text/javascript">
-    $(document).ready(function () {
-        $(".tip").tooltip({
-            placement: 'top'
-        });
+    $(function () {
+        CreateModal('createRestaurantModal', 'restaurantCreate');
     });
 </script>
