@@ -31,6 +31,33 @@ namespace FoodWuzUp.Web.Controllers
                 .OrderBy(o => o.Name).ToList();
             return View(restaurants);
         }
+        public PartialViewResult PartialIndex(int? ID, String Parent)
+        {
+            List<int> groupIDs;
+            if (ID == null)
+            {
+                groupIDs = db.Groups
+                .Where(o => o.Creator.AuthID == AuthID)
+                .Select(o => o.ID).ToList();
+            }
+            else
+            {
+                groupIDs = db.Groups
+                .Where(o => o.Creator.AuthID == AuthID && o.ID == ID)
+                .Select(o => o.ID).ToList();
+            }
+            groupIDs.AddRange(
+               db.GroupUsers
+               .Where(o => o.Child.AuthID == AuthID)
+               .Select(o => o.ParentID));
+            var restaurants = db.Restaurants
+                .Include(o => o.Group)
+                .Include(o => o.RestaurantType)
+                .Include(o => o.Ratings)
+                .Where(o => groupIDs.Contains(o.GroupID))
+                .OrderBy(o => o.Name).ToList();
+            return PartialView(restaurants);
+        }
 
         // GET: Restaurants/Details/5
         public ActionResult Details(int? id)
@@ -191,11 +218,11 @@ namespace FoodWuzUp.Web.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Restaurant restaurant = db.Restaurants
-                .Include(o => o.Employees.Select(e => e.Child.Ratings.Select(r=> r.Rating)))
+                .Include(o => o.Employees.Select(e => e.Child.Ratings.Select(r => r.Rating)))
                 .Include(o => o.MenuItems.Select(e => e.Child))
                 .Include(r => r.Group)
                 .Include(r => r.RestaurantType)
-                .Include(o=> o.Ratings)
+                .Include(o => o.Ratings)
                 .Where(r => r.ID == id)
                 .Single();
             if (restaurant == null)

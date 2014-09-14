@@ -1,0 +1,45 @@
+﻿@model IEnumerable<FoodWuzUp.DAL.Restaurant>
+<h3>My Resturants</h3>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Group.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RatingString)
+        </th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr class="restaurantToolTip" title="" id="@item.ID" data-id=@item.ID>
+            <td>
+                @Html.ActionLink(item.Name, "Details", "Restaurants", new { id = item.ID }, null)
+            </td>
+            <td>
+                @Html.ActionLink(item.Group.Name, "Details", "Groups", new { id = item.ID }, null)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RatingString)
+            </td>
+        </tr>
+    }
+</table>
+<p>
+    <input type="button" value="Create" class="btn btn-default" id="restaurantCreate" />
+</p>
+<div id="createRestaurantModal" title="Restaurant Create" data-url='@Url.Action("CreateModal", "Restaurants")'></div>
+<script type="text/javascript">
+    $(function () {
+        CreateModal('createRestaurantModal', 'restaurantCreate');
+        CreateToolTip('restaurantToolTip', '@Url.Action("DetailsToolTip", "Restaurants")');
+    });
+</script>

@@ -70,54 +70,14 @@
         </table>
     </div>
     <div class="col-sm-6">
-        <h3>My Resturants</h3>
-        <table class="table">
-            <tr>
-                <th>
-                    Name
-                </th>
-                <th>
-                    Group
-                </th>
-                <th>
-                    Description
-                </th>
-                <th>
-                    Rating
-                </th>
-            </tr>
-            @foreach (var item in restaurants)
-            {
-                <tr class="restaurantToolTip" title="" id="@item.ID" data-id=@item.ID>
-                    <td>
-                        @Html.ActionLink(item.Name, "Details", "Restaurants", new { id = item.ID }, null)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modeItem => item.Group.Name)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Description)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.RatingString)
-                    </td>
-                </tr>
-            }
-        </table>
-        <p>
-            <input type="button" value="Create" class="btn btn-default" id="restaurantCreate" />
-        </p>
+        @Html.Action("PartialIndex", "Restaurants")
     </div>
 </div>
 
 <div id="createGroupModal" title="Group Create" data-url='@Url.Action("CreateModal", "Groups")'></div>
 
-<div id="createRestaurantModal" title="Restaurant Create" data-url='@Url.Action("CreateModal", "Restaurants")'></div>
-
 <script type="text/javascript">
     $(function () {
         CreateModal('createGroupModal', 'groupCreate');
-        CreateModal('createRestaurantModal', 'restaurantCreate');
-        CreateToolTip('restaurantToolTip', '@Url.Action("DetailsToolTip", "Restaurants")');
     });
 </script>
