@@ -712,6 +712,8 @@
     <Content Include="Views\RestaurantMenuItems\Details.cshtml" />
     <Content Include="Views\RestaurantMenuItems\Edit.cshtml" />
     <Content Include="Views\RestaurantMenuItems\Index.cshtml" />
+    <Content Include="Views\GroupUsers\CreateModal.cshtml" />
+    <Content Include="Views\GroupUsers\CreatePartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Code\" />

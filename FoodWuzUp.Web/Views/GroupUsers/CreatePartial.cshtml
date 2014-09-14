@@ -1,0 +1,30 @@
+﻿@model FoodWuzUp.DAL.GroupUser
+
+@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+<div class="form-group">
+    @Html.LabelFor(model => model.ParentID, "Group", htmlAttributes: new { @class = "control-label col-md-2" })
+    <div class="col-md-10">
+        @Html.DropDownList("ParentID", null, htmlAttributes: new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.ParentID, "", new { @class = "text-danger" })
+    </div>
+</div>
+
+<div class="form-group">
+    @Html.LabelFor(model => model.ChildID, "User", htmlAttributes: new { @class = "control-label col-md-2" })
+    <div class="col-md-10">
+        @Html.TextBoxFor(model => model.Child.Name, "User", htmlAttributes: new { @class = "form-control", @id = "groupuser", @size = "50" })
+        @Html.Hidden("ChildID", null)
+    </div>
+</div>
+
+<div class="form-group">
+    @Html.LabelFor(model => model.UserTypeID, "User Type", htmlAttributes: new { @class = "control-label col-md-2" })
+    <div class="col-md-10">
+        @Html.DropDownList("UserTypeID", null, htmlAttributes: new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.UserTypeID, "", new { @class = "text-danger" })
+    </div>
+</div>
+
+<script>
+    PropertyAutocomplete('@Url.Action("Lookup","Users")', 'groupuser', 'ChildID');
+</script>
