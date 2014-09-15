@@ -78,14 +78,14 @@ namespace FoodWuzUp.DAL.Test
         {
             Context db = new Context();
             Restaurant actual = db.Restaurants.Include(o => o.Ratings).Single(o => o.Name == "CharBar");
-            Assert.AreEqual("1.00 Star(s)", actual.RatingString);
+            Assert.AreEqual("1.00 Star(s) by 1 Users", actual.RatingString);
         }
         [TestMethod]
         public void RestaurantMultipleRatingStringTest()
         {
             Context db = new Context();
             Restaurant actual = db.Restaurants.Include(o => o.Ratings).Single(o => o.Name == "Shay's");
-            Assert.AreEqual("2.50 Star(s)", actual.RatingString);
+            Assert.AreEqual("2.50 Star(s) by 2 Users", actual.RatingString);
         }
         [TestMethod]
         public void RestaurantNoRatingStringTest()

@@ -17,7 +17,7 @@ namespace FoodWuzUp.Web.Controllers
         public ActionResult Index()
         {
             var myGroups = db.Groups
-                .Where(o => o.Creator.AuthID  == AuthID)
+                .Where(o => o.Creator.AuthID == AuthID)
                 .OrderBy(o => o.Name);
             List<int> groupIDs = db.GroupUsers.Where(o => o.Child.AuthID == AuthID).Select(o => o.ParentID).ToList();
             ViewBag.MyMemberships = db.Groups
@@ -26,6 +26,32 @@ namespace FoodWuzUp.Web.Controllers
                 .OrderBy(o => o.Name).ToList();
             return View(myGroups.ToList());
         }
+        public PartialViewResult PartialIndex(int? ID, String Parent)
+        {
+            IEnumerable<Group> myGroups;
+            if (ID == null)
+            {
+                ViewBag.Title = "My Groups";
+                myGroups = db.Groups
+               .Include(o => o.Creator)
+               .Where(o => o.Creator.AuthID == AuthID)
+               .OrderBy(o => o.Name);
+            }
+            else
+            {
+                ViewBag.Title = "My Memberships";
+                myGroups = db.Groups
+              .Include(o => o.Creator)
+              .Where(o => o.Members.Select(m => m.ChildID).Contains(ID.Value))
+              .OrderBy(o => o.Name);
+            }
+            //List<int> groupIDs = db.GroupUsers.Where(o => o.Child.AuthID == AuthID).Select(o => o.ParentID).ToList();
+            //ViewBag.MyMemberships = db.Groups
+            //    .Where(o => groupIDs.Contains(ID.Value))
+            //    .OrderBy(o => o.Name).ToList();
+            return PartialView(myGroups.ToList());
+        }
+
 
         // GET: Groups/Details/5
         public ActionResult Details(int? id)
@@ -35,10 +61,10 @@ namespace FoodWuzUp.Web.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Group group = db.Groups
-                .Include(g=> g.Members.Select(e => e.Child))
-                .Include(g=> g.Restaurants)
+                .Include(g => g.Members.Select(e => e.Child))
+                .Include(g => g.Restaurants)
                 .Include(g => g.Creator)
-                .Single(o=> o.ID == id);
+                .Single(o => o.ID == id);
             if (group == null)
             {
                 return HttpNotFound();
@@ -49,7 +75,7 @@ namespace FoodWuzUp.Web.Controllers
         // GET: Groups/Create
         public ActionResult Create()
         {
-             return View();
+            return View();
         }
 
         public PartialViewResult CreateModal()
@@ -72,7 +98,7 @@ namespace FoodWuzUp.Web.Controllers
                 return RedirectToAction("Index");
             }
 
-             return View(group);
+            return View(group);
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -139,7 +165,7 @@ namespace FoodWuzUp.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Group group = db.Groups.Include(g => g.Creator).Single(o=> o.ID == id);
+            Group group = db.Groups.Include(g => g.Creator).Single(o => o.ID == id);
             db.Groups.Remove(group);
             db.SaveChanges();
             return RedirectToAction("Index");

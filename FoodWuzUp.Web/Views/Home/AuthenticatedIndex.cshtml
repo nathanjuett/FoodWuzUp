@@ -13,71 +13,10 @@
 
 <div class="row">
     <div class="col-sm-6">
-        <h3>My Groups</h3>
-        <table class="table">
-            <tr>
-                <th>
-                    Name
-                </th>
-                <th>
-                    Description
-                </th>
-            </tr>
-
-            @foreach (var item in Model.Groups)
-            {
-                <tr>
-                    <td>
-                        @Html.ActionLink(item.Name, "Details", "Groups", new { id = item.ID }, null)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Description)
-                    </td>
-                </tr>
-            }
-        </table>
-        <p>
-            <input type="button" value="Create" class="btn btn-default" id="groupCreate" />
-        </p>
-
-        <h3>My Memberships</h3>
-        <table class="table">
-            <tr>
-                <th>
-                    Name
-                </th>
-                <th>
-                    Creator
-                </th>
-                <th>
-                    Description
-                </th>
-            </tr>
-            @foreach (var item in Model.Memberships)
-            {
-                <tr>
-                    <td>
-                        @Html.ActionLink(item.Parent.Name, "Details", "Groups", new { id = item.ParentID }, null)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Parent.Creator.Name)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Parent.Description)
-                    </td>
-                </tr>
-            }
-        </table>
+        @Html.Action("PartialIndex", "Groups")
+        @Html.Action("PartialIndex", "Groups", new { ID = Model.ID, Parent = "Users" })
     </div>
     <div class="col-sm-6">
         @Html.Action("PartialIndex", "Restaurants")
     </div>
 </div>
-
-<div id="createGroupModal" title="Group Create" data-url='@Url.Action("CreateModal", "Groups")'></div>
-
-<script type="text/javascript">
-    $(function () {
-        CreateModal('createGroupModal', 'groupCreate');
-    });
-</script>

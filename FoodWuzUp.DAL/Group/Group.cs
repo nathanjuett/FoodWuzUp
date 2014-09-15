@@ -16,6 +16,7 @@ namespace FoodWuzUp.DAL
 
         public int? CreatorID { get; set; }
 
+        [Display(Name = "Creator")]
         public virtual User Creator { get; set; }
         [NotMapped]
         [Display(Name = "Creator")]
