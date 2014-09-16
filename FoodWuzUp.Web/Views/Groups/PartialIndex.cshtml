@@ -14,23 +14,27 @@
         </th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.ActionLink(item.Name, "Details", "Groups", new { id = item.ID }, null)
-       </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Creator.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Description)
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.ActionLink(item.Name, "Details", "Groups", new { id = item.ID }, null)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Creator.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+        </tr>
+    }
 </table>
-<p>
-    <input type="button" value="Create" class="btn btn-default" id="groupCreate" />
-</p>
+@if (ViewBag.ShowButton)
+{
+    <p>
+        <input type="button" value="Create" class="btn btn-default" id="groupCreate" />
+    </p>
+}
 <div id="createGroupModal" title="Group Create" data-url='@Url.Action("CreateModal", "Groups")'></div>
 <script type="text/javascript">
     $(function () {

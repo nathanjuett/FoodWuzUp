@@ -36,6 +36,7 @@ namespace FoodWuzUp.Web.Controllers
                .Include(o => o.Creator)
                .Where(o => o.Creator.AuthID == AuthID)
                .OrderBy(o => o.Name);
+                ViewBag.ShowButton = true;
             }
             else
             {
@@ -44,6 +45,7 @@ namespace FoodWuzUp.Web.Controllers
               .Include(o => o.Creator)
               .Where(o => o.Members.Select(m => m.ChildID).Contains(ID.Value))
               .OrderBy(o => o.Name);
+                ViewBag.ShowButton = false;
             }
             //List<int> groupIDs = db.GroupUsers.Where(o => o.Child.AuthID == AuthID).Select(o => o.ParentID).ToList();
             //ViewBag.MyMemberships = db.Groups
