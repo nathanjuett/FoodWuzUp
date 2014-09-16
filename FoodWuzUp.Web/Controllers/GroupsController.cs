@@ -47,10 +47,6 @@ namespace FoodWuzUp.Web.Controllers
               .OrderBy(o => o.Name);
                 ViewBag.ShowButton = false;
             }
-            //List<int> groupIDs = db.GroupUsers.Where(o => o.Child.AuthID == AuthID).Select(o => o.ParentID).ToList();
-            //ViewBag.MyMemberships = db.Groups
-            //    .Where(o => groupIDs.Contains(ID.Value))
-            //    .OrderBy(o => o.Name).ToList();
             return PartialView(myGroups.ToList());
         }
 
