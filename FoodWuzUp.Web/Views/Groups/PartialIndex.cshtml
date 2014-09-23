@@ -32,12 +32,12 @@
 @if (ViewBag.ShowButton)
 {
     <p>
-        <input type="button" value="Create" class="btn btn-default" id="groupCreate" />
+        <input type="button" value="Create" class="btn btn-default" id='@ViewBag.ButtonName' />
     </p>
 }
 <div id="createGroupModal" title="Group Create" data-url='@Url.Action("CreateModal", "Groups")'></div>
 <script type="text/javascript">
     $(function () {
-        CreateModal('createGroupModal', 'groupCreate');
+        CreateModal('createGroupModal', '@ViewBag.ButtonName');
     });
 </script>

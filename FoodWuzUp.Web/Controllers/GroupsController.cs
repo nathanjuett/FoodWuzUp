@@ -37,6 +37,7 @@ namespace FoodWuzUp.Web.Controllers
                .Where(o => o.Creator.AuthID == AuthID)
                .OrderBy(o => o.Name);
                 ViewBag.ShowButton = true;
+                ViewBag.ButtonName = "MyGroups";
             }
             else
             {
@@ -46,6 +47,7 @@ namespace FoodWuzUp.Web.Controllers
               .Where(o => o.Members.Select(m => m.ChildID).Contains(ID.Value))
               .OrderBy(o => o.Name);
                 ViewBag.ShowButton = false;
+                ViewBag.ButtonName = "MyMemberships";
             }
             return PartialView(myGroups.ToList());
         }

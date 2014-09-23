@@ -14,8 +14,14 @@ function CreateModal(ModalDivName, CreateButton) {
         autoOpen: false,
         modal: true,
         buttons: {
+            Save: function () {
+                var form;
+                form = gdialog.find("form");
+                form.submit();
+                gdialog.dialog('close');
+            },
             Cancel: function () {
-                $(this).dialog('close');
+                gdialog.dialog('close');
             }
         }
     });
