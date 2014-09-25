@@ -20,7 +20,18 @@ namespace FoodWuzUp.Web.Controllers
             var restaurantEmployees = db.RestaurantEmployees.Include(r => r.Child).Include(r => r.EmployeeType).Include(r => r.Parent).Include(r => r.Rating);
             return View(restaurantEmployees.ToList());
         }
+        public PartialViewResult PartialIndex(int? ID, String Parent)
+        {
 
+            var restaurantEmployees = db.RestaurantEmployees
+                .Include(r => r.Child)
+                .Include(r => r.EmployeeType)
+                .Include(r => r.Parent)
+                .Include(r => r.Rating)
+                .Where(o => o.ParentID == ID);
+            ViewBag.ParentID = ID;
+            return PartialView(restaurantEmployees.ToList());
+        }
         // GET: RestaurantEmployees/Details/5
         public ActionResult Details(int? id, int? childID)
         {
@@ -29,7 +40,7 @@ namespace FoodWuzUp.Web.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             RestaurantEmployee restaurantEmployee = db.RestaurantEmployees.Include(r => r.Child).Include(r => r.EmployeeType).Include(r => r.Parent).Include(r => r.Rating)
-                .Single( o=> o.ParentID == id && o.ChildID == childID);
+                .Single(o => o.ParentID == id && o.ChildID == childID);
             if (restaurantEmployee == null)
             {
                 return HttpNotFound();
@@ -45,6 +56,16 @@ namespace FoodWuzUp.Web.Controllers
             ViewBag.ParentID = new SelectList(db.Restaurants, "ID", "Name");
             ViewBag.RatingID = new SelectList(db.Ratings, "ID", "Name");
             return View();
+        }
+        public ActionResult CreatePartial()
+        {
+            return View();
+        }
+        public PartialViewResult CreateModal(int? parentid)
+        {
+            ViewBag.ParentID = parentid;
+            ViewBag.RatingID = new SelectList(db.Ratings, "ID", "Name");
+            return PartialView();
         }
 
         // POST: RestaurantEmployees/Create
@@ -67,7 +88,21 @@ namespace FoodWuzUp.Web.Controllers
             ViewBag.RatingID = new SelectList(db.Ratings, "ID", "Name", restaurantEmployee.RatingID);
             return View(restaurantEmployee);
         }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateModal([Bind(Include = "ParentID,ChildID,EmployeeTypeID,RatingID")] RestaurantEmployee restaurantEmployee)
+        {
+            if (ModelState.IsValid)
+            {
+                db.RestaurantEmployees.Add(restaurantEmployee);
+                db.SaveChanges();
+                return RedirectToAction("Details", "Restaurants", new { id = restaurantEmployee.ParentID });
+            }
 
+            ViewBag.ParentID = ViewBag.ParentID;
+            ViewBag.RatingID = new SelectList(db.Ratings, "ID", "Name", restaurantEmployee.RatingID);
+            return View(restaurantEmployee);
+        }
         // GET: RestaurantEmployees/Edit/5
         public ActionResult Edit(int? id, int? childID)
         {

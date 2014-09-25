@@ -47,43 +47,7 @@
     </div>
 
     <div class="col-sm-6">
-        <h3>Employees</h3>
-        <table class="table">
-            <tr>
-                <th>
-                    Name
-                </th>
-                <th>
-                    Group
-                </th>
-                <th>
-                    Description
-                </th>
-                <th>
-                    Rating
-                </th>
-            </tr>
-            @foreach (var item in Model.Employees)
-            {
-                <tr class="restaurantToolTip" title="" data-id=@item.ChildID>
-                    <td>
-                        @Html.ActionLink(item.Child.Name, "Details", "Employees", new { id = item.ChildID }, null)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modeItem => item.Child.Name)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Child.Description)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Child.RatingString)
-                    </td>
-                </tr>
-            }
-        </table>
-        <p>
-            <input type="button" value="Create" class="btn btn-default" id="restaurantCreate" />
-        </p>
+        @Html.Action("PartialIndex", "RestaurantEmployees")
     </div>
 </div>
 

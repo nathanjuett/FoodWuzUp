@@ -1,0 +1,48 @@
+﻿@model IEnumerable<FoodWuzUp.DAL.RestaurantEmployee>
+
+
+<h3>Employees</h3>
+<table class="table">
+    <tr>
+        <th>
+            Name
+        </th>
+        <th>
+            Group
+        </th>
+        <th>
+            Description
+        </th>
+        <th>
+            Rating
+        </th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr \>
+            <td>
+                @Html.ActionLink(item.Child.Name, "Details", "Employees", new { id = item.ChildID }, null)
+            </td>
+            <td>
+                @Html.DisplayFor(modeItem => item.Child.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Child.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Child.RatingString)
+            </td>
+        </tr>
+    }
+</table>
+<p>
+    <input type="button" value="Create" class="btn btn-default" id="restaurantEmployeesCreate" />
+</p>
+<div id="createRestaurantEmployeeModal" title="Employee Create" data-url='@Url.Action("CreateModal", "RestaurantEmployees", new { parentid = ViewBag.ParentID })'></div>
+<script type="text/javascript">
+    $(function () {
+        CreateModal('createRestaurantEmployeeModal', 'restaurantEmployeesCreate');
+     });
+</script>
+
+ 

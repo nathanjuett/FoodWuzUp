@@ -164,6 +164,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\EmployeesController.cs" />
+    <Compile Include="Controllers\EmployeeTypesController.cs" />
     <Compile Include="Controllers\EventsController.cs" />
     <Compile Include="Controllers\GroupsController.cs" />
     <Compile Include="Controllers\GroupUsersController.cs" />
@@ -716,6 +717,14 @@
     <Content Include="Views\GroupUsers\CreatePartial.cshtml" />
     <Content Include="Views\Restaurants\PartialIndex.cshtml" />
     <Content Include="Views\Groups\PartialIndex.cshtml" />
+    <Content Include="Views\RestaurantEmployees\CreatePartial.cshtml" />
+    <Content Include="Views\RestaurantEmployees\CreateModal.cshtml" />
+    <Content Include="Views\RestaurantEmployees\PartialIndex.cshtml" />
+    <Content Include="Views\EmployeeTypes\Create.cshtml" />
+    <Content Include="Views\EmployeeTypes\Delete.cshtml" />
+    <Content Include="Views\EmployeeTypes\Details.cshtml" />
+    <Content Include="Views\EmployeeTypes\Edit.cshtml" />
+    <Content Include="Views\EmployeeTypes\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Code\" />
