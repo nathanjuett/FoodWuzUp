@@ -2,7 +2,7 @@
 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 <div>
     <div class="form-group">
-        <div style="float:left">
+        <div class="bob">
             @Html.LabelFor(model => model.Name)
         </div>
             @Html.EditorFor(model => model.Name)
@@ -10,7 +10,7 @@
     </div>
 
     <div class="form-group">
-        <div style="float:left">
+        <div class="bob">
             @Html.LabelFor(model => model.Description)
         </div>
             @Html.EditorFor(model => model.Description)
@@ -18,7 +18,7 @@
     </div>
 
     <div class="form-group">
-        <div style="float:left">
+        <div class="bob">
             @Html.LabelFor(model => model.Phone)
         </div>
             @Html.EditorFor(model => model.Phone)
@@ -26,7 +26,7 @@
     </div>
 
     <div class="form-group">
-        <div style="float:left">
+        <div class="bob">
             @Html.LabelFor(model => model.Url)
         </div>
             @Html.EditorFor(model => model.Url)
@@ -34,7 +34,7 @@
     </div>
 
     <div class="form-group">
-        <div style="float:left">
+        <div class="bob">
             @Html.LabelFor(model => model.Address)
         </div>
             @Html.TextAreaFor(model => model.Address, 2, 50, new { @spellcheck = "false", @style = "overflow:hidden; resize:none" })
@@ -42,7 +42,7 @@
     </div>
 
     <div class="form-group">
-        <div style="float:left">
+        <div class="bob">
             @Html.LabelFor(model => model.GroupID, "Group")
         </div>
             @Html.DropDownList("GroupID")
@@ -50,7 +50,7 @@
     </div>
 
     <div class="form-group">
-        <div style="float:left">
+        <div class="bob">
             @Html.LabelFor(model => model.RestaurantTypeID, "Restaurant Type")
         </div>
             @Html.DropDownList("RestaurantTypeID")
