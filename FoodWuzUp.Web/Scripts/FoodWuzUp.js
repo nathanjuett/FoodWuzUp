@@ -13,6 +13,7 @@ function CreateModal(ModalDivName, CreateButton) {
     var gdialog = $('#' + ModalDivName).dialog({
         autoOpen: false,
         modal: true,
+        width: 'auto',
         buttons: {
             Save: function () {
                 var form;
