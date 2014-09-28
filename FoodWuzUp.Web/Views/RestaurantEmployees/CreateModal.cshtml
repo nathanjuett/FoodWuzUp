@@ -1,15 +1,3 @@
 ﻿@model FoodWuzUp.DAL.RestaurantEmployee
 
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-
-    <div class="form-horizontal">
-        @{ Html.RenderPartial("CreatePartial"); }
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
-            </div>
-        </div>
-    </div>
-}
+@Html.Partial("_ModalPartial")
