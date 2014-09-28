@@ -11,6 +11,12 @@ namespace FoodWuzUp.Core
         int ID { get; set; }
         string Name { get; set; }
     }
+    public interface IBaseDescription 
+    {
+        int ID { get; set; }
+        string Name { get; set; }
+        string Description { get; set; }
+    }
     public interface IBaseWithComments<IBase, IBaseComment>
     {
         ICollection<IBaseComment> Comments { get; set; }

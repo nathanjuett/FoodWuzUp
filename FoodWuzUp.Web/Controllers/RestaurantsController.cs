@@ -77,10 +77,10 @@ namespace FoodWuzUp.Web.Controllers
             return View();
         }
 
-        public PartialViewResult CreateModal()
+        public override PartialViewResult CreateModal()
         {
             SetViewBagItems(new Restaurant());
-            return PartialView();
+            return base.CreateModal();
         }
 
         // POST: Restaurants/Create

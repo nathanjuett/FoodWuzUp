@@ -13,7 +13,7 @@
 <div class="form-group">
     @Html.LabelFor(model => model.ChildID, "Employee", htmlAttributes: new { @class = "control-label col-md-2" })
     <div class="col-md-10">
-        @Html.TextBoxFor(model => model.Child.Name, "Employee", htmlAttributes: new { @class = "form-control", @id = "restaurantEmployee", @size = "50" })
+        @Html.TextBoxFor(model =>    model.Child.Name, "Employee", htmlAttributes: new { Name = "Employee", @class = "form-control", @id = "restaurantEmployee", @size = "50" })
         @Html.Hidden("ChildID", null)
     </div>
 </div>
@@ -34,7 +34,9 @@
     </div>
 </div>
 
+  
 <script>
     PropertyAutocomplete('@Url.Action("Lookup", "Employees")', 'restaurantEmployee', 'ChildID');
     PropertyAutocomplete('@Url.Action("Lookup", "EmployeeTypes")', 'employeeType', 'EmployeeTypeID');
+    
 </script>

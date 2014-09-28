@@ -12,8 +12,6 @@ namespace FoodWuzUp.Web.Controllers
 {
     public class EmployeeTypesController : BaseController<EmployeeType>
     {
-        private Context db = new Context();
-
         // GET: EmployeeTypes
         public ActionResult Index()
         {

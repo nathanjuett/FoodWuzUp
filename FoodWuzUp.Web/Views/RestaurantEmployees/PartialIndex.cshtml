@@ -19,7 +19,7 @@
     </tr>
     @foreach (var item in Model)
     {
-        <tr \>
+        <tr>
             <td>
                 @Html.ActionLink(item.Child.Name, "Details", "Employees", new { id = item.ChildID }, null)
             </td>

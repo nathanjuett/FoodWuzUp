@@ -31,6 +31,9 @@ namespace FoodWuzUp.Web.Controllers
 
             return Json(ret, JsonRequestBehavior.AllowGet);
         }
-
+        public virtual PartialViewResult CreateModal()
+        {
+            return PartialView();
+        }
     }
 }

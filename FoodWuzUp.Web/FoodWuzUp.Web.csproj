@@ -726,6 +726,9 @@
     <Content Include="Views\EmployeeTypes\Edit.cshtml" />
     <Content Include="Views\EmployeeTypes\Index.cshtml" />
     <Content Include="Views\Shared\_ModalPartial.cshtml" />
+    <Content Include="Views\Employees\CreateModal.cshtml" />
+    <Content Include="Views\Employees\CreatePartial.cshtml" />
+    <Content Include="Views\Shared\_NameDescFormPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Code\" />
