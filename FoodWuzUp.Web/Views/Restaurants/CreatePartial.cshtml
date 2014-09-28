@@ -1,21 +1,6 @@
 ﻿@model FoodWuzUp.DAL.Restaurant
-@Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-<div class="form-group">
-    @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
-    <div style="float:right">
-        @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
-        @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
-    </div>
-</div>
-
-<div class="form-group">
-    @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
-    <div>
-        @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
-        @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
-    </div>
-</div>
+@Html.Partial("_NameDescFormPartial")
 
 <div class="form-group">
     @Html.LabelFor(model => model.Phone, htmlAttributes: new { @class = "control-label col-md-2" })

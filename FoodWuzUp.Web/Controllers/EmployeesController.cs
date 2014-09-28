@@ -51,7 +51,25 @@ namespace FoodWuzUp.Web.Controllers
             {
                 db.Employees.Add(employee);
                 db.SaveChanges();
+
                 return RedirectToAction("Index");
+            }
+
+            return View(employee);
+        }
+        // POST: Employees/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateModal([Bind(Include = "ID,Name,Description")] Employee employee)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Employees.Add(employee);
+                db.SaveChanges();
+
+                return PartialView(employee);
             }
 
             return View(employee);

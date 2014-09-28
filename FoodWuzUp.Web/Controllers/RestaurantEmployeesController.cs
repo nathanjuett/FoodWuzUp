@@ -73,7 +73,7 @@ namespace FoodWuzUp.Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ParentID,ChildID,EmployeeTypeID,RatingID")] RestaurantEmployee restaurantEmployee)
+        public ActionResult Create([Bind(Include = "ParentID,ChildID,EmployeeTypeID,RatingID,Employee")] RestaurantEmployee restaurantEmployee)
         {
             if (ModelState.IsValid)
             {
@@ -90,8 +90,17 @@ namespace FoodWuzUp.Web.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CreateModal([Bind(Include = "ParentID,ChildID,EmployeeTypeID,RatingID")] RestaurantEmployee restaurantEmployee)
+        public ActionResult CreateModal([Bind(Include = "ParentID,ChildID,EmployeeTypeID,RatingID,Employee")] RestaurantEmployee restaurantEmployee)
         {
+            if (restaurantEmployee.ChildID == 0 && !string.IsNullOrEmpty( restaurantEmployee.Employee))
+            {
+                Employee emp = new Employee() { Name = restaurantEmployee.Employee, Description = string.Empty };
+                db.Employees.Add(emp);
+                db.SaveChanges();
+                ModelState["ChildID"].Errors.Clear();
+                restaurantEmployee.ChildID = emp.ID;
+             
+            }
             if (ModelState.IsValid)
             {
                 db.RestaurantEmployees.Add(restaurantEmployee);

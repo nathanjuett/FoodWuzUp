@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using FoodWuzUp.Core;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace FoodWuzUp.DAL
 {
@@ -14,5 +15,7 @@ namespace FoodWuzUp.DAL
         public virtual EmployeeType EmployeeType { get; set; }
         public virtual Rating Rating { get; set; }
 
+        [NotMapped]
+        public string Employee { get; set; }
     }
 }
