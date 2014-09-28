@@ -16,8 +16,9 @@ input, select, textarea {
     width: 280px;
 }
 
-.btn {
-    width: auto;
+.bob  {
+    float: left;
+    width: 150px;
 }
 
 /* prevent IE's scrollbar from disappearing */
@@ -28,3 +29,13 @@ html {
  .ui-tooltip-content {
         width: 250px;
     }
+
+ /* overriding bootstrap css */
+ .form-horizontal .form-group  {
+     margin-left: 0px;
+ }
+ 
+ .btn {
+    width: auto;
+}
+/* end overriding bootstrap css */
