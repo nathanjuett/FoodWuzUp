@@ -2,43 +2,43 @@
 
 @Html.Partial("_NameDescFormPartial")
 
-    <div class="form-group">
-        <div class="bob">
-            @Html.LabelFor(model => model.Phone)
-        </div>
-            @Html.EditorFor(model => model.Phone)
-            @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
+<div class="form-group">
+    <div class="bob">
+        @Html.LabelFor(model => model.Phone)
     </div>
-
-    <div class="form-group">
-        <div class="bob">
-            @Html.LabelFor(model => model.Url)
-        </div>
-            @Html.EditorFor(model => model.Url)
-            @Html.ValidationMessageFor(model => model.Url, "", new { @class = "text-danger" })
-    </div>
-
-    <div class="form-group">
-        <div class="bob">
-            @Html.LabelFor(model => model.Address)
-        </div>
-            @Html.TextAreaFor(model => model.Address, 2, 50, new { @spellcheck = "false", @style = "overflow:hidden; resize:none" })
-            @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
-    </div>
-
-    <div class="form-group">
-        <div class="bob">
-            @Html.LabelFor(model => model.GroupID, "Group")
-        </div>
-            @Html.DropDownList("GroupID")
-            @Html.ValidationMessageFor(model => model.GroupID, "", new { @class = "text-danger" })
-    </div>
-
-    <div class="form-group">
-        <div class="bob">
-            @Html.LabelFor(model => model.RestaurantTypeID, "Restaurant Type")
-        </div>
-            @Html.DropDownList("RestaurantTypeID")
-            @Html.ValidationMessageFor(model => model.RestaurantTypeID, "", new { @class = "text-danger" })
-    </div>
+    @Html.EditorFor(model => model.Phone)
+    @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
 </div>
+
+<div class="form-group">
+    <div class="bob">
+        @Html.LabelFor(model => model.Url)
+    </div>
+    @Html.EditorFor(model => model.Url)
+    @Html.ValidationMessageFor(model => model.Url, "", new { @class = "text-danger" })
+</div>
+
+<div class="form-group">
+    <div class="bob">
+        @Html.LabelFor(model => model.Address)
+    </div>
+    @Html.TextAreaFor(model => model.Address, 2, 50, new { @spellcheck = "false", @style = "overflow:hidden; resize:none" })
+    @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+</div>
+
+<div class="form-group">
+    <div class="bob">
+        @Html.LabelFor(model => model.GroupID, "Group")
+    </div>
+    @Html.DropDownList("GroupID")
+    @Html.ValidationMessageFor(model => model.GroupID, "", new { @class = "text-danger" })
+</div>
+
+<div class="form-group">
+    <div class="bob">
+        @Html.LabelFor(model => model.RestaurantTypeID, "Restaurant Type")
+    </div>
+    @Html.DropDownList("RestaurantTypeID")
+    @Html.ValidationMessageFor(model => model.RestaurantTypeID, "", new { @class = "text-danger" })
+</div>
+
