@@ -90,7 +90,7 @@ namespace FoodWuzUp.Web.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CreateModal([Bind(Include = "ParentID,ChildID,EmployeeTypeID,RatingID,Employee")] RestaurantEmployee restaurantEmployee)
+        public ActionResult CreateModal([Bind(Include = "ParentID,ChildID,EmployeeTypeID,RatingID,Employee,NewEmployeeType")] RestaurantEmployee restaurantEmployee)
         {
             if (restaurantEmployee.ChildID == 0 && !string.IsNullOrEmpty( restaurantEmployee.Employee))
             {
@@ -99,7 +99,14 @@ namespace FoodWuzUp.Web.Controllers
                 db.SaveChanges();
                 ModelState["ChildID"].Errors.Clear();
                 restaurantEmployee.ChildID = emp.ID;
-             
+            }
+            if (restaurantEmployee.EmployeeTypeID == 0 && !string.IsNullOrEmpty(restaurantEmployee.NewEmployeeType))
+            {
+                EmployeeType type = new EmployeeType() { Name = restaurantEmployee.Employee, Description = string.Empty };
+                db.EmployeeTypes.Add(type);
+                db.SaveChanges();
+                ModelState["EmployeeTypeID"].Errors.Clear();
+                restaurantEmployee.EmployeeTypeID = type.ID;
             }
             if (ModelState.IsValid)
             {

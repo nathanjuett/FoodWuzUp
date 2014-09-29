@@ -17,5 +17,7 @@ namespace FoodWuzUp.DAL
 
         [NotMapped]
         public string Employee { get; set; }
+        [NotMapped]
+        public string NewEmployeeType { get; set; }
     }
 }
