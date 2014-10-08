@@ -56,7 +56,20 @@ namespace FoodWuzUp.Web.Controllers
 
             return View(menuItem);
         }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateModal([Bind(Include = "ID,Name,Description")] MenuItem menuitem)
+        {
+            if (ModelState.IsValid)
+            {
+                db.MenuItems.Add(menuitem);
+                db.SaveChanges();
 
+                return PartialView(menuitem);
+            }
+
+            return View(menuitem);
+        }
         // GET: MenuItems/Edit/5
         public ActionResult Edit(int? id)
         {

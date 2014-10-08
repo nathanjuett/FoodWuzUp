@@ -10,7 +10,7 @@ using FoodWuzUp.DAL;
 
 namespace FoodWuzUp.Web.Controllers
 {
-    public class RestaurantMenuItemsController : Controller
+    public class RestaurantMenuItemsController : BaseController
     {
         private Context db = new Context();
 
@@ -20,7 +20,17 @@ namespace FoodWuzUp.Web.Controllers
             var restaurantMenuItems = db.RestaurantMenuItems.Include(r => r.Child).Include(r => r.Parent).Include(r => r.Rating);
             return View(restaurantMenuItems.ToList());
         }
+        public PartialViewResult PartialIndex(int? ID, String Parent)
+        {
 
+            var list = db.RestaurantMenuItems
+                .Include(r => r.Child)
+                .Include(r => r.Parent)
+                .Include(r => r.Rating)
+                .Where(o => o.ParentID == ID);
+            ViewBag.ParentID = ID;
+            return PartialView(list.ToList());
+        }
         // GET: RestaurantMenuItems/Details/5
         public ActionResult Details(int? id)
         {
@@ -44,7 +54,16 @@ namespace FoodWuzUp.Web.Controllers
             ViewBag.RatingID = new SelectList(db.Ratings, "ID", "Name");
             return View();
         }
-
+        public ActionResult CreatePartial()
+        {
+            return View();
+        }
+        public PartialViewResult CreateModal(int? parentid)
+        {
+            ViewBag.ParentID = parentid;
+            ViewBag.RatingID = new SelectList(db.Ratings, "ID", "Name");
+            return PartialView();
+        }
         // POST: RestaurantMenuItems/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -64,7 +83,30 @@ namespace FoodWuzUp.Web.Controllers
             ViewBag.RatingID = new SelectList(db.Ratings, "ID", "Name", restaurantMenuItem.RatingID);
             return View(restaurantMenuItem);
         }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateModal([Bind(Include = "ParentID,ChildID,RatingID,MenuItem")] RestaurantMenuItem menuItem)
+        {
+            if (menuItem.ChildID == 0 && !string.IsNullOrEmpty(menuItem.MenuItem))
+            {
+                MenuItem emp = new MenuItem() { Name = menuItem.MenuItem, Description = string.Empty };
+                db.MenuItems.Add(emp);
+                db.SaveChanges();
+                ModelState["ChildID"].Errors.Clear();
+                menuItem.ChildID = emp.ID;
+            }
+            
+            if (ModelState.IsValid)
+            {
+                db.RestaurantMenuItems.Add(menuItem);
+                db.SaveChanges();
+                return RedirectToAction("Details", "Restaurants", new { id = menuItem.ParentID });
+            }
 
+            ViewBag.ParentID = ViewBag.ParentID;
+            ViewBag.RatingID = new SelectList(db.Ratings, "ID", "Name", menuItem.RatingID);
+            return View(menuItem);
+        }
         // GET: RestaurantMenuItems/Edit/5
         public ActionResult Edit(int? id)
         {

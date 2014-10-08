@@ -18,7 +18,7 @@
 
 <div class="row">
     <div class="col-sm-6">
-        <h3>Menu Items</h3>
+        @*<h3>Menu Items</h3>
         <table class="table">
             <tr>
                 <th>
@@ -43,7 +43,8 @@
         </table>
         <p>
             <input type="button" value="Create" class="btn btn-default" id="userGroupCreate" />
-        </p>
+        </p>*@
+        @Html.Action("PartialIndex", "RestaurantMenuItems")
     </div>
 
     <div class="col-sm-6">
