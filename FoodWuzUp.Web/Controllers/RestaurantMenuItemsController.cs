@@ -85,27 +85,27 @@ namespace FoodWuzUp.Web.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CreateModal([Bind(Include = "ParentID,ChildID,RatingID,MenuItem")] RestaurantMenuItem menuItem)
+        public ActionResult CreateModal([Bind(Include = "ParentID,ChildID,RatingID,MenuItem")] RestaurantMenuItem restaurantMenuItem)
         {
-            if (menuItem.ChildID == 0 && !string.IsNullOrEmpty(menuItem.MenuItem))
+            if (restaurantMenuItem.ChildID == 0 && !string.IsNullOrEmpty(restaurantMenuItem.MenuItem))
             {
-                MenuItem emp = new MenuItem() { Name = menuItem.MenuItem, Description = string.Empty };
+                MenuItem emp = new MenuItem() { Name = restaurantMenuItem.MenuItem, Description = string.Empty };
                 db.MenuItems.Add(emp);
                 db.SaveChanges();
                 ModelState["ChildID"].Errors.Clear();
-                menuItem.ChildID = emp.ID;
+                restaurantMenuItem.ChildID = emp.ID;
             }
             
             if (ModelState.IsValid)
             {
-                db.RestaurantMenuItems.Add(menuItem);
+                db.RestaurantMenuItems.Add(restaurantMenuItem);
                 db.SaveChanges();
-                return RedirectToAction("Details", "Restaurants", new { id = menuItem.ParentID });
+                return RedirectToAction("Details", "Restaurants", new { id = restaurantMenuItem.ParentID });
             }
 
             ViewBag.ParentID = ViewBag.ParentID;
-            ViewBag.RatingID = new SelectList(db.Ratings, "ID", "Name", menuItem.RatingID);
-            return View(menuItem);
+            ViewBag.RatingID = new SelectList(db.Ratings, "ID", "Name", restaurantMenuItem.RatingID);
+            return View(restaurantMenuItem);
         }
         // GET: RestaurantMenuItems/Edit/5
         public ActionResult Edit(int? id)

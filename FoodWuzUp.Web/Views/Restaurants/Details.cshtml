@@ -18,32 +18,6 @@
 
 <div class="row">
     <div class="col-sm-6">
-        @*<h3>Menu Items</h3>
-        <table class="table">
-            <tr>
-                <th>
-                    Name
-                </th>
-                <th>
-                    Description
-                </th>
-            </tr>
-
-            @foreach (var item in Model.MenuItems)
-            {
-                <tr>
-                    <td>
-                        @Html.ActionLink(item.Child.Name, "Details", "MenuItems", new { id = item.Child.ID }, null)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Child.Description)
-                    </td>
-                </tr>
-            }
-        </table>
-        <p>
-            <input type="button" value="Create" class="btn btn-default" id="userGroupCreate" />
-        </p>*@
         @Html.Action("PartialIndex", "RestaurantMenuItems")
     </div>
 
