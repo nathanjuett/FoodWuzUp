@@ -124,7 +124,10 @@ namespace FoodWuzUp.Web.Controllers
         public ActionResult Edit([Bind(Include = "ID,GroupID,Name,Description,Phone,Url,Address,RestaurantTypeID")] Restaurant restaurant)
         {
             if (!String.IsNullOrEmpty(restaurant.Url))
-                restaurant.Url = GetUrl(restaurant.Url);
+            { 
+                if( !GetUrl(restaurant))
+                   ModelState.AddModelError("Url", "Invalid Url"); 
+            }
             if (ModelState.IsValid)
             {
                 db.Entry(restaurant).State = EntityState.Modified;
@@ -206,9 +209,17 @@ namespace FoodWuzUp.Web.Controllers
             return restaurantTypeList;
         }
 
-        private string GetUrl(string url)
+        private bool GetUrl(Restaurant restaurant)
         {
-            return new UriBuilder(url).Uri.ToString();
+            try
+            {
+                restaurant.Url = new UriBuilder(restaurant.Url).Uri.ToString();
+            }
+            catch
+            {
+                return false;
+            }
+            return true; 
         }
 
         private ActionResult DetailsGet(int? id)
@@ -235,7 +246,10 @@ namespace FoodWuzUp.Web.Controllers
         private ActionResult InnerCreate(Restaurant restaurant, bool isModal)
         {
             if (!String.IsNullOrEmpty(restaurant.Url))
-                restaurant.Url = GetUrl(restaurant.Url);
+            {
+                if (!GetUrl(restaurant))
+                    ModelState.AddModelError("Url", "Invalid Url");
+            }
             if (ModelState.IsValid)
             {
                 db.Restaurants.Add(restaurant);
