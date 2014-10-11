@@ -1,5 +1,6 @@
 ﻿using System.Web;
 using System.Web.Optimization;
+using System.Collections;
 
 namespace FoodWuzUp.Web
 {
@@ -24,12 +25,13 @@ namespace FoodWuzUp.Web
                         "~/Scripts/modernizr-*"));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                      //"~/Scripts/bootstrap.js",
+                //"~/Scripts/bootstrap.js",
                       "~/Scripts/respond.js"));
+            string theme = System.Configuration.ConfigurationManager.AppSettings["Theme"];
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
-                      "~/Content/themes/ui-lightness/jquery-ui.css",
+                      "~/Content/themes/" + theme + "/jquery-ui.css",
                       "~/Content/site.css"));
 
             // Set EnableOptimizations to false for debugging. For more information,
